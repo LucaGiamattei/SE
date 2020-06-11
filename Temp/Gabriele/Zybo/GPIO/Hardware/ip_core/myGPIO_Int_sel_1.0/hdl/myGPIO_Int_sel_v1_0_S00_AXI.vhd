@@ -37,16 +37,16 @@ use ieee.std_logic_unsigned.all;
 --! @details
 --!
 --! <h4>Registri interni del device</h4>
---! Il device possiede i registri indicati di seguito. Per oognuno di essi viene indicata la modalità di
+--! Il device possiede i registri indicati di seguito. Per oognuno di essi viene indicata la modalitï¿½ di
 --! accesso (R sola lettura, W sola scrittura, R/W lettura scrittura), e l'offset, rispetto all'indirizzo
---! base del device, col quale è possibile indirizzarli.
+--! base del device, col quale ï¿½ possibile indirizzarli.
 --!
 --!  - MODE (R/W, offset +0x0): consente di impostare i singoli pin del device come ingressi o uscite; solo i
 --!    GPIO_width bit meno significativi del registro hanno significato, agire sui restanti bit non produce
 --!    nessun effetto; Il valore che i singoli pin possono
---!    assumere è:
+--!    assumere ï¿½:
 --!			- '1': il pin viene configurato come pin di uscita;
---!			- 'ò: il pin viene configurato come pin di ingresso;
+--!			- 'ï¿½: il pin viene configurato come pin di ingresso;
 --!			.
 --!  - WRITE (R/W, offset +0x4): consente di imporre un valore ai pin del device, qualora essi siano configurati
 --!    come uscite; solo i GPIO_width bit meno significativi del hanno significato, agire sui restanti bit non produce
@@ -57,26 +57,26 @@ use ieee.std_logic_unsigned.all;
 --!    zero;
 --!  - GIES (Global Interrupt Enable/Status, R/W, offset 0xC): Consente di abilitare/disabilitare gli interrupt
 --!    globali della periferica; solo due dei bit sono significativi:
---!	   		- IE (bit 0): interrupt enable, abilita gli interrupt, può essere scritto e letto; se posto ad '1'
---!			  la periferica potrà generare interrupt quando uno dei pin impostati come ingresso assume
---!			  valore '1' (ed il corrispondente bit in PIE è impostato ad '1'); se posto a '0' il device
---!			  non genererà mai interruzioni;
+--!	   		- IE (bit 0): interrupt enable, abilita gli interrupt, puï¿½ essere scritto e letto; se posto ad '1'
+--!			  la periferica potrï¿½ generare interrupt quando uno dei pin impostati come ingresso assume
+--!			  valore '1' (ed il corrispondente bit in PIE ï¿½ impostato ad '1'); se posto a '0' il device
+--!			  non genererï¿½ mai interruzioni;
 --!			- IS (bit 1): interrupt status, settato internamente ad '1' nel caso in cui la periferica abbia
 --!			  generato interrupt; replica del segnale "interrupt" diretto verso il processing-system.
 --!  - PIE (Pin Interrupt Enable, R/W, offset 0x10): consente di abilitare/disabilitare gli interrupt per i
---!	   singoli pin. Con GIES(0)='1' e MODE(n)='0' (cioè se gli interrupt globali sono abilitati e il pin
---!	   n-esimo è configurato come input), se PIE(n)='1' allora il device genererà un interrupt verso il
---!	   processing-system quando il pin n-esimo assumerà valore '1', mentre, se PIE(n)='0' non verrà
+--!	   singoli pin. Con GIES(0)='1' e MODE(n)='0' (cioï¿½ se gli interrupt globali sono abilitati e il pin
+--!	   n-esimo ï¿½ configurato come input), se PIE(n)='1' allora il device genererï¿½ un interrupt verso il
+--!	   processing-system quando il pin n-esimo assumerï¿½ valore '1', mentre, se PIE(n)='0' non verrï¿½
 --!	   generata una interruzione;
---!  - IRQ (Interrupt Request, R, offset 0x14): IRQ(n)='1' indica che la sorgente di interruzione è il bit
+--!  - IRQ (Interrupt Request, R, offset 0x14): IRQ(n)='1' indica che la sorgente di interruzione ï¿½ il bit
 --!    n-esimo; la or-reduce di tale registro costituisce il flag "interrupt" (IS) di GIES, mentre lo stesso
---!    segnale, posto in AND con GIES(0) - interrupt enable - è diretto verso il processing system.
---!  - IACK (Interrupt Ack, W, offset 0x18): imponento IACK(n)='1' è possibile segnalare al device che
---!    l'interruzione generata dal in n-esimo è stata servita; il bit IRQ(n) verrà resettato automaticamente. 
+--!    segnale, posto in AND con GIES(0) - interrupt enable - ï¿½ diretto verso il processing system.
+--!  - IACK (Interrupt Ack, W, offset 0x18): imponento IACK(n)='1' ï¿½ possibile segnalare al device che
+--!    l'interruzione generata dal in n-esimo ï¿½ stata servita; il bit IRQ(n) verrï¿½ resettato automaticamente. 
 --!
 --!
 --! <h4>Process di scrittura dei registri della periferica</h4>
---! Il process che implementa la logica di scrittura dei registri è stato modificato in modo da ottenere
+--! Il process che implementa la logica di scrittura dei registri ï¿½ stato modificato in modo da ottenere
 --! il seguente indirizzamento:
 --! <table>
 --! <tr><th>Indirizzo</th><th>Offset</th><th>Registro</th></tr>
@@ -88,17 +88,17 @@ use ieee.std_logic_unsigned.all;
 --! <tr><td>b"10100"</td><td>0x14</td><td>IRQ(***)</td></tr>
 --! <tr><td>b"11000"</td><td>0x18</td><td>IACK(****)</td></tr>
 --! </table>
---! (*) Il registro READ è a sola lettura: le scritture su questo registro non producono effetti;
---!  la scrittura, infatti, avviene su slv_reg2, che è inutilizzato;<br>
+--! (*) Il registro READ ï¿½ a sola lettura: le scritture su questo registro non producono effetti;
+--!  la scrittura, infatti, avviene su slv_reg2, che ï¿½ inutilizzat<br>r>
 --! (**) La scrittura ha effetto solo sul bit zero del registro;<br>
---! (***) Il registro IRQ è a sola lettura: le scritture su questo registro non producono effetti;
---!  la scrittura, infatti, avviene su slv_reg5, che è inutilizzato;<br>
---! (****) La scrittura su IACK è fittizzia, nel senso che appena si smette di indirizzare il registro,
+--! (***) Il registro IRQ ï¿½ a sola lettura: le scritture su questo registro non producono effetti;
+--!  la scrittura, infatti, avviene su slv_reg5, che ï¿½ inutilizzat<br>r>
+--! (****) La scrittura su IACK ï¿½ fittizzia, nel senso che appena si smette di indirizzare il registro,
 --! esso assume valore zero;<br>
 --!
 --!
 --! <h4>Process di lettura dei registri della periferica</h4>
---! Il process che implementa la logica di lettura dei registri è stato modificato in modo da ottenere
+--! Il process che implementa la logica di lettura dei registri ï¿½ stato modificato in modo da ottenere
 --! il seguente indirizzamento:
 --! <table>
 --! <tr><th>Indirizzo</th><th>Offset</th><th>Registro</th></tr>
@@ -110,19 +110,19 @@ use ieee.std_logic_unsigned.all;
 --! <tr><td>b"10100"</td><td>0x14</td><td>IRQ</td></tr>
 --! <tr><td>b"11000"</td><td>0x18</td><td>IACK(***)</td></tr>
 --! </table>
---! (*) Il registro READ è direttamente connesso alla porta GPIO_inout<br>
---! (**) Il bit 2 di GIES è il flag "interrupt", che vale '1' nel caso in cui la periferica abbia generato
+--! (*) Il registro READ ï¿½ direttamente connesso alla porta GPIO_ino<br>r>
+--! (**) Il bit 2 di GIES ï¿½ il flag "interrupt", che vale '1' nel caso in cui la periferica abbia generato
 --! interrupt ancora non gestiti.<br>
---! (***) Viene letto sempre zero, dal momento che la scrittura su tale registro è fittizzia.
+--! (***) Viene letto sempre zero, dal momento che la scrittura su tale registro ï¿½ fittizzia.
 --!
 --!
 --! <h4>Process di scrittura su IRQ</h4>	
---! La logica di scrittura su IRQ è semplice (non viene scritto come un normale registro, ma pilotato
+--! La logica di scrittura su IRQ ï¿½ semplice (non viene scritto come un normale registro, ma pilotato
 --! internamente dalla periferica):
---! se uno dei bit di GPIO_inout_masked è '1', (la or-reduce è 1) allora il valore del segnale GPIO_inout_masked
+--! se uno dei bit di GPIO_inout_masked ï¿½ '1', (la or-reduce ï¿½ 1) allora il valore del segnale GPIO_inout_masked
 --! viene posto in bitwise-or con il valore attuale del registro IRQ, in modo da non resettare i bit di quest'
 --! ultimo che siano stati settati a seguito di una interruzione non ancora servita
---! se uno dei bit di IACK è '1' (la or-reduce è '1'), allora il nuovo valore del registro IRQ viene ottenuto
+--! se uno dei bit di IACK ï¿½ '1' (la or-reduce ï¿½ '1'), allora il nuovo valore del registro IRQ viene ottenuto
 --!   - mascherando IACK con l'attuale valore di IRQ, in modo da non effettuare il set di bit resettati
 --!   - ponendo in XOR la maschera precedente con il valore attuale del registro			
 
@@ -145,7 +145,7 @@ entity myGPIO_Int_sel_v1_0_S00_AXI is
 		
 		interrupt : out std_logic; --!							
 		--! segnale di interrupt a livelli diretto verso il processing - system. Se le interruzioni sono
-		--! abilitate ed uno dei pin del device è settato come input ed è abilitato a generare interruzioni,
+		--! abilitate ed uno dei pin del device ï¿½ settato come input ed ï¿½ abilitato a generare interruzioni,
 		--! diventa '1' appena tale pin assume valore '1', e mantiene tale valore fino a quando tutte le
 		--! interruzioni non siano state servite.
 
@@ -623,22 +623,22 @@ begin
 --  - il registro MODE (negato), in modo che solo i bit impostati come input possano generare interrupt;
 --  - il registro PIE, in modo che solo i pin abilitati a generare interrupt lo facciano 
 	GPIO_inout_masked <= GPIO_inout and (not MODE(GPIO_width-1 downto 0)) and PIE(GPIO_width-1 downto 0);
--- interrupt_tmp è ottenuto mediante la or-reduce di IRQ
+-- interrupt_tmp ï¿½ ottenuto mediante la or-reduce di IRQ
 	interrupt_tmp <= or_reduce(IRQ);
--- interrupt è ottenuto mediante and tra interrupt_tmp e GIES(0) (interrupt-enable)
+-- interrupt ï¿½ ottenuto mediante and tra interrupt_tmp e GIES(0) (interrupt-enable)
 	interrupt <= interrupt_tmp and GIES(0);
 	
 	
 	
 -- Process di scrittura su IRQ
--- La logica di scrittura su IRQ è semplice (non viene scritto come un normale registro, ma pilotato
+-- La logica di scrittura su IRQ ï¿½ semplice (non viene scritto come un normale registro, ma pilotato
 -- internamente dalla periferica):
 --
--- se uno dei bit di GPIO_inout_masked è '1', (la or-reduce è 1) allora il valore del segnale GPIO_inout_masked
+-- se uno dei bit di GPIO_inout_masked ï¿½ '1', (la or-reduce ï¿½ 1) allora il valore del segnale GPIO_inout_masked
 -- viene posto in bitwise-or con il valore attuale del registro IRQ, in modo da non resettare i bit di quest'
 -- ultimo che siano stati settati a seguito di una interruzione non ancora servita
 --
--- se uno dei bit di IACK è '1' (la or-reduce è '1'), allora il nuovo valore del registro IRQ viene ottenuto
+-- se uno dei bit di IACK ï¿½ '1' (la or-reduce ï¿½ '1'), allora il nuovo valore del registro IRQ viene ottenuto
 --   - mascherando IACK con l'attuale valore di IRQ, in modo da non effettuare il set di bit resettati
 --   - ponendo in XOR la maschera precedente con il valore attuale del registro			
 --        process (S_AXI_ACLK, S_AXI_ARESETN, IACK)
