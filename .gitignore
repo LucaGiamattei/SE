@@ -1,3 +1,9 @@
+#Ignore Doxygen Output
+latex/
+html/
+Doxygen_output/latex/
+Doxygen_output/html/
+
 #Ignore mac DS_Store
 .DS_Store
 
@@ -35,3 +41,8 @@
 *.dSYM/
 *.su
 
+#Ignore swp file
+*.swp
+
+#ignore test lib exection file
+test_lib
