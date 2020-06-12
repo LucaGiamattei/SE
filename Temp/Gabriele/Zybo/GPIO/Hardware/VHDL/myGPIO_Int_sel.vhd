@@ -1,4 +1,4 @@
---! @file myGPIO_Int_sel_AXI.vhd
+--! @file myGPIO_Int_sel.vhd
 --! @authors <b> Giorgio Farina<b> <giorgio.fari96@gmail.com> <br>
 --!			 <b> Luca Giamattei<b>  <lgiamattei@gmail.com> <br>
 --!			 <b> Gabriele Previtera<b>  <gabrieleprevitera@gmail.com> <br>
@@ -8,7 +8,7 @@
 --! @addtogroup myGPIO_Int_Sel
 --! @{
 
---! @brief Top-level entitu della periferica AXI4 Lite che implementa un GPIO pilotabile da processing-system,
+--! @brief Top-level entity della periferica AXI4 Lite che implementa un GPIO pilotabile da processing-system,
 --! con la possibilità di abilitare l'interrupt in lettura scegliendone la modalità di funzionameto tra le tre
 --! disponibili.
 

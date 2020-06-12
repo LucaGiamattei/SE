@@ -127,7 +127,8 @@ use ieee.std_logic_unsigned.all;
 --! </table>
 --! (*) La scrittura ha effetto solo sul bit zero del registro;<br>
 --! (**)  La scrittura su IACK è fittizzia, nel senso che appena si smette di indirizzare il registro,
---! esso assume valore zero;<br>
+--! esso assume valore zero;
+--! Gli indirizzi non presenti sono associati ad registri che sono in sola lettura.<br>
 --!
 --!
 --! <h4>Process di lettura dei registri della periferica</h4>
