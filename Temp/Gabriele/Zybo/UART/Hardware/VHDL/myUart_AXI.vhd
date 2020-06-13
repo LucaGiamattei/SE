@@ -46,28 +46,28 @@ use ieee.numeric_std.all;
 --! 
 --!  - <b>Control_register</b> (R/W, offset +0x8): consente di controllare la periferica, solo i 4 bit
 --! 	meno significativi sono utilizzati.
---! 	Nella tabella di suguito sono riportati il significato dei bit, partendo dal più significativo in
---! 	alto.
+--! 	Nella tabella di suguito sono riportati il significato dei bit, <b>partendo dal più significativo in
+--! 	alto</b>.
 --! 	<table>
---! 		<tr><td>IACK_T</td><td>Acknowledgement dell'interrupt in scrittura</td></tr>
---! 		<tr><td>IE</td><td>Interrupt enable, abilita le interruzioni </td></tr>
---! 		<tr><td>WR</td><td>Write, indica alla periferica che può inviare il contenuto di DBIN</td></tr>
---! 		<tr><td>RD</td><td>Read, indica alla periferica che il PS ha consumato il byte contenuto in DBOUT</td></tr>
+--! 		<tr><td>IACK_T</td><td>Acknowledgement dell'interrupt in scrittura</td><td>3</td></tr>
+--! 		<tr><td>IE</td><td>Interrupt enable, abilita le interruzioni </td><td>2</td></tr>
+--! 		<tr><td>WR</td><td>Write, indica alla periferica che può inviare il contenuto di DBIN</td><td>1</td></tr>
+--! 		<tr><td>RD</td><td>Read, indica alla periferica che il PS ha consumato il byte contenuto in DBOUT</td><td>0</td></tr>
 --! 	</table>
 --! 
 --!  - <b>Status_register</b> (R, offset 0xC): Registro di stato della periferica.
---! 	Nella tabella di suguito sono riportati il significato dei bit, partendo dal più significativo in
---! 	alto.
+--! 	Nella tabella di suguito sono riportati il significato dei bit, <b>partendo dal più significativo in
+--! 	alto</b>.
 --! 	<table>
 --! 		<tr><td>RDA</td><td>Read Data Available, indica che la periferica ha ricevuto in byte
---!								ed è pronto per essere consumato</td></tr>
+--!								ed è pronto per essere consumato</td><td>3</td></tr>
 --! 		<tr><td>TBE</td><td>Transmission Buffer Empty, Indica al PS che la periferica ha trasmesso 
---!								e che DBIN è vuoto</td></tr>
+--!								e che DBIN è vuoto</td><td>2</td></tr>
 --! 		<tr><td>PE</td><td>Parity Error, indica che è avvenuto un'errore di parità nella ricezione</td></tr>
---! 		<tr><td>FE</td><td>Frame Error, indica che è stato ricevuto un bit in più</td></tr>
+--! 		<tr><td>FE</td><td>Frame Error, indica che è stato ricevuto un bit in più</td><td>1</td></tr>
 --! 		<tr><td>OE</td><td>>Overwrite Error, indica che è stato ricevuto in ulteriore byte prima 
 --!								che il precedente fosse consumato, e di conseguenza, quest'ultimo, è perso.
---!			</td></tr>
+--!			</td><td>0</td></tr>
 --! 	</table>
 --!
 --!	<br>
