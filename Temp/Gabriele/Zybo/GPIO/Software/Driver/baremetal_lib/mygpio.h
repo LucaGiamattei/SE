@@ -1,20 +1,20 @@
 /**
 * @file mygpio.h
-* @brief Definisce un board support package per la gestione semplificata
+* @brief Questa liberia definisce un board support package per la gestione semplificata
 * di una periferica AXI Lite che implementa un GPIO.
-* @authors <b> Giorgio Farina<b> <giorgio.fari96@gmail.com> <br>
-*			 <b> Luca Giamattei<b>  <lgiamattei@gmail.com> <br>
-*			 <b> Gabriele Previtera<b>  <gabrieleprevitera@gmail.com> <br>
+* @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
+*			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
+*			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
 * @date 12/06/2020
-*
-* @addtogroup myGPIO
-* @{
 *
 * @details
 *   API che permettono di utilizzare una periferica AXI Lite che implementa un
 *   GPIO descritto nel file <b>myGPIO_Int_sel_AXI.vhd</b> presente all'interno
 *   del repository.
 *
+*
+* @addtogroup myGPIO
+* @{
 */
 
 #ifndef MYGPIO_H
@@ -187,7 +187,7 @@ void myGPIO_set_mode_mask(myGPIO * mygpio, uint32_t mode_mask);
 /**
  * @brief Abilita/Disabilita il GIES
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
- * @param int_en 1 GIES abilitato, 0 GIES disabilitato 
+ * @param int_en INT_EN abilitato, INT_DIS GIES disabilitato 
  * @retval valore del registro GIES dopo l'operazione di scrittura
  * @{
  */
@@ -200,7 +200,7 @@ uint32_t myGPIO_en_int(myGPIO * mygpio, uint8_t int_en);
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
- * @param int_en 1 interrupt abilitato, 0 interrupt disabilitato 
+ * @param int_en INT_EN interrupt abilitato, INT_DIS interrupt disabilitato 
  * @retval valore del registro PIE dopo l'operazione di scrittura
  * @{
  */
@@ -213,7 +213,7 @@ uint32_t myGPIO_en_pins_int(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_en)
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
- * @param int_en 0 livelli, 1 sensibile sul fronte
+ * @param int_en INT_LEVEL livelli, INT_EDGE sensibile sul fronte
  * @retval valore del registro IRQ_MODE dopo l'operazione di scrittura
  * @{
  */
@@ -227,7 +227,7 @@ uint32_t myGPIO_en_pins_int(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_en)
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
- * @param int_egde 1 Fronte di salita, 0 fronte di discesa
+ * @param int_egde INT_RE Fronte di salita, INT_FE fronte di discesa
  * @retval valore del registro IRQ_EDGE dopo l'operazione di scrittura
  * @{
  */
@@ -241,7 +241,7 @@ uint32_t myGPIO_set_edge(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_egde);
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
- * @param level 1 valore logico alto, 0 valore logico basso
+ * @param level HIGH valore logico alto, LOW valore logico basso
  * @retval valore del registro WRITE dopo l'operazione di scrittura
  * @{
  */
@@ -253,7 +253,7 @@ uint32_t myGPIO_write(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t level);
  * Scrive sul registro WRITE della periferica.
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param levels maschera dei valori che si volgiono scrivere sui pin,
- *  1 valore logico alto, 0 valore logico basso
+ *  HIGH valore logico alto, LOW valore logico basso
  * @{
  */
 void myGPIO_write_mask(myGPIO * mygpio, uint32_t levels);
@@ -264,7 +264,7 @@ void myGPIO_write_mask(myGPIO * mygpio, uint32_t levels);
  * Legge il registro READ della periferica.
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pin Pin di cui si vuole leggere il valore
- * @retval valore letto, 1 valore logico alto, 0 valore logico basso
+ * @retval valore letto, HIGH valore logico alto, LOW valore logico basso
  * @{
  */
 uint8_t myGPIO_read_pin(myGPIO * mygpio, uint32_t GPIO_pin);
@@ -288,7 +288,7 @@ uint32_t myGPIO_read(myGPIO * mygpio);
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
  * @retval valore del registro IRQ dopo l'operazione
  * @{
-*/
+ */
 uint32_t myGPIO_clear_irq(myGPIO * mygpio, uint32_t GPIO_pins);
 /** @} */
 
@@ -304,11 +304,13 @@ uint32_t myGPIO_clear_irq(myGPIO * mygpio, uint32_t GPIO_pins);
  * @brief Lettura dello stato d'interruzione per il singolo pin.
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pin Pin di cui si vuole leggere lo stato d'interruzione
- * @retval valore del registro IRQ in corrispondenza dle bit idindicato da GPIO_pin
+ * @retval valore del registro IRQ in corrispondenza dle bit idindicato da GPIO_pin, '1' richiesta
+ * di interrupt
  * @{
  */
 uint32_t myGPIO_read_pin_irq_status(myGPIO * mygpio, uint32_t GPIO_pin);
 /** @} */
+
 /** @} */
 
 
