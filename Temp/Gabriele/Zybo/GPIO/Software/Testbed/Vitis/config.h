@@ -1,7 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#include "xparameters.h"
+//#include "xparameters.h"
 
 //Switch interrupt line
 #define SWT_IRQN XPAR_FABRIC_MYGPIO_INT_SEL_2_INTERRUPT_INTR

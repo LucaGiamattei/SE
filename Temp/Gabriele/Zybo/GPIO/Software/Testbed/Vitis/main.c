@@ -1,132 +1,152 @@
+/**
+* @file main.c
+* @brief Questo è un esempio di utilizzo della libreria @ref mygpio.h
+* @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
+*			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
+*			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
+* @date 12/06/2020
+*
+* @details
+*   In questo esempio è utilizzato il file .xsa generato dai file VHDL presenti in
+*   Hardware/GPIO/VHDL. Nell'esempio si utilizzano led in modalità WRITE e switch
+*   in modalità READ con interruzioni abilitate con la seguente configurazione:
+*   - SW0 e SW1 a livelli
+*   - SW2 sensibile sul fronte di salita
+*   - SW3 sensibile sul fronte di discesa
+*
+*   In caso di interruzione da parte di uno switch si accenderà il corrispettivo led.
+*   Il led acceso non si spegnerà almeno che non si presenti una interruzione
+*   da parte di uno switch differente.
+*   <b>NB:</b>mantenendo gli switch in modalità a livello in posizione alta questi
+*   continueranno a sollevare interruzioni.
+*
+* @{
+*/
+
+
+/***************************** Include Files *******************************/
 #include "xparameters.h"
 #include "xscugic.h"
 #include "xil_printf.h"
+#include "config.h"
+#include "mygpio.h"
+#include "utils.h"
 
-#define SWT_IRQN  XPAR_FABRIC_MYGPIO_INT_SEL_2_INTERRUPT_INTR
-#define BTN_IRQN XPAR_FABRIC_MYGPIO_INT_SEL_1_INTERRUPT_INTR
-#define BTN_BA XPAR_MYGPIO_INT_SEL_1_S00_AXI_BASEADDR
-#define SWT_BA XPAR_MYGPIO_INT_SEL_2_S00_AXI_BASEADDR
-#define LED_BA XPAR_MYGPIO_INT_SEL_0_S00_AXI_BASEADDR
-#define GIC_ID XPAR_PS7_SCUGIC_0_DEVICE_ID
+/***************************** Variables declaration *******************************/
 
-#define GPIO1_MASK 0x01
-#define GPIO2_MASK 0x02
-#define GPIO3_MASK 0x04
-#define GPIO4_MASK 0x08
+myGPIO* led;
+myGPIO* swt;
+//myGPIO* btn;
+XScuGic gic_inst;
 
+/***************************** Functions prototype *******************************/
+/**
+ * @brief Funzione eseguita all'interno del while(1), vuota nello specifico caso
+ * @{
+ */
 void loop (void);
+/** @} */
 
-int setup (void);
+/**
+ * @brief Funzione di inizializzazione e configurazione delle periferiche
+ * @{
+ */
+uint32_t setup (void);
+/** @} */
 
-XScuGic gic_inst;
-
+/**
+ * @brief Funzione chiamata in caso di interrupt sul gpio associato agli switch
+ * @{
+ */
 void gpio_swt_IRQHandler(void*);
-void gpio_btn_IRQHandler(void*);
-uint32_t* swt = (uint32_t*)SWT_BA;
-uint32_t* btn = (uint32_t*)BTN_BA;
-uint32_t* led = (uint32_t*)LED_BA;
+/** @} */
 
-XScuGic gic_inst;
+//void gpio_btn_IRQHandler(void*);
 
+/***************************** main *******************************/
 
 int main(){
-	setup();
-	while(1){
 
+	setup();
+
+	while(1){
 		loop();
 	}
+
+	return 0;
+}
+
+/***************************** Functions definition *******************************/
+
+void loop(){}
+
+
+uint32_t setup(void){
+	xil_printf("Setup \n");
+
+	swt = myGPIO_init(SWT_BA);
+	led = myGPIO_init(LED_BA);
+	
+	//configurazione periferica Switch
+	myGPIO_set_mode(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  READ_MODE);
+
+	//gpio GIES
+	myGPIO_en_int(swt, INT_EN);
+
+	//gpio PIE
+	myGPIO_en_pins_int(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_EN);
+
+	//gpio IRQ_MODE
+	myGPIO_set_irq_mode(swt, GPIO_PIN_0|GPIO_PIN_1, INT_LEVEL);
+	myGPIO_set_irq_mode(swt, GPIO_PIN_2|GPIO_PIN_3, INT_EDGE);
+
+	//gpio IRQ_EDGE
+	myGPIO_set_edge(swt, GPIO_PIN_2, INT_RE);
+	myGPIO_set_edge(swt, GPIO_PIN_3, INT_FE);
+
+	myGPIO_clear_irq(swt,GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
+
+	//configurazione led
+	myGPIO_set_mode(led, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  WRITE_MODE);
+
+
+	gic_enable(GIC_ID, &gic_inst);
+
+	interrupt_handler swt_irq_handler;
+	swt_irq_handler.interrupt_line = SWT_IRQN;
+	swt_irq_handler.interrupt_handler = gpio_swt_IRQHandler;
+
+	gic_register_interrupt_handler(&gic_inst , &swt_irq_handler);
 
 
 	return 0;
 }
 
-void loop(){
 
-}
-
-int setup(void){
-	xil_printf("Setup \n");
-	XScuGic_Config * gic_conf ;
-
-	//configurazione periferica Switch
-	//gpio mode
-	swt[0] = 0x0;
-	//gpio GIES
-	swt[3]= 0x1;
-	//gpio PIE
-	swt[4] = 0xf;
-
-	//Modalita  edge
-	swt[7] = 0xf;
-	//rising edge
-	swt[8] = 0x0;
-
-
-
-
-
-
-	//configurazione periferica Button
-	//gpio mode
-	btn[0] = 0x0;
-	//gpio GIES
-	btn[3]= 0x1;
-	//gpio PIE
-	btn[4] = 0xf;
-
-	//Modalita  edge
-	btn[7] = 0xf;
-	//rising edge
-	btn[8] = 0xf;
-
-
-
-	//configurazione base del gic
-	gic_conf = XScuGic_LookupConfig(GIC_ID);
-	int status = XScuGic_CfgInitialize(&gic_inst, gic_conf, gic_conf->CpuBaseAddress);
-
-	if (status != XST_SUCCESS){
-		return status;
-	}
-	//abilitazione del gic per gestire gli interrupt esterni
-	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,(Xil_ExceptionHandler)XScuGic_InterruptHandler,( void*) &gic_inst);
-	Xil_ExceptionEnable();
-
-	//registrazione dell interrupt esterno e associazione del handler
-	status = XScuGic_Connect(&gic_inst, SWT_IRQN, (Xil_InterruptHandler)gpio_swt_IRQHandler, ( void*) &gic_inst);
-	if (status != XST_SUCCESS){
-			return status;
-		}
-
-	status = XScuGic_Connect(&gic_inst, BTN_IRQN, (Xil_InterruptHandler)gpio_btn_IRQHandler, ( void*) &gic_inst);
-	if (status != XST_SUCCESS){
-				return status;
-			}
-
-
-	//configurare interrupt periferica pulendo il registro irq
-	XScuGic_Enable( &gic_inst, SWT_IRQN);
-	XScuGic_Enable( &gic_inst, BTN_IRQN);
-
-	return XST_SUCCESS;
-}
-
-
+/***************************** Interrupt Handlers *******************************/
 
 void gpio_swt_IRQHandler(void* data){
-	int gpio1 = (swt[5] & GPIO1_MASK) && 1;
-	int gpio2 = (swt[5] & GPIO2_MASK) && 1;
-	int gpio3 = (swt[5] & GPIO3_MASK) && 1;
-	int gpio4 = (swt[5] & GPIO4_MASK) && 1;
+	int gpio1 = myGPIO_read_pin_irq_status(swt,GPIO_PIN_0);
+	int gpio2 = myGPIO_read_pin_irq_status(swt,GPIO_PIN_1);
+	int gpio3 = myGPIO_read_pin_irq_status(swt,GPIO_PIN_2);
+	int gpio4 = myGPIO_read_pin_irq_status(swt,GPIO_PIN_3);
 
 	xil_printf("Interrupt Switch %d %d %d %d\n\r",gpio1, gpio2, gpio3, gpio4);
-	swt[6] = 0xF;
+
+	myGPIO_write(led,GPIO_PIN_0, gpio1);
+	myGPIO_write(led,GPIO_PIN_1, gpio2);
+	myGPIO_write(led,GPIO_PIN_2, gpio3);
+	myGPIO_write(led,GPIO_PIN_3, gpio4);
+
+	myGPIO_clear_irq(swt,GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
 
 }
 
 
-void gpio_btn_IRQHandler(void* data){
-	xil_printf("Interrupt Button \n\r");
-	btn[6] = 0xF;
+//void gpio_btn_IRQHandler(void* data){
+//	xil_printf("Interrupt Button \n\r");
+//	//myGPIO_clear_irq(btn,GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
+//
+//}
 
-}
+/** @} */
