@@ -57,8 +57,8 @@
  * @name Definizioni delle macro per identificare i bit del GIES
  * @{
  */
-#define GIES_IE     0   /** Interrupt Enable */
-#define GIES_IS     1   /** Interrupt Status */
+#define GIES_IE     (uint32_t) 1 << 0   /** Interrupt Enable */
+#define GIES_IS     (uint32_t) 1 << 1   /** Interrupt Status */
 /** @} */
 
 /**
@@ -102,6 +102,7 @@
 
 /***************************** Include Files *********************************/
 #include "stdlib.h"
+#include "stdio.h"
 
 /***************************** Type Definition *******************************/
 
