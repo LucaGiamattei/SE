@@ -1,21 +1,19 @@
 #include "xparameters.h"
 #include "xscugic.h"
 #include "xil_printf.h"
+#include "config.h"
+#include "mygpio.h"
 
 void loop (void);
-
 int setup (void);
+myGPIO* led;
+myGPIO* swt;
+myGPIO* btn;
 
 XScuGic gic_inst;
 
 void gpio_swt_IRQHandler(void*);
 void gpio_btn_IRQHandler(void*);
-uint32_t* swt = (uint32_t*)SWT_BA;
-uint32_t* btn = (uint32_t*)BTN_BA;
-uint32_t* led = (uint32_t*)LED_BA;
-
-XScuGic gic_inst;
-
 
 int main(){
 	setup();
@@ -34,65 +32,34 @@ void loop(){
 
 int setup(void){
 	xil_printf("Setup \n");
-	XScuGic_Config * gic_conf ;
 
+	
 	//configurazione periferica Switch
-	//gpio mode
-	swt[0] = 0x0;
+	myGPIO_set_mode(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  READ_MODE);
+
 	//gpio GIES
-	swt[3]= 0x1;
+	myGPIO_en_int(swt, INT_EN);
+
 	//gpio PIE
-	swt[4] = 0xf;
+	myGPIO_en_pins_int(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_EN);
 
-	//Modalita� edge
-	swt[7] = 0xf;
-	//rising edge
-	swt[8] = 0x0;
+	//gpio IRQ_MODE
+	myGPIO_set_irq_mode(swt, GPIO_PIN_0|GPIO_PIN_1, INT_LEVEL);
+	myGPIO_set_irq_mode(swt, GPIO_PIN_2|GPIO_PIN_3, INT_EDGE);
 
-	//configurazione periferica Button
-	//gpio mode
-	btn[0] = 0x0;
-	//gpio GIES
-	btn[3]= 0x1;
-	//gpio PIE
-	btn[4] = 0xf;
+	//gpio IRQ_EDGE
+	myGPIO_set_edge(swt, GPIO_PIN_2, INT_RE);
+	myGPIO_set_edge(swt, GPIO_PIN_3, INT_FE);
 
-	//Modalita� edge
-	btn[7] = 0xf;
-	//rising edge
-	btn[8] = 0xf;
+	gic_inst = gic_enable(GIC_ID);
 
-	//configurazione base del gic
-	gic_conf = XScuGic_LookupConfig(GIC_ID);
-	int status = XScuGic_CfgInitialize(&gic_inst, gic_conf, gic_conf->CpuBaseAddress);
+	interrupt_handler swt_irq_handler;
+	swt_irq_handler.interrupt_line = SWT_IRQN;
+	swt_irq_handler.interrupt_handler = gpio_swt_IRQHandler;
 
-	if (status != XST_SUCCESS){
-		return status;
-	}
-	//abilitazione del gic per gestire gli interrupt esterni
-	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,(Xil_ExceptionHandler)XScuGic_InterruptHandler,( void*) &gic_inst);
-	Xil_ExceptionEnable();
+	return gic_register_interrupt_handler(gic_inst, swt_irq_handler);
 
-	//registrazione dell interrupt esterno e associazione del handler
-	status = XScuGic_Connect(&gic_inst, SWT_IRQN, (Xil_InterruptHandler)gpio_swt_IRQHandler, ( void*) &gic_inst);
-	if (status != XST_SUCCESS){
-			return status;
-		}
-
-	status = XScuGic_Connect(&gic_inst, BTN_IRQN, (Xil_InterruptHandler)gpio_btn_IRQHandler, ( void*) &gic_inst);
-	if (status != XST_SUCCESS){
-				return status;
-			}
-
-
-	//configurare interrupt periferica pulendo il registro irq
-	XScuGic_Enable( &gic_inst, SWT_IRQN);
-	XScuGic_Enable( &gic_inst, BTN_IRQN);
-
-	return XST_SUCCESS;
 }
-
-
 
 void gpio_swt_IRQHandler(void* data){
 	int gpio1 = (swt[5] & GPIO1_MASK) && 1;
