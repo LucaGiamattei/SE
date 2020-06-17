@@ -1,16 +1,18 @@
-/*! \mainpage GPIO with Interrupt
+/*! \mainpage GPIO bare-matal with Interrupt
  *
  * \section intro_sec Introduzione
  * 
- * @brief Questa liberia definisce un board support package per la gestione semplificata
- * di una periferica AXI Lite che implementa un GPIO.
+ * @brief Questo è un esempio per l'utilizzo d'utilizzo della liberia mygpio.h che
+ * utiliza una periferica GPIO AXI Lite costum 
  *
  * \section File
- * - @ref mygpio.h
- * - @ref mygpio.c
+ *  - @ref main.c
  *
  * \section Requirements
+ * - @ref mygpio.h
+ * - @ref mygpio.c
  * - @ref utils.h
+ * - @ref utils.c
  * \section Use
  *
  * \subsection step1 Step 1: Vivado
@@ -22,7 +24,7 @@
  *  cambiando <b>-O2</b> in <b>-O0</b> dove è presente, per rimuovere le ottimizzazioni di compilazione
  * - Creare un nuovo <b>Application Project</b> scegliendo come platform 
  * quella creata precedentemente
- * - Copiare il file presenti in ../Testbed/
+ * - Copiare le dipendenze presenti in ../Driver/baremetal_lib
  * 
  * 
  *
