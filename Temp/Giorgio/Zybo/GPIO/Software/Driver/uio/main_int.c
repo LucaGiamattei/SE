@@ -1,6 +1,5 @@
 #include "mygpio.h"
 #include "utils.h"
-
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -13,6 +12,7 @@
 #define UIO_FILE_LED "/dev/uio0"
 #define UIO_FILE_BTN "/dev/uio1"
 #define UIO_FILE_SWT "/dev/uio2"
+
 /* colors macros */
 #define COL(x) "\033[" #x ";1m"
 #define COL_RED COL(31)
@@ -33,7 +33,7 @@ void howto(void) {
  printf("\t\n");
 }
 
-int configure_uio_mygpio(char * filename, void* gpio);
+void* configure_uio_mygpio(int file_descriptor);
 
 int read_value = 0;
 
@@ -44,105 +44,145 @@ int main (int argc, char** argv){
     void* shmem = create_shared_memory(1);
     memcpy(shmem, "", sizeof(0));
     int pid = fork();
-
-    //-------------------Fork--------------------
     if(pid == 0){
         
-        printf("%s[SWT]%s sono il figlio \n",COL_BLUE,COL_GRAY);
-
-        //---------------Switch uio e mmap------------------
-        int uio_swt_descriptor = open (UIO_FILE_SWT, O_RDWR);
-        uint32_t page_size = sysconf(_SC_PAGESIZE);
         
-	    if (uio_swt_descriptor < 1) {
-		    printf("%s[SWT]%s Errore nell'aprire il descrittore: %s \n",COL_BLUE,COL_GRAY, UIO_FILE_SWT);
-		    return -1;
-	    }
-        
-        printf("%s[SWT]%s file aperto con successo descrittore: %d \n",COL_BLUE,COL_GRAY, uio_swt_descriptor);
+        printf("%s[BTN]%s sono il figlio \n",COL_YELLOW,COL_GRAY);
 
-	    void* vrt_gpio_addr3 = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, uio_swt_descriptor, 0);
-       
+        //---------------Button uio e mmap------------------
 
-	    if (vrt_gpio_addr3 == MAP_FAILED) {
-	    	printf("%s[SWT]%s Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n",COL_BLUE,COL_GRAY);
-	    	return -1;
-    	}
-        printf("%s[SWT]%s mapping indirizzo avvenuto con successo indirizzo: %08x\n",COL_BLUE,COL_GRAY, vrt_gpio_addr3);
+        int uio_btn_descriptor = open (UIO_FILE_BTN, O_RDWR);
+        void* vrt_gpio = configure_uio_mygpio(uio_btn_descriptor);
+        if (vrt_gpio == NULL) return 0;
 
          //-----------------Configurazione device----------------
-         myGPIO* swt = myGPIO_init(vrt_gpio_addr3);
-         myGPIO_set_mode(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  READ_MODE);
-         myGPIO_set_irq_mode(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,INT_EDGE );
-         myGPIO_set_edge(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_RE);
-         printf("%s[SWT]%s configurazione switch \n\tDescrittore %d\n\taddress %08x\n",COL_BLUE,COL_GRAY,uio_swt_descriptor, swt);
+         myGPIO* btn = myGPIO_init(vrt_gpio);
+         myGPIO_set_mode(btn, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  READ_MODE);
+         myGPIO_set_irq_mode(btn, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,INT_EDGE );
+         myGPIO_set_edge(btn, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_RE);
+         printf("%s[BTN]%s configurazione switch \n\tDescrittore %d\n\taddress %08x\n",COL_YELLOW,COL_GRAY,uio_btn_descriptor, btn);
         
         int32_t interrupt_count = 1 ;
         int32_t reenable =1;
-        myGPIO_en_int(swt, INT_EN);
-        myGPIO_en_pins_int(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_EN);
+        int32_t write_value = 0;
+        myGPIO_en_int(btn, INT_EN);
+        myGPIO_en_pins_int(btn, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_EN);
         
         while(1){
             
-            if (read(uio_swt_descriptor, &interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
-                printf("%sSWT]%s Read error!\n",COL_BLUE,COL_GRAY);
+            if (read(uio_btn_descriptor, &interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
+                printf("%BTN]%s Read error!\n",COL_YELLOW,COL_GRAY);
                 return 0;
             }
             if (interrupt_count > 1){
                 //leggo il valore dagli switch gpio    
-                read_value = myGPIO_read(swt);
+                read_value =  (myGPIO_read(btn));
                 // place data into memory
-                printf("%s[SWT]%s read: %d\n",COL_BLUE,COL_GRAY, *((uint32_t*) shmem));
-                memcpy(shmem, &read_value, sizeof(read_value));
-                printf("%s[SWT]%s wrote: %d\n",COL_BLUE,COL_GRAY, *((uint32_t*) shmem));
+                printf("%s[BTN]%s read: %d\n",COL_YELLOW,COL_GRAY, *((uint32_t*) shmem));
+                write_value = ~read_value &  *((uint32_t*) shmem);
+                memcpy(shmem, &write_value, sizeof(read_value));
+                printf("%s[BTN]%s wrote: %d\n",COL_YELLOW,COL_GRAY, *((uint32_t*) shmem));
               
             }
             //IACK
-            myGPIO_clear_irq(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
+            myGPIO_clear_irq(btn, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
            
-            if (write(uio_swt_descriptor, (void*)&reenable, sizeof(uint32_t)) != sizeof(uint32_t)) {
-                printf("%s[SWT]%s Write error!\n",COL_BLUE,COL_GRAY);
+            if (write(uio_btn_descriptor, (void*)&reenable, sizeof(uint32_t)) != sizeof(uint32_t)) {
+                printf("%s[BTN]%s Write error!\n",COL_YELLOW,COL_GRAY);
                 return 0;
             }
-            sleep(1);
+            
         }
 
-    }else if(pid > 0) { 
-            
-            printf("%s[LED]%s Sono il padre \n",COL_RED,COL_GRAY);
-
-            //-------------------Led uio e mmap----------------------------
-            int uio_led_descriptor = open (UIO_FILE_LED, O_RDWR);
-	        if (uio_led_descriptor < 1) {
-		        printf("%s[LED]%s Errore nell'aprire il descrittore:%s \n", COL_RED, COL_GRAY, UIO_FILE_LED );
-		        return -1;
-	        }
-            printf("%s[LED]%s file aperto con successo descrittore: %d \n", COL_RED, COL_GRAY, uio_led_descriptor );
-            uint32_t page_size = sysconf(_SC_PAGESIZE);		
-            void* vrt_gpio_addr  = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, uio_led_descriptor, 0);
-        	if (vrt_gpio_addr == MAP_FAILED) {
-	    	    printf("%s[LED]%s Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n",COL_RED, COL_GRAY);
-	    	    return -1;
-	        }
-            printf("%s[LED]%s mapping indirizzo avvenuto con successo indirizzo: %08x\n", COL_RED, COL_GRAY, vrt_gpio_addr);
-
-            //------------------Configurazione device------------------------
-            myGPIO* led = myGPIO_init(vrt_gpio_addr);
-            printf("%s[LED]%s Led configurati \n\tDescirttore %d\n\taddress %08x\n", COL_RED, COL_GRAY, uio_led_descriptor, led);
-            myGPIO_set_mode(led, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  WRITE_MODE);
-            while(1){
-               
-                
-                sleep(1);
-                myGPIO_write_mask(led, *((uint32_t*) shmem));
-
-
-                
-            }
-            
     }
+    else if (pid>0) {
+        sleep(1);
+        int pid = fork();
+        if(pid == 0){
+        
+            printf("%s[SWT]%s sono il figlio \n",COL_BLUE,COL_GRAY);
+
+            //---------------Switch uio e mmap------------------
+
+            int uio_swt_descriptor = open (UIO_FILE_SWT, O_RDWR);
+            void* vrt_gpio = configure_uio_mygpio(uio_swt_descriptor);
+            if (vrt_gpio == NULL) return 0;
+
+            //-----------------Configurazione device----------------
+            myGPIO* swt = myGPIO_init(vrt_gpio);
+            myGPIO_set_mode(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  READ_MODE);
+            myGPIO_set_irq_mode(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,INT_EDGE );
+            myGPIO_set_edge(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_RE);
+            printf("%s[SWT]%s configurazione switch \n\tDescrittore %d\n\taddress %08x\n",COL_BLUE,COL_GRAY,uio_swt_descriptor, swt);
+                
+            int32_t interrupt_count = 1 ;
+            int32_t reenable =1;
+            myGPIO_en_int(swt, INT_EN);
+            myGPIO_en_pins_int(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3, INT_EN);
+                
+            while(1){
+                    
+                if (read(uio_swt_descriptor, &interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
+                    printf("%sSWT]%s Read error!\n",COL_BLUE,COL_GRAY);
+                    return 0;
+                }
+                if (interrupt_count > 1){
+                    //leggo il valore dagli switch gpio    
+                    read_value = myGPIO_read(swt);
+                    // place data into memory
+                    printf("%s[SWT]%s read: %d\n",COL_BLUE,COL_GRAY, *((uint32_t*) shmem));
+                    memcpy(shmem, &read_value, sizeof(read_value));
+                    printf("%s[SWT]%s wrote: %d\n",COL_BLUE,COL_GRAY, *((uint32_t*) shmem));
+                    
+                }
+                //IACK
+                myGPIO_clear_irq(swt, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3);
+                
+                if (write(uio_swt_descriptor, (void*)&reenable, sizeof(uint32_t)) != sizeof(uint32_t)) {
+                    printf("%s[SWT]%s Write error!\n",COL_BLUE,COL_GRAY);
+                    return 0;
+                }
+                    
+            }
+
+        }else if(pid > 0) { 
+            sleep(2);
+                printf("%s[LED]%s Sono il padre \n",COL_RED,COL_GRAY);
+
+                //-------------------Led uio e mmap----------------------------
+
+                int uio_led_descriptor = open (UIO_FILE_LED, O_RDWR);
+                void* vrt_gpio = configure_uio_mygpio(uio_led_descriptor);
+                if (vrt_gpio == NULL) return 0;
+                    //------------------Configurazione device------------------------
+                myGPIO* led = myGPIO_init(vrt_gpio);
+                printf("%s[LED]%s Led configurati \n\tDescirttore %d\n\taddress %08x\n", COL_RED, COL_GRAY, uio_led_descriptor, led);
+                myGPIO_set_mode(led, GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3,  WRITE_MODE);
+                while(1){
+                        
+                            
+                        
+                        myGPIO_write_mask(led, *((uint32_t*) shmem));
+
+
+                            
+                    }
+            }
+                        
+                
+        
+    }
+
+
+            
+        
+
+
+
+    //-------------------Fork--------------------
     
-    uint32_t read_value = 0;
+    
+    
 
 	
 
@@ -158,25 +198,26 @@ int main (int argc, char** argv){
     return 0;
 }
 
-int configure_uio_mygpio(char *filename, void* gpio){
+void* configure_uio_mygpio(int file_descriptor){
 
-    int file_descriptor = open (filename, O_RDWR);
+    void* vrt_gpio = NULL;
 	if (file_descriptor < 1) {
-		printf("Errore nell'aprire il descrittore: %s\n", filename);
-		return -1;
+		printf("Errore nell'aprire il descrittore \n");
+		return NULL;
 	}
-    printf("file aperto con successo descrittore: %s \n", file_descriptor);
+    printf("file aperto con successo descrittore: %d \n", file_descriptor);
     uint32_t page_size = sysconf(_SC_PAGESIZE);		
 
-	gpio = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, file_descriptor, 0);
-	if (gpio == MAP_FAILED) {
+	vrt_gpio = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, file_descriptor, 0);
+	if (vrt_gpio == MAP_FAILED) {
 		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
-		return -1;
+		return NULL;
 	}
 
-    printf("mapping indirizzo avvenuto con successo indirizzo: %08x\n", gpio);
-
-    return file_descriptor;
+    printf("mapping indirizzo avvenuto con successo indirizzo: %08x\n", vrt_gpio);
+    
+    return vrt_gpio;
+    
 }
 
 
