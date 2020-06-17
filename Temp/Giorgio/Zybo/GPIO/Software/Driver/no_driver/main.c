@@ -25,9 +25,14 @@ void howto(void) {
 }
 
 
-
+int read_file();
 int main (int argc, char** argv){
+	if (read_file()){
+		perror("Error while opening the file.\n");
+	}
+
 	int descriptor = open ("/dev/mem", O_RDWR);
+
 	if (descriptor < 1) {
 		perror(argv[0]);
 		return -1;
@@ -56,4 +61,31 @@ int main (int argc, char** argv){
 	close(descriptor);
 
 return 0;
+}
+
+
+int read_file()
+{
+   char ch;
+   FILE *fp;
+
+   printf("Enter name of a file you wish to see\n");
+  
+
+   fp = fopen("/dev/mem", "r"); // read mode
+
+   if (fp == NULL)
+   {
+      
+      return 1;
+   }
+
+   printf("The contents of /dev/mem file are:\n");
+
+   while((ch = fgetc(fp)) != EOF)
+      printf("Byte %08x \n", ch);
+	  sleep(1);
+
+   fclose(fp);
+   return 0;
 }
