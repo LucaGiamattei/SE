@@ -8,9 +8,11 @@
 # Cambiare BUILDROOT_PATH con il path di buildroot
 # dare source init_build_environment.sh
 
-BUILDROOT_PATH="/home/giorgio/Documents/SO_embedded/Zinco-Linux/buildroot-2019.02.5/output/host/bin"
+#BUILDROOT_PATH="/home/giorgio/Documents/SO_embedded/Zinco-Linux/buildroot-2019.02.5/output/host/bin"
+BUILDROOT_PATH="/home/jiin995/Linux-on-Zynq/buildroot-2020.02.3/output/host/bin"
 
-export CROSS_COMPILE=arm-buildroot-linux-uclibcgnueabihf-
+
+export CROSS_COMPILE=arm-buildroot-linux-uclibcgnueabi-
 export PATH=$PATH:${BUILDROOT_PATH}
 export CXX=${CROSS_COMPILE}g++
 export CC=${CROSS_COMPILE}gcc
