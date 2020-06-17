@@ -1,0 +1,53 @@
+/*! \mainpage GPIO with Interrupt
+ *
+ * \section intro_sec Introduzione
+ * 
+* @brief Periferica AXI4 Lite che implementa un GPIO pilotabile da processing-system, con la 
+* possibilità di abilitare l'interrupt in lettura scegliendone la modalità di funzionameto tra le tre
+* disponibili:
+*				<ul>
+*					<li>Interrupt sul livello del pin, fin quando il pin in ingresso è '1', verranno
+*						generate interruzioni consecutive sulla linea;
+*					</li>
+*					<li>Interrupt sul fronte di salita, quando c'è una variazione '0' ->'1' del 
+*						pin di ingresso verrà generata un'interruzione sulla linea;</li>
+*					<li>Interrupt sul fronte di discesa, quando c'è una variazione '1' ->'0' del 
+*						pin di ingresso verrà generata un'interruzione sulla linea;</li>
+*				</ul>
+ * \section install_sec Build
+ *
+ * \subsection step1 Step 1: Inizializzazione
+ * - Creazione un nuovo progetto in Vivado
+ * - Cambiare il linguaggio predefinito del progetto da Verilog a VHDL
+ * - Creare un nuovo block design 
+ * \subsection step2 Step 2: Creazione IP-Core 
+ * - Creare un nuovo ip-core slave AXI LITE, scegliendo 9 registri da 32 bit, e aprirlo in modalità Edit
+ * - Aggiungere il file <b>uart_se.vhd</b>
+ * - Copiare il contenuto del file <b>myGPIO_Int_sel_AXI.vhd</b> nel file dell'ip creato termina con <b>AXI</b> 
+ * - Rinominare l'etity presente nel file dell'ip creato termina con <b>AXI</b> utilizzando il nome 
+ * assengato nel momento della creazione, che è possibile vedere dalla top-level-etity dell'ip-core creato.
+ * - chiudere l'editor dell'ip-core
+ * \subsection step3 Step 3: Realizzazione Design
+ * - Aggiungere il Processing System, il core o i core creati e il componente xlconcat se si utilizzano più GPIO
+ * - Run block automation
+ * - Run connection automation
+ * - Fare 'make external' sui i pin <b>tx</b> e <b>rx</b>
+ * \subsection step4 Step 4: Abilitazion Interrupt
+ * - Doppio click sul Processing System nel menu a sinistra selezionare la voce <b>Interrupts</b>
+ * - Abilitare le <b>Fabric Interrupts</b>
+ * - Espandere la voce <b>Fabric Interrupts</b> e quella <b>PL-PS Interrupt Ports</b>
+ * - Abilitare le <b>Shared Interrupts</b>
+ * - Doppio click su xlconcat e selezionare il numero di Interrupt che si vogliono gestire
+ * - Se si utilizzano più GPIO collegare il segnale Interrupt in uscita dai GPIO a xlconcat altrimenti collegarlo
+ *   direttamente a IRQ_F2P del Processing System
+ * - Se si utilizza xlconcat collegare il bus <b>dout</b> del xlconcat a IRQ_F2P del Processing System
+ * \subsection step5 Step 5: Build e esportazione 
+ * - Cliccare col tasto destro sulla block design in Sources e cliccare su <b>Create HDL Wrapper</b>
+ * - Lanciare una prima sintesi e aprire il design sintetizzato
+ * - Aprire I/O Planning e configurare i pin
+ * - Cliccare col tasto destro sulla block design in Sources e fare <b>Reset output products</b>
+ * - Cliccare col tasto destro sulla block design in Sources e cliccare su <b>Generate output products</b> scegliendo <b>Global</b>
+ * - Lanciare la sintesi, run implementation e generate bitstream
+ * - Cliccare su File -> Export -> Export Hardware -> dare un nome che termina l'estensione xsa
+
+ */
