@@ -73,6 +73,8 @@ begin
         if RESET='0' then
             state   <= '0';
             int_tmp <= '0';
+            next_state  <= '0';
+            next_int_tmp <= '0';
         elsif rising_edge(CLK) then
             state   <= next_state;
             int_tmp <= next_int_tmp;
@@ -88,7 +90,7 @@ begin
 
         -- rising edge
         if ((((not state) and GPIO_INOUT ) and MODE) and EDGE) = '1' then
-            next_int_tmp<= '1';
+            next_int_tmp <= '1';
         -- falling edge
         elsif ((state and (not GPIO_INOUT ) and MODE) and (not EDGE)) = '1' then
             next_int_tmp <= '1';
@@ -104,7 +106,7 @@ begin
         
         -- se è variato il livello del pin in ingresso, allora aggiorna lo stato
         -- in modo tale da poter capire se si verificano altre variazioni 
-        next_state<= GPIO_INOUT;
+        next_state <= GPIO_INOUT;
             
     end process;
     
