@@ -14,8 +14,6 @@ void* configure_uio_myuart(char* filename, int* file_descriptor);
 int32_t wait_interrupt(int uio_descriptor, int32_t* file_descriptor);
 int32_t reenable_interrupt(int uio_descriptor, int32_t* reenable);
 
-
-
 int main (int argc, char** argv){
     int uart1_fd, uart2_fd;
     myUART *uart1, *uart2;
@@ -24,7 +22,7 @@ int main (int argc, char** argv){
     int pid = fork();
      
     if( pid > 0 ){
-        uint8_t byte_to_send;
+        uint8_t byte_to_send = 'a';
 
         uart1_fd  = open(UIO_FILE_UART1,O_RDWR) ;
 
@@ -38,13 +36,15 @@ int main (int argc, char** argv){
         printf("%s[UART1-SENDER]%s myUART pointer: %08x\n",COL_BLUE, COL_GRAY, uart1);
             
         while(1){
-            printf("%s[UART1-SENDER]%s wait user input char %08x\n",COL_BLUE, COL_GRAY, uart1);
-            scanf("%c", byte_to_send);
-
-            myUART_transmit(uart1, byte_to_send);
+            printf("%s[UART1-SENDER]%s wait user input char \n",COL_BLUE, COL_GRAY);
+            scanf(" %c", &byte_to_send);
+            if(byte_to_send != 0){
+                printf("%s[UART1-SENDER]%s send byte %c\n",COL_BLUE, COL_GRAY, byte_to_send);
+                myUART_transmit(uart1, byte_to_send);
+            }
         }
 
-    }else{
+    }else if(pid == 0){
         char received_byte;
         uint32_t status_reg;
         int interrupt_count;
@@ -54,19 +54,26 @@ int main (int argc, char** argv){
 
         void* vrt_gpio = configure_uio_myuart(UIO_FILE_UART2, &uart2_fd);
         printf("%s[UART2-RECEIVER]%s vrt_gpio: %08x\n",COL_RED, COL_GRAY, vrt_gpio);
-
         if (vrt_gpio == NULL) 
             return -1;
 
         uart2 = myUART_init(vrt_gpio);
+        
+        myUART_en_int_rx(uart2, INT_EN);
+        myUART_Iack_r(uart2);
         printf("%s[UART2-RECEIVER]%s myUART pointer: %08x\n",COL_RED, COL_GRAY, uart2);
             
         while(1){
-            printf("%s[UART2-RECEIVER]%s wait interrupt %08x\n",COL_RED, COL_GRAY, uart2);
+            //sleep(1);
+            printf("%s[UART2-RECEIVER]%s wait interrupt\n",COL_RED, COL_GRAY);
             wait_interrupt(uart2_fd, &interrupt_count);
             
-            received_byte = myUART_read(uart2, &status_reg);
+            status_reg = myUART_read_status(uart2);
+            received_byte = myUART_read_DBOUT(uart2);
+            myUART_Iack_r(uart2);
+
             printf("%s[UART2-RECEIVER]%s received: %c\n",COL_RED, COL_GRAY, received_byte);
+            printf("%s[UART2-RECEIVER]%s status_reg: %08x\n",COL_RED, COL_GRAY, status_reg);
 
             reenable_interrupt(uart2_fd, &reenable);
         }
@@ -83,15 +90,6 @@ int main (int argc, char** argv){
 
     return 0;
 }
-
-
-void howto(void) {
-    printf("L'interruzione sul fronte di salita di SW0 accende tutti i led,\n");
-    printf("mentre l'interruzione du BTN0 li spegne.\n");
-
-    printf("\t\n");
-}
-
 
 void* configure_uio_myuart(char* filename, int* file_descriptor){
    
@@ -120,8 +118,7 @@ void* configure_uio_myuart(char* filename, int* file_descriptor){
 
 
 int32_t wait_interrupt(int uio_descriptor, int32_t *interrupt_count){
-    printf("Wait interrupt");
-     if (read(uio_descriptor, interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
+    if (read(uio_descriptor, interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
         printf("Read error!\n");
         return -1;
     }
