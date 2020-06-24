@@ -159,7 +159,7 @@ void myUART_transmit(myUART * myuart, uint8_t transmit_data);
  * @retval byte letto 
  * @{
  */
-uint8_t myUART_read(myUART * myuart);
+uint8_t myUART_read(myUART * myuart, uint32_t* status_reg);
 /** @} */
 
 /**

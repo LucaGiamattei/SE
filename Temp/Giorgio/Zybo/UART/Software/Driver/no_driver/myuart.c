@@ -50,9 +50,12 @@ void myUART_transmit(myUART * myuart, uint8_t transmit_data){
 }
 
 //ATT: Si dovrebbe gestire il TIMEOUT con un timer
-uint8_t myUART_read(myUART * myuart){
+uint8_t myUART_read(myUART * myuart,uint32_t* status_reg){
     while(!read_bit_in_single_pos(&myuart->STATUS_REG, ST_RDA)){}
-    return myuart->DBOUT;
+    *(status_reg) = myuart->STATUS_REG;
+    uint8_t read_value = myuart->DBOUT;
+    myUART_Iack_r(myuart);
+    return read_value;
 }
 
 uint8_t myUART_read_DBOUT(myUART * myuart){
