@@ -1,0 +1,10 @@
+
+
+OPTION psf_version = 2.1;
+
+BEGIN DRIVER myUart_one_interrupt
+	OPTION supported_peripherals = (myUart_one_interrupt);
+	OPTION copyfiles = all;
+	OPTION VERSION = 1.0;
+	OPTION NAME = myUart_one_interrupt;
+END DRIVER
