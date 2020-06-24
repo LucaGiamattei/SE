@@ -15,7 +15,6 @@ int read_value = 0;
 void* configure_uio_mygpio(char* filename, int* file_descriptor);
 void* create_shared_memory(size_t size);
 void cofigure_btn_swt(myGPIO* btn, int uio_btn_descriptor );
-void cofigure_led(myGPIO* led, int uio_btn_descriptor );
 int32_t wait_interrupt(int uio_descriptor, int32_t* file_descriptor);
 int32_t reenable_interrupt(int uio_descriptor, int32_t* reenable);
 
@@ -230,9 +229,9 @@ void cofigure_btn_swt(myGPIO* btn, int uio_btn_descriptor ){
 }
 
 int32_t wait_interrupt(int uio_descriptor, int32_t *interrupt_count){
-    printf("Aspetto interrupt");
+    printf("Wait interrupt");
      if (read(uio_descriptor, interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
-        printf("%sSWT]%s Read error!\n",COL_BLUE,COL_GRAY);
+        printf("Read error!\n");
         return -1;
     }
                 
@@ -240,7 +239,7 @@ int32_t wait_interrupt(int uio_descriptor, int32_t *interrupt_count){
 
 int32_t reenable_interrupt(int uio_descriptor, int32_t *reenable){   
     if (write(uio_descriptor, (void*)reenable, sizeof(uint32_t)) != sizeof(uint32_t)) {
-        printf("%s[SWT]%s Write error!\n",COL_BLUE,COL_GRAY);
+        printf("Write error!\n");
         return -2;
     }
 }
