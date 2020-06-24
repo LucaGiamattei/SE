@@ -1,0 +1,62 @@
+
+#include <linux/module.h>	/* Needed by all modules */
+#include <linux/kernel.h>	/* Needed for KERN_INFO */
+#include <linux/init.h>		/* Needed for the macros */
+#include <linux/device.h>         // Header to support the kernel Driver Model
+
+#define  DEVICE_NAME "myGPIO"    ///< The device will appear at /dev/ebbchar using this value
+
+
+MODULE_LICENSE("GPL");            ///< The license type -- this affects available functionality
+MODULE_AUTHOR("Gabriele Previtere");    ///< The author -- visible when you use modinfo
+MODULE_DESCRIPTION("A simple Linux char driver");  ///< The description -- see modinfo
+MODULE_VERSION("0.1");            ///< A version number to inform users
+ 
+static int    majorNumber;                  ///< Stores the device number -- determined automatically
+static int    numberOpens = 0;  
+
+static struct device* myGPIODevice = NULL; ///< The device-driver device struct pointer
+static struct class*  myGPIOClass  = NULL; ///< The device-driver class struct pointer
+
+static int __init myGPIO_init(void)
+{
+    majorNumber = register_chrdev(0, DEVICE_NAME, &fops);
+    if (majorNumber<0){
+        printk(KERN_ALERT "myGPIO failed to register a major number\n");
+        return majorNumber;
+    }
+    printk(KERN_INFO "myGPIO: registered correctly with major number %d\n", majorNumber);
+ 
+	   // Register the device class
+    myGPIOClass= class_create(THIS_MODULE, CLASS_NAME);
+    if (IS_ERR(myGPIOClass)){                // Check for error and clean up if there is
+        unregister_chrdev(majorNumber, DEVICE_NAME);
+        printk(KERN_ALERT "Failed to register device class\n");
+        return PTR_ERR(myGPIOClass);          // Correct way to return an error on a pointer
+    }
+    printk(KERN_INFO "myGPIO: device class registered correctly\n");
+ 
+   // Register the device driver
+    myGPIODevice = device_create(myGPIODevice, NULL, MKDEV(majorNumber, 0), NULL, DEVICE_NAME);
+    if (IS_ERR(myGPIODevice)){               // Clean up if there is an error
+        class_destroy(myGPIODevice);           // Repeated code but the alternative is goto statements
+        unregister_chrdev(majorNumber, DEVICE_NAME);
+        printk(KERN_ALERT "Failed to create the device\n");
+         return PTR_ERR(myGPIODevice);
+    }
+    printk(KERN_INFO "myGPIO: device class created correctly\n"); // Made it! device was initialized
+	return 0;
+}
+
+static void __exit myGPIO_exit(void)
+{
+    device_destroy(myGPIOClass, MKDEV(majorNumber, 0));     // remove the device
+    class_unregister(myGPIOlass);                          // unregister the device class
+    class_destroy(myGPIOClass);                             // remove the device class
+    unregister_chrdev(majorNumber, DEVICE_NAME);             // unregister the major number
+    printk(KERN_INFO "myGPIO: Goodbye from the LKM!\n");
+	printk(KERN_INFO "Goodbye, world 2\n");
+}
+
+module_init(myGPIO_init);
+module_exit(myGPIO_exit);
