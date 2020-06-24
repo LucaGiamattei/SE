@@ -46,3 +46,6 @@ Doxygen_output/html/
 
 #ignore test lib exection file
 test_lib
+
+#Ignore vscode file
+.vscode*
