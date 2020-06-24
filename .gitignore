@@ -49,3 +49,12 @@ test_lib
 
 #Ignore vscode file
 .vscode*
+
+#ignore kernel obj file and other files
+*.ko.cmd
+*.o.cmd
+*.mod.cmd
+*.mod
+*.mod.c
+*.order
+*.symvers
