@@ -50,7 +50,8 @@ use ieee.numeric_std.all;
 --! 	alto</b>.
 --! 	<table>
 --! 		<tr><td>IACK_T</td><td>Acknowledgement dell'interrupt in scrittura</td><td>3</td></tr>
---! 		<tr><td>IE</td><td>Interrupt enable, abilita le interruzioni </td><td>2</td></tr>
+--! 		<tr><td>IETX</td><td>Interrupt enable, abilita le interruzioni </td><td>2</td></tr>
+--! 		<tr><td>IERX</td><td>Interrupt enable, abilita le interruzioni </td><td>2</td></tr>
 --! 		<tr><td>WR</td><td>Write, indica alla periferica che può inviare il contenuto di DBIN</td><td>1</td></tr>
 --! 		<tr><td>RD</td><td>Read, indica alla periferica che il PS ha consumato il byte contenuto in DBOUT</td><td>0</td></tr>
 --! 	</table>
@@ -59,15 +60,16 @@ use ieee.numeric_std.all;
 --! 	Nella tabella di suguito sono riportati il significato dei bit, <b>partendo dal più significativo in
 --! 	alto</b>.
 --! 	<table>
---! 		<tr><td>RDA</td><td>Read Data Available, indica che la periferica ha ricevuto in byte
---!								ed è pronto per essere consumato</td><td>3</td></tr>
---! 		<tr><td>TBE</td><td>Transmission Buffer Empty, Indica al PS che la periferica ha trasmesso 
---!								e che DBIN è vuoto</td><td>2</td></tr>
---! 		<tr><td>PE</td><td>Parity Error, indica che è avvenuto un'errore di parità nella ricezione</td></tr>
---! 		<tr><td>FE</td><td>Frame Error, indica che è stato ricevuto un bit in più</td><td>1</td></tr>
 --! 		<tr><td>OE</td><td>>Overwrite Error, indica che è stato ricevuto in ulteriore byte prima 
 --!								che il precedente fosse consumato, e di conseguenza, quest'ultimo, è perso.
---!			</td><td>0</td></tr>
+--!			</td><td>4</td></tr>
+--! 		<tr><td>FE</td><td>Frame Error, indica che è stato ricevuto un bit in più</td><td>3</td></tr>
+--! 		<tr><td>PE</td><td>Parity Error, indica che è avvenuto un'errore di parità nella ricezione</td><td>2</td></tr>
+--!								ed è pronto per essere consumato</td><td>3</td></tr>
+--! 		<tr><td>TBE</td><td>Transmission Buffer Empty, Indica al PS che la periferica ha trasmesso 
+--!								e che DBIN è vuoto</td><td>1</td></tr>
+--! 		<tr><td>RDA</td><td>Read Data Available, indica che la periferica ha ricevuto in byte</td><td>0</td></tr>
+--!
 --! 	</table>
 --!
 --!	<br>
@@ -97,7 +99,7 @@ use ieee.numeric_std.all;
 --!
 --!
 
-entity myUart_v1_0_S00_AXI is
+entity myUart_one_interrupt_v1_0_S00_AXI is
 	generic (
 		-- Users to add parameters here
 
@@ -111,8 +113,7 @@ entity myUart_v1_0_S00_AXI is
 	);
 	port (
 		-- Users to add ports here
-        interrupt_1 : out std_logic;
-        interrupt_2 : out std_logic;
+        interrupt : out std_logic;
         
         
         pin_tx : out std_logic;
@@ -182,9 +183,9 @@ entity myUart_v1_0_S00_AXI is
     		-- accept the read data and response information.
 		S_AXI_RREADY	: in std_logic
 	);
-end myUart_v1_0_S00_AXI;
+end myUart_one_interrupt_v1_0_S00_AXI;
 
-architecture arch_imp of myUart_v1_0_S00_AXI is
+architecture arch_imp of myUart_one_interrupt_v1_0_S00_AXI is
 
 	-- AXI4LITE signals
 	signal axi_awaddr	: std_logic_vector(C_S_AXI_ADDR_WIDTH-1 downto 0);
@@ -343,7 +344,7 @@ begin
 	      control_reg <= (others => '0');
 	      slv_reg3 <= (others => '0');
 	    else
-	       control_reg(3) <= '0';
+	       control_reg(4) <= '0';
 	    
 	      loc_addr := axi_awaddr(ADDR_LSB + OPT_MEM_ADDR_BITS downto ADDR_LSB);
 	      if (slv_reg_wren = '1') then
@@ -530,22 +531,24 @@ begin
 	
 				
 	-- Process che genera l' interruzione in trasmissione  
-    process (state_reg(1), control_reg(3))
+    process (state_reg(1), control_reg(4))
 		begin
 			-- Se il bit TBE si è alzato allora è possibile sollevare l'interruzione
     		if rising_edge(state_reg(1)) then
         		IRQ_T <= '1';
     		end if;
 		-- Se l'utente alza IACK allora il bit di interruzione deve essere abbassato
-    	if control_reg(3) = '1' then
+    	if control_reg(4) = '1' then
         	IRQ_T <= '0';
     	end if;
     end process;
 	
 	-- segnali di interruzione verso l'esterno in and con il bit IE del control register
-    interrupt_1 <= state_reg(0) and control_reg(2);
-    interrupt_2 <= IRQ_T and control_reg(2);
+    --interrupt_1 <= state_reg(0) and control_reg(2);
+    --interrupt_2 <= IRQ_T and control_reg(2);
     
+    interrupt <= (state_reg(0) and control_reg(2)) or (IRQ_T and control_reg(3));
+        
 	-- User logic ends
 
 end arch_imp;
