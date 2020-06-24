@@ -1,5 +1,5 @@
 #include "utils.h"
-#include "xscugic.h"
+
 
 /*TODO
 * METTERE ASSERT
@@ -26,6 +26,10 @@ uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos){
     }
     return 0;
 }
+
+#if GIC
+
+#include "xscugic.h"
 
 uint32_t gic_enable(uint32_t gic_id, XScuGic* gic_inst){
     XScuGic_Config * gic_conf ;
@@ -65,3 +69,4 @@ uint32_t gic_register_interrupt(XScuGic *gic_inst ,uint32_t interrupt_line, void
 uint32_t gic_register_interrupt_handler(XScuGic *gic_inst, interrupt_handler* interrupt_handler){
     return gic_register_interrupt(gic_inst , interrupt_handler->interrupt_line, interrupt_handler->interrupt_handler);
 }
+#endif
