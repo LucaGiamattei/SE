@@ -1,0 +1,54 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/62f01448/
+CONTROL_REG	myuart.h	/^    uint32_t CONTROL_REG;$/;"	m	struct:__anon8e08f67d0108	typeref:typename:uint32_t
+CONTROL_REG_OFFSET	myuart.h	/^#define CONTROL_REG_OFFSET /;"	d
+CTR_IACK	myuart.h	/^#define CTR_IACK /;"	d
+CTR_IE	myuart.h	/^#define CTR_IE /;"	d
+CTR_RD	myuart.h	/^#define CTR_RD /;"	d
+CTR_WR	myuart.h	/^#define CTR_WR /;"	d
+DBIN	myuart.h	/^    uint32_t DBIN; $/;"	m	struct:__anon8e08f67d0108	typeref:typename:uint32_t
+DBIN_OFFSET	myuart.h	/^#define DBIN_OFFSET /;"	d
+DBOUT	myuart.h	/^    uint32_t DBOUT;$/;"	m	struct:__anon8e08f67d0108	typeref:typename:uint32_t
+DBOUT_OFFSET	myuart.h	/^#define DBOUT_OFFSET /;"	d
+HIGH	myuart.h	/^#define HIGH /;"	d
+INT_DIS	myuart.h	/^#define INT_DIS /;"	d
+INT_EN	myuart.h	/^#define INT_EN /;"	d
+LOW	myuart.h	/^#define LOW /;"	d
+MYUART_H	myuart.h	/^#define MYUART_H$/;"	d
+STATUS_REG	myuart.h	/^    uint32_t STATUS_REG;$/;"	m	struct:__anon8e08f67d0108	typeref:typename:uint32_t
+STATUS_REG_OFFSET	myuart.h	/^#define STATUS_REG_OFFSET /;"	d
+ST_FE	myuart.h	/^#define ST_FE /;"	d
+ST_OE	myuart.h	/^#define ST_OE /;"	d
+ST_PE	myuart.h	/^#define ST_PE /;"	d
+ST_RDA	myuart.h	/^#define ST_RDA /;"	d
+ST_TBE	myuart.h	/^#define ST_TBE /;"	d
+UTILS_H	utils.h	/^#define UTILS_H$/;"	d
+__anon485cffec0108	utils.h	/^typedef struct{$/;"	s
+__anon8e08f67d0108	myuart.h	/^typedef struct{$/;"	s
+gic_disable	utils.c	/^uint32_t gic_disable(uint32_t gic_id){$/;"	f	typeref:typename:uint32_t
+gic_enable	utils.c	/^uint32_t gic_enable(uint32_t gic_id, XScuGic* gic_inst){$/;"	f	typeref:typename:uint32_t
+gic_register_interrupt	utils.c	/^uint32_t gic_register_interrupt(XScuGic *gic_inst ,uint32_t interrupt_line, void* interrupt_hand/;"	f	typeref:typename:uint32_t
+gic_register_interrupt_handler	utils.c	/^uint32_t gic_register_interrupt_handler(XScuGic *gic_inst, interrupt_handler* interrupt_handler)/;"	f	typeref:typename:uint32_t
+interrupt_handler	utils.h	/^    void* interrupt_handler;$/;"	m	struct:__anon485cffec0108	typeref:typename:void *
+interrupt_handler	utils.h	/^}interrupt_handler;$/;"	t	typeref:struct:__anon485cffec0108
+interrupt_line	utils.h	/^    uint32_t interrupt_line;$/;"	m	struct:__anon485cffec0108	typeref:typename:uint32_t
+myUART	myuart.h	/^} myUART;$/;"	t	typeref:struct:__anon8e08f67d0108
+myUART_Iack_r	myuart.c	/^void myUART_Iack_r(myUART * myuart){$/;"	f	typeref:typename:void
+myUART_Iack_w	myuart.c	/^void myUART_Iack_w(myUART * myuart){$/;"	f	typeref:typename:void
+myUART_en_int	myuart.c	/^uint32_t myUART_en_int(myUART * myuart, uint8_t int_en){$/;"	f	typeref:typename:uint32_t
+myUART_init	myuart.c	/^myUART* myUART_init(uint32_t *peripheral_address){$/;"	f	typeref:typename:myUART *
+myUART_read	myuart.c	/^uint8_t myUART_read(myUART * myuart){$/;"	f	typeref:typename:uint8_t
+myUART_read_DBOUT	myuart.c	/^uint8_t myUART_read_DBOUT(myUART * myuart){$/;"	f	typeref:typename:uint8_t
+myUART_read_status	myuart.c	/^uint32_t myUART_read_status(myUART * myuart){$/;"	f	typeref:typename:uint32_t
+myUART_read_status_bit	myuart.c	/^uint8_t myUART_read_status_bit(myUART * myuart, uint32_t pos){$/;"	f	typeref:typename:uint8_t
+myUART_transmit	myuart.c	/^void myUART_transmit(myUART * myuart, uint8_t transmit_data){$/;"	f	typeref:typename:void
+myUART_transmit_int	myuart.c	/^void myUART_transmit_int(myUART * myuart, uint8_t transmit_data){$/;"	f	typeref:typename:void
+read_bit_in_single_pos	utils.c	/^uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos){ $/;"	f	typeref:typename:uint8_t
+write_bit_in_pos	utils.c	/^uint32_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit){$/;"	f	typeref:typename:uint32_t
