@@ -51,7 +51,7 @@ int main(){
         write(led_file_descriptor, write_value , sizeof(__uint32_t));
     }
 
-
+    free(write_value);
     close(led_file_descriptor);
     close(button_file_descriptor);
     return 0;
