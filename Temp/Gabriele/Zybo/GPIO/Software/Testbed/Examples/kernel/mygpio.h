@@ -20,6 +20,7 @@
 #ifndef MYGPIO_H
 #define MYGPIO_H
 
+
 /************************** Constant Definitions *****************************/
 /**
  * @name Definizioni delle macro per identificare i pin
@@ -311,6 +312,55 @@ uint32_t myGPIO_clear_irq(myGPIO * mygpio, uint32_t GPIO_pins);
  */
 uint32_t myGPIO_read_pin_irq_status(myGPIO * mygpio, uint32_t GPIO_pin);
 /** @} */
+
+/***************************** UIO functions *******************************/
+
+#ifdef MYGPIO_UIO
+
+/**
+ * @brief Read UIO, pone in attesa di un interruzione
+ * @param uio_descriptor descrittore del file uio aperto
+ * @param interrupt_count variabile di conteggio delle interruzioni, aggiornata dalla read
+ * @retval valore negativo in caso di errore della read, postitivo altrimenti
+ * @{
+ */
+int32_t wait_interrupt(int uio_descriptor, int32_t* interrupt_count);
+/** @} */
+
+/**
+ * @brief Write UIO, riabilita le interruzioni
+ * @param uio_descriptor descrittore del file uio aperto
+ * @param reenable valore "1" per la riabilitazione delle interruzioni
+ * @retval valore negativo in caso di errore della write, postitivo altrimenti
+ * @{
+ */
+int32_t reenable_interrupt(int uio_descriptor, int32_t* reenable);
+/** @} */
+
+/**
+ * @brief Esegue mmap sul file uio aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
+ * @param filename nome del file, per la stampa di errore sul file descriptor
+ * @param file_descriptor descrittore del file uio aperto
+ * @retval NULL nel caso in cui il descrittore non sia valido o nel caso in cui 
+ * "mmap" ritorni MAP_FAILED 
+ * @{
+ */
+void* configure_uio_mygpio(char* filename, int* file_descriptor);
+/** @} */
+#endif
+
+#ifdef MYGPIO_NO_DRIVER
+/**
+ * @brief Esegue mmap sul file /dev/mem aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
+ * @param file_descriptor descrittore del file /dev/mem aperto
+ * @param phy_address indirizzo fisico base della periferica memory mapped
+ * @retval NULL nel caso in cui "mmap" ritorni MAP_FAILED, altrimenti l'indirizzo virtuale base della periferica
+ * @{
+ */
+void* configure_no_driver_mygpio(int* file_descriptor, uint32_t phy_address);
+/** @} */
+#endif
+
 
 /** @} */
 

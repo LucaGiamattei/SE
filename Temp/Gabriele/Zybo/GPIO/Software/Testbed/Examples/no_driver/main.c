@@ -81,25 +81,8 @@ int main(int argc, char** argv){
 		return -1;
 	}
 
-	// dimensione della pagina di memoria
-	uint32_t page_size = sysconf(_SC_PAGESIZE);		
-	/* maschera di bit per ottenere l'indirizzo della pagina fisica
-	* in cui è mappato l'indirizzo la nostra periferica 
-	*/
-	uint32_t page_mask = ~(page_size-1);			
-	// indirizzo della "pagina fisica" a cui è mappato il device
-	uint32_t page_addr =  ADDR_LED & page_mask;		
-	// offset del device rispetto all'indirizzo della pagina
-	uint32_t offset = ADDR_LED - page_addr;		
-
-	//mapping della pagina fisica, contenente il nostro device, nello spazio d'indirizzamento del processo
-	void* vrt_page_addr = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, descriptor, page_addr);
-	if (vrt_page_addr == MAP_FAILED) {
-		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
-		return -1;
-	}
 	// indirizzo virtuale del device gpio nello spazio d'indirizzamento del processo
-	void* vrt_gpio_addr = vrt_page_addr + offset;	
+	void* vrt_gpio_addr = configure_no_driver_mygpio(descriptor,ADDR_LED);
 	
 	//Inizializzazione del device in modalità scrittura
 	myGPIO* led = myGPIO_init(vrt_gpio_addr);
