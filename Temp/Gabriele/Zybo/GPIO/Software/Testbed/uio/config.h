@@ -1,13 +1,6 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-<<<<<<< Updated upstream:Temp/Gabriele/Zybo/UART/UART-1-Interrupt/Software/Testbed/Examples/no_driver/config.h
-/**
-* UIO device macros
-**/
-#define UART1_ADDR 0x43c00000
-#define UART2_ADDR 0x43c10000
-=======
 
 #ifdef MYGPIO_UIO
 #define UIO_FILE_LED "/dev/uio0"
@@ -45,7 +38,6 @@
 #define GIC_ID XPAR_PS7_SCUGIC_0_DEVICE_ID
 #endif
 
->>>>>>> Stashed changes:Temp/Gabriele/Zybo/GPIO/Software/Testbed/uio/config.h
 
 /**
  *  colors macros 
