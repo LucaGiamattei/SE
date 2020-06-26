@@ -1,0 +1,1 @@
+File necessari per compilare il devicetree generati a partire dall'xsa presente in GPIO/hardware

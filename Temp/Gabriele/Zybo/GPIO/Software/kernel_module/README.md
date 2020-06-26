@@ -1,0 +1,1 @@
+File necessari per compilare il modulo kernel, ottenendo un file .ko
