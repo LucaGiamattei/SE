@@ -83,58 +83,6 @@ uint32_t myGPIO_read_pin_irq_status(myGPIO * mygpio, uint32_t GPIO_pin){
 }
 
 
-#ifdef MYGPIO_UIO
-void* configure_uio_mygpio(char* filename, int* file_descriptor){
-   
-    void* vrt_gpio = NULL;
-
-	if (*file_descriptor < 1) {
-		printf("Errore nell'aprire il descrittore  del file %s\n", filename);
-		return NULL;
-	}
-
-    printf("File aperto con successo descrittore: %d \n", *file_descriptor);
-
-    uint32_t page_size = sysconf(_SC_PAGESIZE);		
-
-	vrt_gpio = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, *file_descriptor, 0);
-	if (vrt_gpio == MAP_FAILED) {
-		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
-		return NULL;
-	}
-
-    printf("Mapping indirizzo avvenuto con successo indirizzo: %08x\n", vrt_gpio);
-    
-    return vrt_gpio;
-}
-#endif
-
-#ifdef MYGPIO_NO_DRIVER
-void* configure_no_driver_mygpio(int file_descriptor, void** vrt_page_addr, uint32_t phy_address){
-	// dimensione della pagina di memoria
-	uint32_t page_size = sysconf(_SC_PAGESIZE);		
-	/* maschera di bit per ottenere l'indirizzo della pagina fisica
-	* in cui è mappato l'indirizzo la nostra periferica 
-	*/
-	uint32_t page_mask = ~(page_size-1);			
-	// indirizzo della "pagina fisica" a cui è mappato il device
-	uint32_t page_addr =  phy_address & page_mask;		
-	// offset del device rispetto all'indirizzo della pagina
-	uint32_t offset = phy_address - page_addr;		
-
-	//mapping della pagina fisica, contenente il nostro device, nello spazio d'indirizzamento del processo
-	*vrt_page_addr = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, file_descriptor, page_addr);
-	if (*vrt_page_addr == MAP_FAILED) {
-		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
-		return NULL;
-	}
-	// indirizzo virtuale del device gpio nello spazio d'indirizzamento del processo
-	void* vrt_gpio_addr = *vrt_page_addr + offset;	
-
-    return vrt_gpio_addr;
-}
-#endif
-
 #ifdef MYGPIO_KERNEL
 
 void myGPIO_set_mode_mask_k(int descriptor, uint32_t mode_mask){

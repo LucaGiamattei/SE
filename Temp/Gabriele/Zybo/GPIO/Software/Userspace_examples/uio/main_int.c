@@ -58,7 +58,7 @@ int main (int argc, char** argv){
         //---------------Button uio e mmap------------------
 
         int uio_btn_descriptor = open(UIO_FILE_BTN, O_RDWR);
-        void* vrt_gpio = configure_uio_mygpio(UIO_FILE_BTN, &uio_btn_descriptor);
+        void* vrt_gpio = configure_uio(UIO_FILE_BTN, &uio_btn_descriptor);
         printf("%s[BTN]%s vrt_gpio %08x\n",COL_YELLOW,COL_GRAY, vrt_gpio);
         printf("%s[BTN]%s uio_btn_descriptor %d\n",COL_YELLOW,COL_GRAY, uio_btn_descriptor);
 
@@ -111,7 +111,7 @@ int main (int argc, char** argv){
             // int uio_swt_descriptor = open (UIO_FILE_SWT, O_RDWR);
             int uio_swt_descriptor  = open(UIO_FILE_SWT,O_RDWR) ;
 
-            void* vrt_gpio = configure_uio_mygpio(UIO_FILE_SWT, &uio_swt_descriptor);
+            void* vrt_gpio = configure_uio(UIO_FILE_SWT, &uio_swt_descriptor);
             printf("%s[SWT]%s vrt_gpio %08x\n",COL_BLUE,COL_GRAY, vrt_gpio);
 
             if (vrt_gpio == NULL) 
@@ -155,7 +155,7 @@ int main (int argc, char** argv){
 
             //int uio_led_descriptor = open (UIO_FILE_LED, O_RDWR);
             int uio_led_descriptor = open(UIO_FILE_LED,O_RDWR);
-            void* vrt_gpio = configure_uio_mygpio(UIO_FILE_SWT, &uio_led_descriptor);
+            void* vrt_gpio = configure_uio(UIO_FILE_SWT, &uio_led_descriptor);
             printf("%s[LED]%s vrtgpio %08x\n",COL_RED,COL_GRAY, vrt_gpio);
 
             if (vrt_gpio == NULL) 

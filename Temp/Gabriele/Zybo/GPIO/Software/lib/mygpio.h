@@ -317,36 +317,8 @@ uint32_t myGPIO_clear_irq(myGPIO * mygpio, uint32_t GPIO_pins);
 uint32_t myGPIO_read_pin_irq_status(myGPIO * mygpio, uint32_t GPIO_pin);
 /** @} */
 
-/***************************** UIO functions *******************************/
 
-#ifdef MYGPIO_UIO
 
-/**
- * @brief Esegue mmap sul file uio aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
- * @param filename nome del file, per la stampa di errore sul file descriptor
- * @param file_descriptor descrittore del file uio aperto
- * @retval NULL nel caso in cui il descrittore non sia valido o nel caso in cui 
- * "mmap" ritorni MAP_FAILED 
- * @{
- */
-void* configure_uio_mygpio(char* filename, int* file_descriptor);
-/** @} */
-#endif
-
-#ifdef MYGPIO_NO_DRIVER
-#include <sys/mman.h>
-#include <unistd.h>
-/**
- * @brief Esegue mmap sul file /dev/mem aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
- * @param file_descriptor descrittore del file /dev/mem aperto
- * @param vrt_page_addr indirizzo virtuale della pagina a cui appartiene quello della periferica memory mapped
- * @param phy_address indirizzo fisico base della periferica memory mapped
- * @retval NULL nel caso in cui "mmap" ritorni MAP_FAILED, altrimenti l'indirizzo virtuale base della periferica
- * @{
- */
-void* configure_no_driver_mygpio(int file_descriptor, void** vrt_page_addr, uint32_t phy_address);
-/** @} */
-#endif
 
 #ifdef MYGPIO_KERNEL
 /**

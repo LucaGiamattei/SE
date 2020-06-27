@@ -71,5 +71,31 @@ int32_t wait_interrupt(int uio_descriptor, int32_t* interrupt_count);
 int32_t reenable_interrupt(int uio_descriptor, int32_t* reenable);
 /** @} */
 
+/**
+ * @brief Esegue mmap sul file uio aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
+ * @param filename nome del file, per la stampa di errore sul file descriptor
+ * @param file_descriptor descrittore del file uio aperto
+ * @retval NULL nel caso in cui il descrittore non sia valido o nel caso in cui 
+ * "mmap" ritorni MAP_FAILED 
+ * @{
+ */
+void* configure_uio(char* filename, int* file_descriptor);
+/** @} */
+
 #endif
+#if defined MYGPIO_NO_DRIVER|| defined MYUART_NO_DRIVER
+#include <sys/mman.h>
+#include <unistd.h>
+/**
+ * @brief Esegue mmap sul file /dev/mem aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
+ * @param file_descriptor descrittore del file /dev/mem aperto
+ * @param vrt_page_addr indirizzo virtuale della pagina a cui appartiene quello della periferica memory mapped
+ * @param phy_address indirizzo fisico base della periferica memory mapped
+ * @retval NULL nel caso in cui "mmap" ritorni MAP_FAILED, altrimenti l'indirizzo virtuale base della periferica
+ * @{
+ */
+void* configure_no_driver(int file_descriptor, void** vrt_page_addr, uint32_t phy_address);
+#endif
+
+/** @} */
 #endif

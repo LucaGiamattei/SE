@@ -81,7 +81,7 @@ int main(int argc, char** argv){
 
 	void* vrt_page_addr;
 	// indirizzo virtuale del device gpio nello spazio d'indirizzamento del processo
-	void* vrt_gpio_addr = configure_no_driver_mygpio(descriptor,&vrt_page_addr,ADDR_LED);
+	void* vrt_gpio_addr = configure_no_driver(descriptor,&vrt_page_addr,ADDR_LED);
 	
 	//Inizializzazione del device in modalità scrittura
 	myGPIO* led = myGPIO_init(vrt_gpio_addr);
