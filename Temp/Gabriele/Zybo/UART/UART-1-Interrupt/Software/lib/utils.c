@@ -2,12 +2,6 @@
 
 
 
-/*TODO
-* METTERE ASSERT
-*
-*/
-
-//Scrive lo stesso bit nelle posizioni desiderate
 uint32_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit){
     if(bit == 0){
         *(address) &= ~pos;
@@ -33,23 +27,19 @@ uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos){
 
 uint32_t gic_enable(uint32_t gic_id, XScuGic* gic_inst){
     XScuGic_Config * gic_conf ;
-
-    //Configuriamo il GIC
     gic_conf = XScuGic_LookupConfig(gic_id);
 	uint32_t status = XScuGic_CfgInitialize(gic_inst, gic_conf, gic_conf->CpuBaseAddress);
 
 	if (status != XST_SUCCESS){
 		return status;
 	}
-
-	//abilitazione del gic per gestire gli interrupt esterni
 	Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,(Xil_ExceptionHandler)XScuGic_InterruptHandler,( void*) gic_inst);
 	Xil_ExceptionEnable();
 
     return XST_SUCCESS;
 }
 
-uint32_t gic_disable(uint32_t gic_id){
+void gic_disable(){
 	Xil_ExceptionDisable();
 	return 0;
 }
@@ -98,7 +88,6 @@ uint32_t write_bit_in_pos_k(int descriptor, int32_t reg, uint32_t pos, uint32_t 
     }else if(bit == 1){
         write_value |= pos;
     }else{
-        //invalid bit
         return 0;
     }
     write(descriptor, &write_value , sizeof(__uint32_t));
@@ -121,7 +110,7 @@ void write_reg(int descriptor, int32_t reg, int32_t write_value){
     lseek(descriptor, reg, SEEK_SET);
     write(descriptor, &write_value , sizeof(__uint32_t));
 }
-uint8_t  read_reg(int descriptor, int32_t reg){
+uint32_t  read_reg(int descriptor, int32_t reg){
     lseek(descriptor, reg, SEEK_SET);
     int flags = fcntl(descriptor, F_GETFL, 0);
     fcntl(descriptor, F_SETFL, flags | O_NONBLOCK);
@@ -130,7 +119,7 @@ uint8_t  read_reg(int descriptor, int32_t reg){
     fcntl(descriptor, F_SETFL, flags & ~O_NONBLOCK);
     return read_value;
 }
-uint8_t  read_reg_bloc(int descriptor, int32_t reg){
+uint32_t  read_reg_bloc(int descriptor, int32_t reg){
     lseek(descriptor, reg, SEEK_SET);
     int32_t read_value = 0;
     read(descriptor, &read_value, sizeof(__uint32_t));
@@ -159,26 +148,15 @@ int32_t reenable_interrupt(int uio_descriptor, int32_t *reenable){
 }
 
 void* configure_uio(char* filename, int* file_descriptor){
-   
     void* vrt_gpio = NULL;
-
 	if (*file_descriptor < 1) {
-		printf("Errore nell'aprire il descrittore  del file %s\n", filename);
 		return NULL;
 	}
-
-    printf("File aperto con successo descrittore: %d \n", *file_descriptor);
-
     uint32_t page_size = sysconf(_SC_PAGESIZE);		
-
 	vrt_gpio = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, *file_descriptor, 0);
 	if (vrt_gpio == MAP_FAILED) {
-		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
 		return NULL;
-	}
-
-    printf("Mapping indirizzo avvenuto con successo indirizzo: %08x\n", vrt_gpio);
-    
+	}  
     return vrt_gpio;
 }
 
@@ -188,26 +166,16 @@ void* configure_uio(char* filename, int* file_descriptor){
 #if defined MYGPIO_NO_DRIVER|| defined MYUART_NO_DRIVER
 
 void* configure_no_driver(int file_descriptor, void** vrt_page_addr, uint32_t phy_address){
-	// dimensione della pagina di memoria
 	uint32_t page_size = sysconf(_SC_PAGESIZE);		
-	/* maschera di bit per ottenere l'indirizzo della pagina fisica
-	* in cui è mappato l'indirizzo la nostra periferica 
-	*/
 	uint32_t page_mask = ~(page_size-1);			
-	// indirizzo della "pagina fisica" a cui è mappato il device
 	uint32_t page_addr =  phy_address & page_mask;		
-	// offset del device rispetto all'indirizzo della pagina
 	uint32_t offset = phy_address - page_addr;		
-
-	//mapping della pagina fisica, contenente il nostro device, nello spazio d'indirizzamento del processo
 	*vrt_page_addr = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, file_descriptor, page_addr);
 	if (*vrt_page_addr == MAP_FAILED) {
 		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
 		return NULL;
 	}
-	// indirizzo virtuale del device gpio nello spazio d'indirizzamento del processo
 	void* vrt_gpio_addr = *vrt_page_addr + offset;	
-
     return vrt_gpio_addr;
 }
 #endif
