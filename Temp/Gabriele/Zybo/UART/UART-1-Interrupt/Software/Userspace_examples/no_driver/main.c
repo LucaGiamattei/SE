@@ -54,14 +54,8 @@ void howto(void);
  *  I parametri riconosciuti sono:
  *  - 'w' : operazione di scrittura, seguito dal valore che si intende scrivere, in esadecimale; 
  */
-typedef struct {
-    u_int32_t page_addr;
-    u_int32_t offset;
-}phy_page;
 
 int parse_args(int argc, char**argv, uint32_t	*val);
-
-phy_page get_phy_page(uint32_t page_size,uint32_t physical_address);
 
 /***************************** MAIN *********************************************/
 
@@ -91,34 +85,19 @@ int main(int argc, char** argv){
 		perror(argv[0]);
 		return -1;
 	}
-     // dimensione della pagina di memoria
-	uint32_t page_size = sysconf(_SC_PAGESIZE);	
-    //ottengo l'indrizzo della pagina fisica e l'offset dell'uart1
-    phy_page p_page_uart1 = get_phy_page(page_size,UART1_ADDR);
-     //ottengo l'indrizzo della pagina fisica e l'offset dell'uart2
-    phy_page p_page_uart2 = get_phy_page(page_size,UART2_ADDR);
-
-	//mapping della pagina fisica, contenente il nostro device, nello spazio d'indirizzamento del processo
-	void* vrt_page_addr_uart1 = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, descriptor, p_page_uart1.page_addr);
-	if (vrt_page_addr_uart1 == MAP_FAILED) {
-		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
-		return -1;
-	}
-    //mapping della pagina fisica, contenente il nostro device, nello spazio d'indirizzamento del processo
-	void* vrt_page_addr_uart2 = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, descriptor, p_page_uart2.page_addr);
-	if (vrt_page_addr_uart2 == MAP_FAILED) {
-		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
-		return -1;
-	}
-	// indirizzo virtuale del device uart1 nello spazio d'indirizzamento del processo
-	void* vrt_uart1_addr = vrt_page_addr_uart1 + p_page_uart1.offset;	
-	// indirizzo virtuale del device uart2 nello spazio d'indirizzamento del processo
-	void* vrt_uart2_addr = vrt_page_addr_uart2 + p_page_uart2.offset;
-
+	
+	void* vrt_page_addr_uart1;
+	void* vrt_page_addr_uart2;
+	
+    //UART1: ottengo l'indrizzo della pagina virtuale e l'indirizzo virtuale base della periferica
+	//tenendo conto dell'offset
+    void* vrt_uart1_addr = configure_no_driver(descriptor,&vrt_page_addr_uart1,UART1_ADDR);
+	//UART2: ottengo l'indrizzo della pagina virtuale e l'indirizzo virtuale base della periferica
+	//tenendo conto dell'offset
+    void* vrt_uart2_addr = configure_no_driver(descriptor,&vrt_page_addr_uart2,UART2_ADDR);
 	//Inizializzazione dell'uart1
 	uart1 = myUART_init((uint32_t*)vrt_uart1_addr);
-	
-    //Inizializzazione dell'uart2
+	//Inizializzazione dell'uart2
     uart2 = myUART_init((uint32_t*)vrt_uart2_addr);
     //invio del carattere sull'uart1
     myUART_transmit(uart1, value);
@@ -127,30 +106,12 @@ int main(int argc, char** argv){
     uint32_t state = 0;
     uint8_t read_value = myUART_read(uart2, & state);
     printf("%s[UART2]%s ho letto il valore: %08x\n",COL_YELLOW,COL_GRAY, read_value);
-	
-
-	
-
 	//rimozione della pagain di memoria e chiusura del file /dev/mem
-	munmap(vrt_uart1_addr, page_size);
-    munmap(vrt_uart2_addr, page_size);
+	munmap(vrt_uart1_addr, sysconf(_SC_PAGESIZE));
+    munmap(vrt_uart2_addr, sysconf(_SC_PAGESIZE));
 	close(descriptor);
 
 	return 0;
-}
-
-phy_page get_phy_page(uint32_t page_size,uint32_t physical_address){
-    phy_page i_p_fisica;
-   	
-	/* maschera di bit per ottenere l'indirizzo della pagina fisica
-	* in cui è mappato l'indirizzo la nostra periferica 
-	*/
-	uint32_t page_mask = ~(page_size-1);			
-	// indirizzo della "pagina fisica" a cui è mappato il device
-	i_p_fisica.page_addr = physical_address  & page_mask;		
-	// offset del device rispetto all'indirizzo della pagina
-	i_p_fisica.offset = physical_address - i_p_fisica.page_addr;	
-    return i_p_fisica;
 }
 
 /***************************** Functions definition *******************************/

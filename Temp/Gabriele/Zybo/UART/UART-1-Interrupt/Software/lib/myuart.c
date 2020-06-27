@@ -23,7 +23,7 @@
 
 /***************************** Include Files *********************************/
 #include "myuart.h"
-#include "utils.h"
+
 
 /***************************** Function Implementation *******************************/
 
@@ -87,6 +87,65 @@ void myUART_Iack_w(myUART * myuart){
     //IACK è abbassato automaticamente in hw
 }
 
+#ifdef MYUART_KERNEL
 
+uint32_t myUART_en_int_rx_k(int descriptor, uint8_t int_en){
+    return write_bit_in_pos_k( descriptor, CONTROL_REG_OFFSET, CTR_IERX, int_en);
+   
+}
+
+uint32_t myUART_en_int_tx_k(int descriptor, uint8_t int_en){
+    return write_bit_in_pos_k( descriptor, CONTROL_REG_OFFSET, CTR_IETX, int_en);
+    
+}
+
+
+//ATT: Si dovrebbe gestire il TIMEOUT con un timer
+void myUART_transmit_k(int descriptor, uint8_t transmit_data){
+    while(!read_bit_in_single_pos_k( descriptor, STATUS_REG_OFFSET, ST_TBE)){}
+    write_reg(descriptor, DBIN_OFFSET, transmit_data);
+    
+}
+
+//ATT: Si dovrebbe gestire il TIMEOUT con un timer
+uint8_t myUART_read_k(int descriptor,uint32_t* status_reg){
+    while(!read_bit_in_single_pos_k( descriptor, STATUS_REG_OFFSET, ST_RDA)){}
+    *(status_reg) = read_reg( descriptor, STATUS_REG_OFFSET);
+    uint8_t read_value =read_reg( descriptor, DBOUT_OFFSET);
+    myUART_Iack_r_k(descriptor); 
+    return read_value;
+}
+
+void myUART_read_DBOUT_bloc_k(int descriptor,uint32_t* read_value){
+   read_reg_bloc_UART_k(descriptor, DBOUT_OFFSET,read_value);
+}
+
+uint8_t myUART_read_status_bit_k(int descriptor, uint32_t pos){
+    return read_bit_in_single_pos_k( descriptor, STATUS_REG_OFFSET, pos);
+
+}
+
+uint32_t myUART_read_status_k(int descriptor){
+    return read_reg( descriptor, STATUS_REG_OFFSET);
+}
+
+void myUART_Iack_r_k(int descriptor){
+    write_bit_in_pos_k( descriptor, CONTROL_REG_OFFSET, CTR_RD, HIGH);
+    write_bit_in_pos_k( descriptor, CONTROL_REG_OFFSET, CTR_RD, LOW);
+}
+
+void myUART_Iack_w_k(int descriptor){
+    write_bit_in_pos_k( descriptor, CONTROL_REG_OFFSET, CTR_IACK, HIGH);
+    //IACK è abbassato automaticamente in hw
+}
+
+void  read_reg_bloc_UART_k(int descriptor, uint32_t reg, uint32_t* read_value){
+    //uint32_t *read_value = (uint32_t *)malloc(2 * sizeof (uint32_t));
+    lseek(descriptor, reg, SEEK_SET);
+    read(descriptor, read_value, 2*sizeof(uint32_t));
+
+}
+
+#endif
 
 /** @} */

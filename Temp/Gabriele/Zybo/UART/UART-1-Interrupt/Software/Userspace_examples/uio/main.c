@@ -10,10 +10,6 @@
 #include <sys/mman.h>
 #include <fcntl.h>
 
-void* configure_uio_myuart(char* filename, int* file_descriptor);
-int32_t wait_interrupt(int uio_descriptor, int32_t* file_descriptor);
-int32_t reenable_interrupt(int uio_descriptor, int32_t* reenable);
-
 int main (int argc, char** argv){
     int uart1_fd, uart2_fd;
     myUART *uart1, *uart2;
@@ -26,7 +22,7 @@ int main (int argc, char** argv){
 
         uart1_fd  = open(UIO_FILE_UART1,O_RDWR) ;
 
-        void* vrt_gpio = configure_uio_myuart(UIO_FILE_UART1, &uart1_fd);
+        void* vrt_gpio = configure_uio(UIO_FILE_UART1, &uart1_fd);
         printf("%s[UART1-SENDER]%s vrt_gpio: %08x\n",COL_BLUE, COL_GRAY, vrt_gpio);
 
         if (vrt_gpio == NULL) 
@@ -52,7 +48,7 @@ int main (int argc, char** argv){
 
         uart2_fd  = open(UIO_FILE_UART2,O_RDWR) ;
 
-        void* vrt_gpio = configure_uio_myuart(UIO_FILE_UART2, &uart2_fd);
+        void* vrt_gpio = configure_uio(UIO_FILE_UART2, &uart2_fd);
         printf("%s[UART2-RECEIVER]%s vrt_gpio: %08x\n",COL_RED, COL_GRAY, vrt_gpio);
         if (vrt_gpio == NULL) 
             return -1;
@@ -89,45 +85,4 @@ int main (int argc, char** argv){
 
 
     return 0;
-}
-
-void* configure_uio_myuart(char* filename, int* file_descriptor){
-   
-    void* vrt_gpio = NULL;
-    //Open UIO device
-    //*file_descriptor = open (filename, O_RDWR);
-	if (*file_descriptor < 1) {
-		printf("Errore nell'aprire il descrittore  del file %s\n", filename);
-		//return NULL;
-	}
-
-    printf("File aperto con successo descrittore: %d \n", *file_descriptor);
-
-    uint32_t page_size = sysconf(_SC_PAGESIZE);		
-
-	vrt_gpio = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, *file_descriptor, 0);
-	if (vrt_gpio == MAP_FAILED) {
-		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
-		//return NULL;
-	}
-
-    printf("Mapping indirizzo avvenuto con successo indirizzo: %08x\n", vrt_gpio);
-    
-    return vrt_gpio;
-}
-
-
-int32_t wait_interrupt(int uio_descriptor, int32_t *interrupt_count){
-    if (read(uio_descriptor, interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
-        printf("Read error!\n");
-        return -1;
-    }
-                
-}
-
-int32_t reenable_interrupt(int uio_descriptor, int32_t *reenable){   
-    if (write(uio_descriptor, (void*)reenable, sizeof(uint32_t)) != sizeof(uint32_t)) {
-        printf("Write error!\n");
-        return -2;
-    }
 }

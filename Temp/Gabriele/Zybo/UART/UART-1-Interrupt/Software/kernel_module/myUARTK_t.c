@@ -138,10 +138,6 @@ int myUARTK_Init(	myUARTK_t* myUARTK_device,
 
 
 	myUARTK_GlobalInterruptEnable(myUARTK_device);
-	volatile unsigned reg_value = ioread32((myUARTK_device->vrtl_addr + myUARTK_CONTROL_REG_OFFSET));
-	reg_value |= CTR_IERX ;
-	printk("Device initialized ctr_reg: %08x", reg_value);
-	//myUARTK_PinInterruptEnable(myUARTK_device, myUARTK_device->irq_mask);
 
 	goto no_error;
 
@@ -241,11 +237,8 @@ void* myUARTK_GetDeviceAddress(myUARTK_t* device) {
 void myUARTK_GlobalInterruptEnable(myUARTK_t* device) {
 	volatile unsigned reg_value = ioread32((device->vrtl_addr + myUARTK_CONTROL_REG_OFFSET));
 	reg_value |= CTR_IERX ;
-	printk("Sto per scrivere sull'indirizzo %08x il valore %08x\n",device->vrtl_addr + myUARTK_CONTROL_REG_OFFSET, reg_value );
-
 	iowrite32(reg_value, (device->vrtl_addr + myUARTK_CONTROL_REG_OFFSET));
-	reg_value = ioread32((device->vrtl_addr + myUARTK_CONTROL_REG_OFFSET));
-	printk("control reg after IE: %08x\n", reg_value);
+	
 }
 
 /**

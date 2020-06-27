@@ -258,6 +258,8 @@ static ssize_t myUARTK_read (struct file *file_ptr, char *buf, size_t count, lof
 	myUARTK_t *myUARTK_dev_ptr;
 	void* read_addr;
 	uint32_t data_readed;
+	uint32_t* data;
+	void* status_addr;
 	printk(KERN_INFO "Chiamata %s\n", __func__);
 	
 	myUARTK_dev_ptr = file_ptr->private_data;
@@ -267,26 +269,32 @@ static ssize_t myUARTK_read (struct file *file_ptr, char *buf, size_t count, lof
 	if ((file_ptr->f_flags & O_NONBLOCK) == 0) {
 		printk(KERN_INFO "%s è bloccante\n", __func__);
 		myUARTK_TestCanReadAndSleep(myUARTK_dev_ptr);
-
 		myUARTK_ResetCanRead(myUARTK_dev_ptr);
+		if ((data = kmalloc(2*sizeof(uint32_t), GFP_KERNEL)) == NULL ) {
+			printk(KERN_ERR "%s: kmalloc ha restituito NULL\n", __func__);
+			return -ENOMEM;
+		}
+		read_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
+		data[0] = ioread32(read_addr);
+		status_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+myUARTK_STATUS_REG_OFFSET;
+		data[1] = ioread32(status_addr);
+		printk("KERNEL byte %c with state %d count %d \n",data[0],data[1],count);
+		if (copy_to_user(buf, data, count));
+		myUARTK_PinInterruptAck(myUARTK_dev_ptr);
+		myUARTK_GlobalInterruptEnable(myUARTK_dev_ptr);
+		kfree(data);
+		return -EFAULT;
+		
 	}
 	else {
 		printk(KERN_INFO "%s non è bloccante\n", __func__);
-	}
-
-	read_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
-	data_readed = ioread32(read_addr);
-
-	unsigned status_reg = ioread32((myUARTK_GetDeviceAddress(myUARTK_dev_ptr) + myUARTK_STATUS_REG_OFFSET));
-	printk("status reg before read: %08x\n", status_reg);
-	if (copy_to_user(buf, &data_readed, count))
+		read_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
+		read_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
+		data_readed = ioread32(read_addr);
+		if (copy_to_user(buf, &data_readed, count))
 		return -EFAULT;
-		
-	myUARTK_PinInterruptAck(myUARTK_dev_ptr);
-
-	myUARTK_GlobalInterruptEnable(myUARTK_dev_ptr);
-
-
+	}
+	
 	return count;
 }
 

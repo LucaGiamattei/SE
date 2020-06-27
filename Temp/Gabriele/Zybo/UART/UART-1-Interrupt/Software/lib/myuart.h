@@ -25,10 +25,10 @@
  * @name Definizioni delle macro per identificare i bit
  * @brief Macro utili a identificare i bit dei registri di controllo e di stato
  * @{
- */
+ */ 
 #define CTR_RD      (uint32_t) 1 << 0
-#define CTR_WR      (uint32_t) 1 << 1
-#define CTR_IERX    (uint32_t) 1 << 2
+#define CTR_WR      (uint32_t) 1 << 1 
+#define CTR_IERX    (uint32_t) 1 << 2 
 #define CTR_IETX    (uint32_t) 1 << 3
 #define CTR_IACK    (uint32_t) 1 << 4
 
@@ -70,6 +70,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
+#include "utils.h"
 /***************************** Type Definition *******************************/
 
 /**
@@ -224,6 +225,38 @@ void myUART_Iack_w(myUART * myuart);
 /** @} */
 
 /** @} */
+
+
+
+
+#ifdef MYUART_KERNEL
+
+
+uint32_t myUART_en_int_rx_k(int descriptor, uint8_t int_en);
+
+uint32_t myUART_en_int_tx_k(int descriptor, uint8_t int_en);
+
+void myUART_transmit_int_k(int descriptor, uint8_t transmit_data);
+
+//ATT: Si dovrebbe gestire il TIMEOUT con un timer
+void myUART_transmit_k(int descriptor, uint8_t transmit_data);
+
+//ATT: Si dovrebbe gestire il TIMEOUT con un timer
+uint8_t myUART_read_k(int descriptor,uint32_t* status_reg);
+
+void myUART_read_DBOUT_bloc_k(int descriptor,uint32_t* read_value);
+
+uint8_t myUART_read_status_bit_k(int descriptor, uint32_t pos);
+
+uint32_t myUART_read_status_k(int descriptor);
+
+void myUART_Iack_r_k(int descriptor);
+
+void myUART_Iack_w_k(int descriptor);
+
+void  read_reg_bloc_UART_k(int descriptor, uint32_t reg, uint32_t* read_value);
+
+#endif
 
 
 #endif
