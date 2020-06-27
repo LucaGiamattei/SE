@@ -1,6 +1,6 @@
 /**
 * @file myuart.c
-* @brief Questa è l'implementazione della liberia <b>myuart.h</b> definisce un board 
+* @brief Questa è l'implementazione della liberia <b>myuart.h</b> 
 * che definisce un board support package per la gestione semplificata
 * di una periferica AXI Lite che implementa un UART.
 * @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
@@ -13,11 +13,11 @@
 *   support package per la gestione semplificata di una periferica AXI Lite
 *   che implementa una UART. API che permettono di utilizzare 
 *   una periferica AXI Lite che implementa un
-*   GPIO descritto nel file <b>myUart_AXI.vhd</b> presente all'interno
+*   UART descritto nel file <b>myUart_AXI.vhd</b> presente all'interno
 *   del repository.
 *
 *
-* @addtogroup myGPIO
+* @addtogroup myUART
 * @{
 */
 
@@ -136,11 +136,9 @@ void myUART_Iack_r_k(int descriptor){
 
 void myUART_Iack_w_k(int descriptor){
     write_bit_in_pos_k( descriptor, CONTROL_REG_OFFSET, CTR_IACK, HIGH);
-    //IACK è abbassato automaticamente in hw
 }
 
 void  read_reg_bloc_UART_k(int descriptor, uint32_t reg, uint32_t* read_value){
-    //uint32_t *read_value = (uint32_t *)malloc(2 * sizeof (uint32_t));
     lseek(descriptor, reg, SEEK_SET);
     read(descriptor, read_value, 2*sizeof(uint32_t));
 
