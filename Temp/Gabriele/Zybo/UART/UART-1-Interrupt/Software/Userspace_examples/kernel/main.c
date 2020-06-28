@@ -1,3 +1,18 @@
+/**
+* @file main.c
+* @brief Questo è un esempio di utilizzo della libreria @ref myuart.h sul S.O GNU/Linux in esecuzione sulla board Zybo. \n La libreria è stata estesa affinchè la comunicazione con la periferica possa avvenire tramite il modulo kernel uart. 
+* @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
+*			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
+*			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
+* @date 15/06/2020
+*
+* 
+*
+* @{
+*/
+
+
+
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,7 +24,12 @@
 
 
 
-
+/**
+* @brief Main di un semplice programma di test dell'interfaccia seriale uart tramite la libreria myuart.h estesa per rendere possibile l'utilizzo del modulo kernel uart. 
+* @details Il programma instanzia due processi. Ogni processo guida una periferica uart. \n
+* Ogni uart può fungere sia da receiver che da transmitter. Inizialmente l'uart1 funge da transmitter e l'uart2 da receiver; i ruoli possono
+* essere scambiati inviando il carattere 'a'.
+*/
 int main (int argc, char** argv){
 
     int uart_1_file_descriptor, uart_2_file_descriptor, error;
@@ -81,3 +101,4 @@ int main (int argc, char** argv){
 
     return 0;
 }
+/** @} */
