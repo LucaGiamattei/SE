@@ -1,26 +1,21 @@
-/*! \mainpage Test GPIO on GNU/Linux without driver
+/*! \mainpage UART con driver UIO
  *
  * \section intro_sec Introduzione
  * 
  * 
- * @brief Smplice programma di test per accendere i led usando una periferica GPIO costum
+ * @brief UART uio è un esempio di utilizzo, a livello user space, del driver uio per interfacciarsi con la periferica custom UART sintetizzata sulla
+ * PL della board ZYBO. 
  * 
- * @details *   In questo esempio e' utilizzata la periferica generata dai file VHDL presenti in
- *   Hardware/GPIO/VHDL.
- * 	Nota per utilizzare correttamente la periferica è necessario generare il dtb 
- * 	seguento quanto riportato nella documentazione a corredo di questi esempi.
- *	Nell'esempio si utilizzano led in modalita' WRITE per accendere i led in base al
- *	parametro che si riceve in input.
  *
  * \section File
  * - @ref main.c
  *
  * \section Requirements
- * - @ref mygpio.h
- * - @ref mygpio.c
+ * - @ref myuart.h
+ * - @ref myuart.c
  * - @ref utils.h
  * - @ref utils.c
- *
+ * - @ref config.h
  * \section Use
  *
  * \subsection step1 Step 1: Configurare il CrossCompile
@@ -28,29 +23,30 @@
  * variabile <b>BUILDROOT_PATH</b> con il path d'installazione di buildroot, oppure
  * mettere il path d'installazione del proprio crosscompilatore facendo però attenzione
  * a modificare anche la variabile CROSS_COMPILE assegnandovi il nome del crosscompilatore
- * che si intende utilizzare.
+ * che si intende utilizzare. \n
  * \subsection step2 Step 2: Esportare le variabili d'ambiente
  * Aprire il terminale, posizionarsi nella directory corretto e digitare il seguente comando:
  * @code
  *  source init_crosscompile_build_environment
  * @endcode
- * \subsection step3 Step 3: Compilazione
+ * \subsection step3 Step 3: Cross Compilazione
  * Usando lo stesso terminale in cui si è digitato il comando <b>source</b>, posizionarsi 
  * nella cartella dei sorgenti e digitare il seguente comando:
  * @code
  *  make 
  * @endcode
  * 
- * \subsection step4 Step 4: Copia e esecuzione
- * Copiare il file <b>led_noDriver</b> sulla microsd contenente il root FS, 
- * la cartella in cui si copia è indifferente, basta solo tenerla presente.
- * Avviare la zybo, connettersi utilizzando la seriale (per i parametri vedere 
- * il manuale).
- * posizionarsi nella cartella contenete l'eseguibile copiato precedentemente e 
+ * \subsection step4 Step 4: Trasferimento dell'eseguibile sulla board ed esecuzione
+ * Assicurarsi che il device tree sia quello corretto e che dia le giuste informazioni al kernel linux affinchè sia possibile
+ * associare un mdoulo generico, UIO, alla periferica. \n
+ * Copiare il file <b>uart_uio_with_int</b> sulla microsd contenente il root FS. 
+ * La cartella in cui si copia è indifferente, basta solo tenerla presente. \n
+ * Avviare la zybo. Connettersi utilizzando la seriale (per i parametri vedere 
+ * il manuale). \n
+ * Posizionarsi nella cartella contenete l'eseguibile copiato precedentemente e 
  * dare il comando:
  * @code
- * led_noDriver -w hex-value
- * @endcode
- * <b>Nota</b>: per hex-value si intende un valore esadecimale, quindi dovrà essere preceduto 
- * da <b>0x</b>.
+ * uart_uio_with_int value
+ * @endcode 
+ *
  */
