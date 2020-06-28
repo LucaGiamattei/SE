@@ -639,7 +639,7 @@ begin
 --  - GPIO_inout
 --  - il registro MODE (negato), in modo che solo i bit impostati come input possano generare interrupt;
 --  - il registro PIE, in modo che solo i pin abilitati a generare interrupt lo facciano 
-	GPIO_inout_masked <= GPIO_inout and (not MODE(GPIO_width-1 downto 0)) and PIE(GPIO_width-1 downto 0);
+	GPIO_inout_masked <= GPIO_inout and PIE(GPIO_width-1 downto 0);
 -- interrupt_tmp è ottenuto mediante la or-reduce di IRQ
 	interrupt_tmp <= or_reduce(IRQ);
 -- interrupt è ottenuto mediante and tra interrupt_tmp e GIES(0) (interrupt-enable)
