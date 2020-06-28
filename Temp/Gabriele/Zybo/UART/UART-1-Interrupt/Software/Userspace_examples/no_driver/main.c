@@ -1,20 +1,17 @@
 /**
 * @file main.c
-* @brief Questo è un esempio di utilizzo della libreria @ref mygpio.h che
-* può essere eseguito sul S.O. GNU/Linux 
+* @brief Questo è un esempio di utilizzo della libreria @ref myuart.h sul S.O GNU/Linux in esecuzione sulla board Zybo . 
+* Per utilizzare la libreria vi è bisogno dell'indirizzo a cui è mappata la periferica.
+* Tramite un meccanismo di mapping sarà possibile ottenere un indirizzo virtuale, appartenente allo spazio di indrizzamento del processo, per comunicare con la periferica. 
 * @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
 *			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
 *			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
 * @date 15/06/2020
 *
-* @details
-*   In questo esempio e' utilizzata la periferica generata dai file VHDL presenti in
-*   Hardware/GPIO/VHDL.
-* 	Nota per utilizzare correttamente la periferica è necessario generare il dtb 
-* 	seguento quanto riportato nella documentazione a corredo di questi esempi.
-*	Nell'esempio si utilizzano led in modalita' WRITE per accendere i led in base al
-*	parametro che si riceve in input.
-*
+* @details E' possibile l'utilizzo delle funzioni della libreria myuart.h grazie a un mapping che viene fatto della pagina fisica, 
+* a cui è mappata la periferica UART custom, a una virtuale nello spazio di indirizzamento del processo.
+* Tale esempio non può fare uso delle interruzione  non essendovi alcun modulo kernel
+* ad occuparsi della periferica; per tale motivo questo modo di operare è definito driver no driver.
 *
 * @{
 */
@@ -40,6 +37,7 @@
  */
 void howto(void);
 
+
 /**
  * @brief Effettua il parsing degli argomenti
  *
@@ -59,18 +57,17 @@ int parse_args(int argc, char**argv, uint32_t	*val);
 
 /***************************** MAIN *********************************************/
 
-/**
-* @brief Main di un semplice programma di test dell'interfaccia seriale uart.
-* @details Main di un semplice programma di test dell'uart. Il primo Uart invia il carattere ricevuto in ingresso dal terminale
-* e il secondo uart stampa sul terminale il carattere ricevuto (ricezione con polling) sull'interfaccia seriale di ricezione.
-* Riceve come parametro di ingresso l'opzione -w e il valore in hex da inviare al secondo uart. 
-* sul registro write dei led.
-* Uso: uart_noDriver -w hex 
-*/
+
 myUART* uart1;
 myUART* uart2;
 
-
+/**
+* @brief Main di un semplice programma di test dell'interfaccia seriale uart.
+* @details Il primo Uart invia il carattere ricevuto in ingresso dal terminale
+* e il secondo uart stampa sul terminale il carattere ricevuto (ricezione con polling) sull'interfaccia seriale di ricezione. \n
+* Riceve come parametro di ingresso l'opzione -w e il valore in hex da inviare al secondo uart. 
+* Uso: uart_noDriver -w hex 
+*/
 int main(int argc, char** argv){
 
 	uint32_t value;
