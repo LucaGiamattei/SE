@@ -16,7 +16,7 @@ uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos);
 #include <sys/stat.h>
 #include <fcntl.h>
 
- /** @brief Funzione di inizializzazione,apre il file (in /dev) a cui è mappata la periferica per ottenere il descrittore.
+ /** @brief Richiama la system call open
  * @param file_descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
  * @param device_file nome del file da aprire
  * @retval 0 se l'operazione di apertura è andata a buon fine e il descrittore è valido, -1 altrimenti
@@ -25,27 +25,111 @@ uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos);
 int open_device(int* file_descriptor, char* device_file);
 /** @} */
 
+/** @brief Permette di scrivere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto 
+ * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
+ * @param reg offset del registro 
+ * @param pos posizione del bit
+ * @param bit 1 asserisce il livello alto, 0 asserisce il livello basso
+ * @retval il valore del registro aggiornato
+ * @{
+ */
 uint32_t write_bit_in_pos_k(int descriptor, int32_t reg, uint32_t pos, uint32_t bit);
+/** @} */
+
+/** @brief Permette di leggere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto 
+ * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
+ * @param reg offset del registro 
+ * @param pos posizione del bit 
+ * @retval il valore del bit (0 livello logico basso, 1 livello logico alto)
+ * @{
+ */
 uint8_t  read_bit_in_single_pos_k(int descriptor, int32_t reg, uint8_t pos);
+/** @} */
+
+/** @brief Permette di scrivere un intero registro di 32 bit  prendendo in ingresso il descrittore del file aperto 
+ * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
+ * @param reg offset del registro 
+ * @param write_value valore da asserire al registro
+ * @{
+ */
 void     write_reg(int descriptor, int32_t reg, int32_t write_value);
-uint8_t  read_reg(int descriptor, int32_t reg);
-uint8_t  read_reg_bloc(int descriptor, int32_t reg);
+/** @} */
+
+/** @brief Permette di leggere un intero registro di 32 bit  prendendo in ingresso il descrittore del file aperto 
+ * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
+ * @param reg offset del registro 
+ * @retval valore letto dal registro 
+ * @{
+ */
+uint32_t  read_reg(int descriptor, int32_t reg);
+/** @} */
+
+/** @brief Permette di leggere un intero registro di 32 bit utilizzando una read bloccante prendendo in ingresso il descrittore del file aperto 
+ * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
+ * @param reg offset del registro 
+ * @retval valore letto dal registro 
+ * @{
+ */
+uint32_t  read_reg_bloc(int descriptor, int32_t reg);
+/** @} */
 
 #endif
 
 #if defined MYGPIO_BARE_METAL || defined MYUART_BARE_METAL
 #include "xscugic.h"
-
+/**
+ * @name interrupt_handler STRUCT
+ * @struct interrupt_handler
+ * @brief Struttura che astrae le proprietà di un interrupt handler
+ * @var interrupt_handler::interrupt_line linea su cui registrare l'interrupt handler
+ * @var interrupt_handler::interrupt_handler puntatore alla definizione della funzione interrupt handler da associare alla linea
+ * @{
+ */
 typedef struct{
     uint32_t interrupt_line;
     void* interrupt_handler;
 }interrupt_handler;
+/** @} */
 
+
+/**
+ * @brief Inizializza e configura l'Interrupt controller. Abilitazione del gic alla gestione delle interruzioni.
+ * @param gic_id identificativo del gic
+ * @param gic_inst instanza di XScuGic
+ * @retval XST_SUCCESS in caso di successo,
+ *  lo status di inizializzazione nel caso in cui l'inizializzazione dell'interrupt controller non è andata a buon fine
+ * @{
+ */
 uint32_t gic_enable(uint32_t gic_id,XScuGic* gic_inst);
-uint32_t gic_disable(uint32_t gic_id);
+/** @} */
 
+/**
+ * @brief Disabilita l'interrupt controller
+ * @{
+ */
+void gic_disable();
+/** @} */
+
+/**
+ * @brief Registra per l'interrupt line  passata in ingresso la funzione interrupt handler 
+ * @param gic_inst instanza del gic
+ * @param interrupt_line linea su cui registrare l'interrupt handler
+ * @param interrupt_handler definizione della funzione interrupt handler da associare alla linea
+ * @retval XST_SUCCESS in caso di corretta registrazione,altrimenti lo status della connessione
+ * @{
+ */
 uint32_t gic_register_interrupt(XScuGic* gic_inst, uint32_t interrupt_line, void* interrupt_handler);
+/** @} */
+
+/**
+ * @brief Registra per l'interrupt line  passata in ingresso la funzione interrupt handler 
+ * @param gic_inst instanza del gic
+ * @param interrupt_handler instanza della struttura interrupt_handler
+ * @retval 
+ * @{
+ */
 uint32_t gic_register_interrupt_handler(XScuGic* gic_inst, interrupt_handler* interrupt_handler);
+/** @} */
 #endif
 
 #if defined MYGPIO_UIO || defined MYUART_UIO
@@ -89,7 +173,7 @@ void* configure_uio(char* filename, int* file_descriptor);
 /**
  * @brief Esegue mmap sul file /dev/mem aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
  * @param file_descriptor descrittore del file /dev/mem aperto
- * @param vrt_page_addr indirizzo virtuale della pagina a cui appartiene quello della periferica memory mapped
+ * @param vrt_page_addr puntatore all'indirizzo virtuale della pagina a cui appartiene l'indirizzo virtuale della periferica memory mapped (parametro di ingresso uscita)
  * @param phy_address indirizzo fisico base della periferica memory mapped
  * @retval NULL nel caso in cui "mmap" ritorni MAP_FAILED, altrimenti l'indirizzo virtuale base della periferica
  * @{

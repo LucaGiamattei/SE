@@ -1,14 +1,12 @@
-/*! \mainpage UART con driver UIO
+/*! \mainpage UART no-driver
  *
  * \section intro_sec Introduzione
  * 
- * 
- * @brief UART uio è un esempio di utilizzo, a livello user space, del driver uio per interfacciarsi con la periferica custom UART sintetizzata sulla
+ * @brief UART no-driver è un esempio di implementazione di un driver no driver per la periferica custom UART sintetizzata sulla
  * PL della board ZYBO. 
- * 
  *
  * \section File
- * - @ref main.c
+ *  - @ref main.c
  *
  * \section Requirements
  * - @ref myuart.h
@@ -23,30 +21,29 @@
  * variabile <b>BUILDROOT_PATH</b> con il path d'installazione di buildroot, oppure
  * mettere il path d'installazione del proprio crosscompilatore facendo però attenzione
  * a modificare anche la variabile CROSS_COMPILE assegnandovi il nome del crosscompilatore
- * che si intende utilizzare. \n
+ * che si intende utilizzare.
  * \subsection step2 Step 2: Esportare le variabili d'ambiente
  * Aprire il terminale, posizionarsi nella directory corretto e digitare il seguente comando:
  * @code
  *  source init_crosscompile_build_environment
  * @endcode
- * \subsection step3 Step 3: Cross Compilazione
+ * \subsection step3 Step 3: Compilazione
  * Usando lo stesso terminale in cui si è digitato il comando <b>source</b>, posizionarsi 
  * nella cartella dei sorgenti e digitare il seguente comando:
  * @code
  *  make 
  * @endcode
  * 
- * \subsection step4 Step 4: Trasferimento dell'eseguibile sulla board ed esecuzione
- * Assicurarsi che il device tree sia quello corretto e che dia le giuste informazioni al kernel linux affinchè sia possibile
- * associare un mdoulo generico, UIO, alla periferica. \n
- * Copiare il file <b>uart_uio_with_int</b> sulla microsd contenente il root FS. 
- * La cartella in cui si copia è indifferente, basta solo tenerla presente. \n
- * Avviare la zybo. Connettersi utilizzando la seriale (per i parametri vedere 
- * il manuale). \n
+ * \subsection step4 Step 4: Copia e esecuzione
+ * Copiare il file <b>uart_no_driver</b> sulla microsd contenente il root FS, 
+ * la cartella in cui si copia è indifferente, basta solo tenerla presente.
+ * Avviare la zybo, connettersi utilizzando la seriale (per i parametri vedere 
+ * il manuale).
  * Posizionarsi nella cartella contenete l'eseguibile copiato precedentemente e 
  * dare il comando:
  * @code
- * uart_uio_with_int value
- * @endcode 
- *
+ * uart_noDriver -w hex-value
+ * @endcode
+ * <b>Nota</b>: per hex-value si intende un valore esadecimale, quindi dovrà essere preceduto 
+ * da <b>0x</b>.
  */

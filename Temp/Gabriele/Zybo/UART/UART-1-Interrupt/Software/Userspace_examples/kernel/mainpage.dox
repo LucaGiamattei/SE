@@ -1,14 +1,11 @@
-/*! \mainpage UART con driver UIO
+/*! \mainpage Uart modulo kernel
  *
  * \section intro_sec Introduzione
  * 
- * 
- * @brief UART uio è un esempio di utilizzo, a livello user space, del driver uio per interfacciarsi con la periferica custom UART sintetizzata sulla
- * PL della board ZYBO. 
- * 
+ * @brief In questo esempio l'interfacciamento con la periferica avviene tramite il modulo kernel uart. E' stata realizzata un'espansione della libreria myuart.h per consentire l'utilizzo del modulo.
  *
  * \section File
- * - @ref main.c
+ *  - @ref main.c
  *
  * \section Requirements
  * - @ref myuart.h
@@ -19,7 +16,7 @@
  * \section Use
  *
  * \subsection step1 Step 1: Configurare il CrossCompile
- * Modificare il file <b>init_crosscompile_build_environment.sh</b> cambiaando la 
+ * Modificare il file <b>init_crosscompile_build_environment.sh</b> cambiando la 
  * variabile <b>BUILDROOT_PATH</b> con il path d'installazione di buildroot, oppure
  * mettere il path d'installazione del proprio crosscompilatore facendo però attenzione
  * a modificare anche la variabile CROSS_COMPILE assegnandovi il nome del crosscompilatore
@@ -38,7 +35,7 @@
  * 
  * \subsection step4 Step 4: Trasferimento dell'eseguibile sulla board ed esecuzione
  * Assicurarsi che il device tree sia quello corretto e che dia le giuste informazioni al kernel linux affinchè sia possibile
- * associare un mdoulo generico, UIO, alla periferica. \n
+ * utilizzare il modulo kernel uart. \n
  * Copiare il file <b>uart_uio_with_int</b> sulla microsd contenente il root FS. 
  * La cartella in cui si copia è indifferente, basta solo tenerla presente. \n
  * Avviare la zybo. Connettersi utilizzando la seriale (per i parametri vedere 
@@ -46,7 +43,8 @@
  * Posizionarsi nella cartella contenete l'eseguibile copiato precedentemente e 
  * dare il comando:
  * @code
- * uart_uio_with_int value
+ * kernel_test value
  * @endcode 
+ * Inizialmente l'uart 1 funge da transmitter e l'uart2 da receiver. E' possibile scambiare i ruoli inviando il carattere 'a'.
  *
  */

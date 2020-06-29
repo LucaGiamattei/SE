@@ -232,29 +232,116 @@ void myUART_Iack_w(myUART * myuart);
 #ifdef MYUART_KERNEL
 
 
+/**
+ @brief Abilita/Disabilita le interruzioni per la ricezione di un dato
+ * @param descriptor descrittore del file aperto
+ * @param int_en int_en INT_EN abilitato, INT_DIS disabilitato
+ * @retval valore del registro di controllo dopo l'operazione di scrittura
+ * @{
+ */
 uint32_t myUART_en_int_rx_k(int descriptor, uint8_t int_en);
+/** @} */
 
+/*
+/**
+ * @brief Abilita/Disabilita le interruzioni per la tramissione
+ * @param descriptor descrittore del file aperto
+ * @param int_en  INT_EN abilitato, INT_DIS  disabilitato 
+ * @retval valore del registro di controllo dopo l'operazione di scrittura
+ * @{
+ */
 uint32_t myUART_en_int_tx_k(int descriptor, uint8_t int_en);
+/** @} */
 
+
+/**
+ * @brief Funzione di trasmissione di un byte in modalità interrupt
+ * @param descriptor descrittore del file aperto
+ * @param transmit_data byte di dati da trasmettere
+ * @{
+ */
 void myUART_transmit_int_k(int descriptor, uint8_t transmit_data);
+/** @} */
 
+/**
+ * @brief Funzione di trasmissione di un byte in modalità polling
+ * Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione.
+ * Si assicura prima che il buffer di trasmissione sia libero.
+ * @param descriptor descrittore del file aperto
+ * @param transmit_data byte di dati da trasmettere
+ * @{
+ */
 //ATT: Si dovrebbe gestire il TIMEOUT con un timer
 void myUART_transmit_k(int descriptor, uint8_t transmit_data);
+/** @} */
 
+/**
+ * @brief Funzione di ricezione di un byte in modalità polling
+ * Questa funzione mette in attesa attiva fintanto che non si riceve un byte.
+ * @param descriptor descrittore del file aperto
+ * @param status_reg (parametro di ingresso uscita) registro di stato della periferica
+ * @retval byte contenuto in DBOUT
+ * @{
+ */
 //ATT: Si dovrebbe gestire il TIMEOUT con un timer
 uint8_t myUART_read_k(int descriptor,uint32_t* status_reg);
+/** @} */
 
+/**
+ * @brief funzione di ricezione bloccante. Si sblocca nel momento in cui
+ * è disponibile un dato nel buffer di ricezione. 
+ * @param descriptor descrittore del file aperto
+ * @param read_value deve essere un puntatore a un'area di memoria di 2 uin32_t
+ * E' un parametro di ingresso uscita. In uscita sarà un vettore di due elementi.
+ * In posziione 0 si avrà il dato letto dal registro DBOUT e in posizione 1
+ * il registro di stato.
+ * @{
+ */
 void myUART_read_DBOUT_bloc_k(int descriptor,uint32_t* read_value);
+/** @} */
 
+/**
+ * @brief Funzione di lettura di un bit del registro di stato
+ * Questa funzione legge dal registro di stato il bit indicato
+ * @param descriptor descrittore del file aperto
+ * @param pos maschera che indica il bit da leggere
+ * @retval bit letto
+ * @{
+ */
 uint8_t myUART_read_status_bit_k(int descriptor, uint32_t pos);
+/** @} */
 
+/**
+ * @brief Funzione di lettura del registro di stato
+ * Questa funzione legge l'intero registro di stato
+ * @param descriptor descrittore del file aperto
+ * @retval registro di stato
+ * @{
+ */
 uint32_t myUART_read_status_k(int descriptor);
+/** @} */
 
+/**
+ * @brief Acknowledgement dell'interruzione in lettura
+ * Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read
+ * @param descriptor descrittore del file aperto
+ * @{
+ */
 void myUART_Iack_r_k(int descriptor);
+/** @} */
 
+/**
+ * @brief Acknowledgement dell'interruzione in scrittura
+ * Alzando il bit IACK_T del registro di controllo, abbassa la linea di interruzione di scrittura
+ * per indicare che l'interruzione di scrittura è stata gestita.
+ * @param descriptor descrittore del file aperto
+ * @{
+ */
 void myUART_Iack_w_k(int descriptor);
+/** @} */
 
 void  read_reg_bloc_UART_k(int descriptor, uint32_t reg, uint32_t* read_value);
+
 
 #endif
 
