@@ -1,3 +1,19 @@
+/**
+* @file main.c
+* @brief Questo è un esempio di utilizzo della libreria @ref mygpio.h sul S.O GNU/Linux in esecuzione sulla board Zybo. \n
+* La libreria è stata estesa affinchè la comunicazione con la periferica possa avvenire tramite il modulo kernel gpio. 
+* @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
+*			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
+*			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
+* @date 15/06/2020
+*
+* 
+*
+* @{
+*/
+
+
+
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -10,6 +26,11 @@
 #include "config.h"
 
 
+/**
+* @brief Main di un semplice programma di test dell'interfaccia seriale gpio tramite la libreria mygpio.h estesa per rendere possibile l'utilizzo del modulo kernel gpio. 
+* @details Il programma consiste nell'aspettare l'evento di pressione dei bottoni per leggere il valore dalla periferica button GPIO e
+*  mostrare tale valore sui led
+*/
 int main(){
 
     int led_file_descriptor, button_file_descriptor, error;
@@ -44,3 +65,6 @@ int main(){
     close(button_file_descriptor);
     return 0;
 }
+
+
+/** @} */

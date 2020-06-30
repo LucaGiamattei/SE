@@ -1,27 +1,17 @@
 /**
-* @file main.c
-* @brief Questo è un esempio di utilizzo del driver uio per pilotare una
-* periferica GPIO AXI Lite costum su un S.O. GNU/Linux 
+* @file main_no_int.c
+* @brief Questo è un esempio di utilizzo del driver uio per il GPIO custom.
 * @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
 *			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
 *			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
 * @date 15/06/2020
 *
-* @details
-*   In questo esempio e' utilizzata la periferica generata dai file VHDL presenti in
-*   Hardware/GPIO/VHDL.
-* 	Nota per utilizzare correttamente la periferica è necessario generare il dtb 
-* 	seguento quanto riportato nella documentazione a corredo di questi esempi, 
-* 	abilitare il supporto dei driver uio e abilitare la compatibilità della periferica
-* 	con il driver uio.
-*	Nell'esempio si utilizzano i led in modalita' WRITE per accendere i led in base al
-*	parametro che si riceve in input.
-*
+* @details E' possibile l'utilizzo delle funzioni della libreria mygpio.h sul S.O. GNU/Linux grazie a un mapping che viene fatto della pagina fisica, 
+* a cui è mappata la periferica GPIO custom, a una virtuale nello spazio di indirizzamento del processo. \n
+* Questo esempio svolge le stesse azioni fatte con il no-driver tramite il file uio associato alla periferica. \n
 *
 * @{
 */
-
-/***************************** Include Files *******************************/
 
 #include "mygpio.h"
 #include "utils.h"
@@ -63,9 +53,7 @@ int parse_args(int argc, char**argv, uint32_t	*val);
 /**
 * @brief Main di un semplice programma di test per accendere i led usando una 
 * periferica GPIO costum utilizzando il driver uio
-* @details Main di un semplice programma di test per accendere i led usando 
-* una periferica GPIO costum utilizzando il driver uio.
-* Riceve come parametro di ingresso l'opzione -w e il valore in hex da scrivere 
+* @details* Riceve come parametro di ingresso l'opzione -w e il valore in hex da scrivere 
 * sul registro write dei led.
 * Uso: led_noDriver -w hex 
 */
