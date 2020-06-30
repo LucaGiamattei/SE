@@ -13,7 +13,7 @@
 *   del repository.
 *
 *
-* @addtogroup myGPIO
+* 
 * @{
 */
 
@@ -23,9 +23,10 @@
 
 /************************** Constant Definitions *****************************/
 /**
- * @name Definizioni delle macro per identificare i pin
+ * @name Definizioni delle macro per identificare i pin 
  * @brief <b>Nota</b> per permettere utilizzare i restanti 24 pin è possibile 
  * crearsi delle machere oppure continuare la definizione delle seguenti macro
+ * 
  * @{
  */
 #define GPIO_PIN_0 (uint32_t) 1 << 0
@@ -36,7 +37,7 @@
 #define GPIO_PIN_5 (uint32_t) 1 << 5
 #define GPIO_PIN_6 (uint32_t) 1 << 6
 #define GPIO_PIN_7 (uint32_t) 1 << 7
-/** @} */
+/*@}**/
 
 /**
  * @name Definizioni delle macro per identificare la modalità di funzionamento dei pin
@@ -44,7 +45,7 @@
  */
 #define READ_MODE   0
 #define WRITE_MODE  1
-/** @} */
+/*@}**/
 
 /**
  * @name Definizioni delle macro per il livello logico del valore dei letto o scritto sui pin
@@ -52,7 +53,7 @@
  */
 #define LOW         0
 #define HIGH        1
-/** @} */
+/*@}**/
 
 /**
  * @name Definizioni delle macro per identificare i bit del GIES
@@ -60,7 +61,7 @@
  */
 #define GIES_IE     (uint32_t) 1 << 0   /** Interrupt Enable */
 #define GIES_IS     (uint32_t) 1 << 1   /** Interrupt Status */
-/** @} */
+/*@}**/
 
 /**
  * @name Definizioni delle macro per l'abilitazione dell'interrupt di un pin
@@ -68,7 +69,7 @@
  */
 #define INT_EN      1
 #define INT_DIS     0
-/** @} */
+/*@}**/
 
 /**
  * @name Definizioni delle macro per scegliere la modalità di funzionamento dell'interrupt di un pin
@@ -76,7 +77,7 @@
  */
 #define INT_LEVEL   0
 #define INT_EDGE    1
-/** @} */
+/*@}**/
 
 /**
  * @name Definizioni delle macro per scegliere il fronte su cui è sensibile il pin per generare l'interrupt 
@@ -84,7 +85,7 @@
  */
 #define INT_RE      1
 #define INT_FE      0
-/** @} */
+/*@}**/
 
 /**
  * @name Definizioni delle macro per identificare l'offset dei registri della periferica
@@ -99,7 +100,7 @@
 #define IACK_OFFSET     0x18
 #define IRQ_MODE_OFFSET 0x1C
 #define IRQ_EDGE_OFFSET 0x1F
-/** @} */
+/*@}**/
 
 /***************************** Include Files *********************************/
 #include "stdlib.h"
@@ -109,11 +110,18 @@
 #include "stdio.h"
 
 
-/***************************** Type Definition *******************************/
+#if defined MYGPIO_NO_DRIVER || defined MYGPIO_BARE_METAL ||defined MYGPIO_UIO
+/***************************** Function Definition *******************************/
 
 /**
- * @name myGPIO STRUCT
- * @struct myGPIO
+ * @name API per interfacciamento UIO, no-driver e bare metal
+ * 
+//@{
+ */
+
+/***************************** Type Definition *******************************/
+/**
+ * @struct myGPIO 
  * @brief struct che permette una semplice gestione della periferica
  * @var myGPIO::MODE
  * Registro MODE, permette di settare la modalità di funzionamento del pin
@@ -136,7 +144,6 @@
  * @var myGPIO::IRQ_EDGE
  * Registro IRQ_EDGE, permette di settare il fronte su cui è sensibile il pin
  * per la generazione dell'interruzione
- * @{
  */
 typedef struct{
     uint32_t MODE; 
@@ -149,23 +156,16 @@ typedef struct{
     uint32_t IRQ_MODE;
     uint32_t IRQ_EDGE;
 } myGPIO;
-/** @} */
-/***************************** Function Definition *******************************/
 
-/**
- * @name myGPIO API
- * @brief API per poter configurare e utilizzare il GPIO
- * @{
- */
+/***************************** Function Definition *******************************/
 
  /** @brief Funzione di inizializzazione,Effettua un casting dell'indirizzo in modo tale da 
  * poter utilizzare la struct al meglio
  * @param peripheral_address indirizzo base della periferica AXI Lite
- * @retval puntatore ad una struct myGPIO il cui indirzzo base è quello di peripheral_address
- * @{
+ * @retval myGPIO puntatore ad una struct myGPIO il cui indirzzo base è quello di peripheral_address
  */
 myGPIO* myGPIO_init(uint32_t *peripheral_address);
-/** @} */
+
 
 /**
  * 
@@ -175,30 +175,27 @@ myGPIO* myGPIO_init(uint32_t *peripheral_address);
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
  * @param mode modalità di funzionamento dei pin 
- * @retval valore del registro MODE dopo l'operazione di scrittura
- * @{
+ * @retval MODE_Register valore del registro MODE dopo l'operazione di scrittura
  */
 uint32_t myGPIO_set_mode(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t mode);
-/** @} */
+
 
 /**
  * @brief Imposta il registro MODE della periferica con la maschera data in input
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param mode_mask maschera dei bit che si vogliono scrivere sulla periferica
- * @{
  */
 void myGPIO_set_mode_mask(myGPIO * mygpio, uint32_t mode_mask);
-/** @} */
+
 
 /**
  * @brief Abilita/Disabilita il GIES
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param int_en INT_EN abilitato, INT_DIS GIES disabilitato 
- * @retval valore del registro GIES dopo l'operazione di scrittura
- * @{
+ * @retval GIES_Register valore del registro GIES dopo l'operazione di scrittura
  */
 uint32_t myGPIO_en_int(myGPIO * mygpio, uint8_t int_en);
-/** @} */
+
 
 /**
  * @brief Abilitazione interrupt per il pin, setta il registro PIE.
@@ -207,11 +204,10 @@ uint32_t myGPIO_en_int(myGPIO * mygpio, uint8_t int_en);
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
  * @param int_en INT_EN interrupt abilitato, INT_DIS interrupt disabilitato 
- * @retval valore del registro PIE dopo l'operazione di scrittura
- * @{
+ * @retval PIE_register valore del registro PIE dopo l'operazione di scrittura
  */
 uint32_t myGPIO_en_pins_int(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_en);
- /** @} */
+
 
 /**
  * @brief Selezione modalità di interrupt per il pin, setta il registro IRQ_MODE. 
@@ -220,11 +216,10 @@ uint32_t myGPIO_en_pins_int(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_en)
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
  * @param int_en INT_LEVEL livelli, INT_EDGE sensibile sul fronte
- * @retval valore del registro IRQ_MODE dopo l'operazione di scrittura
- * @{
+ * @retval IRQ_MODE_Register valore del registro IRQ_MODE dopo l'operazione di scrittura
  */
  uint32_t myGPIO_set_irq_mode(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_mode);
-/** @} */
+
 
 /**
  * @brief Seleziona il fronte su cui è sensibile il pin per la generazione dell' interrupt,
@@ -234,11 +229,9 @@ uint32_t myGPIO_en_pins_int(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_en)
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
  * @param int_egde INT_RE Fronte di salita, INT_FE fronte di discesa
- * @retval valore del registro IRQ_EDGE dopo l'operazione di scrittura
- * @{
+ * @retval IRQ_EDGE_Register valore del registro IRQ_EDGE dopo l'operazione di scrittura
  */
 uint32_t myGPIO_set_edge(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_egde);
-/** @} */
 
 /**
  * @brief Scrittura del valore sui i pin GPIO_pins. 
@@ -248,11 +241,9 @@ uint32_t myGPIO_set_edge(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t int_egde);
  * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
  * @param level HIGH valore logico alto, LOW valore logico basso
- * @retval valore del registro WRITE dopo l'operazione di scrittura
- * @{
+ * @retval WRITE_Register valore del registro WRITE dopo l'operazione di scrittura
  */
 uint32_t myGPIO_write(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t level);
-/** @} */
 
 /**
  * @brief Scrittura della maschera dei valori sui pin. 
@@ -260,30 +251,26 @@ uint32_t myGPIO_write(myGPIO * mygpio, uint32_t GPIO_pins, uint8_t level);
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param levels maschera dei valori che si volgiono scrivere sui pin,
  *  HIGH valore logico alto, LOW valore logico basso
- * @{
  */
 void myGPIO_write_mask(myGPIO * mygpio, uint32_t levels);
-/** @} */
 
 /**
  * @brief Lettura del valore di un pin . 
  * Legge il registro READ della periferica.
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pin Pin di cui si vuole leggere il valore
- * @retval valore letto, HIGH valore logico alto, LOW valore logico basso
- * @{
+ * @retval READ_Register_pin_value valore letto, HIGH valore logico alto, LOW valore logico basso
  */
 uint8_t myGPIO_read_pin(myGPIO * mygpio, uint32_t GPIO_pin);
-/** @} */
+
 
 /**
  * @brief Lettura del registro READ. 
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
- * @retval valore del registro READ
- * @{
+ * @retval READ_Register valore del registro READ
  */
 uint32_t myGPIO_read(myGPIO * mygpio);
-/** @} */
+
 
 
 /**
@@ -292,74 +279,182 @@ uint32_t myGPIO_read(myGPIO * mygpio);
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pins maschera dei pin di cui si vuol pulire lo stato d'interruzione, può essere costruita 
  * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
- * @retval valore del registro IRQ dopo l'operazione
- * @{
+ * @retval IRQ_Register valore del registro IRQ dopo l'operazione
  */
 uint32_t myGPIO_clear_irq(myGPIO * mygpio, uint32_t GPIO_pins);
-/** @} */
+
 
 /**
  * @brief Lettura del registro IRQ. 
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
- * @retval valore del registro IRQ
- * @{
- */uint32_t myGPIO_read_irq(myGPIO * mygpio);
-/** @} */
+ * @retval IRQ_Register valore del registro IRQ
+ */
+uint32_t myGPIO_read_irq(myGPIO * mygpio);
 
 /**
  * @brief Lettura dello stato d'interruzione per il singolo pin.
  * @param mygpio puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param GPIO_pin Pin di cui si vuole leggere lo stato d'interruzione
- * @retval valore del registro IRQ in corrispondenza dle bit idindicato da GPIO_pin, '1' richiesta
+ * @retval IRQ_Register valore del registro IRQ in corrispondenza dle bit idindicato da GPIO_pin, '1' richiesta
  * di interrupt
- * @{
  */
 uint32_t myGPIO_read_pin_irq_status(myGPIO * mygpio, uint32_t GPIO_pin);
-/** @} */
 
+//@}
+#endif
 
 
 
 #ifdef MYGPIO_KERNEL
 /**
-* @brief Le seguenti funzioni svolgono le stesse operazioni di quelle omonime precedenti,
-* prendendo però il descrittore di un file
-* @{
+ * @name API per interfacciamento tramito modulo kernel
+ * Funzioni utilizzate per interfacciarsi con la periferica tramite un modulo kernel. 
+//@{
+ */
+
+/**
+ * 
+ * @brief Imposta lo stesso valore, mode, per i pin identificati dalla maschera GPIO_pins
+ * <b>Nota</b>: setta lo stesso valore per tutti i pin.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
+ * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
+ * @param mode modalità di funzionamento dei pin 
+ * @retval MODE_Register valore del registro MODE dopo l'operazione di scrittura
  */
 uint32_t myGPIO_set_mode_k(int descriptor, uint32_t GPIO_pins, uint8_t mode);
 
+/**
+ * @brief Imposta il registro MODE della periferica con la maschera data in input
+ * @param descriptor descrittore del file aperto
+ * @param mode_mask maschera dei bit che si vogliono scrivere sulla periferica
+ */
 void myGPIO_set_mode_mask_k(int descriptor, uint32_t mode_mask);
 
+/**
+ * @brief Abilita/Disabilita il GIES
+ * @param descriptor descrittore del file aperto
+ * @param int_en INT_EN abilitato, INT_DIS GIES disabilitato 
+ * @retval GIES_Register valore del registro GIES dopo l'operazione di scrittura
+ */
 uint32_t myGPIO_en_int_k(int descriptor, uint8_t int_en);
 
+/**
+ * @brief Abilitazione interrupt per il pin, setta il registro PIE.
+ * <b>Nota</b>: setta lo stesso valore per tutti i pin.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
+ * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
+ * @param int_en INT_EN interrupt abilitato, INT_DIS interrupt disabilitato 
+ * @retval PIE_register valore del registro PIE dopo l'operazione di scrittura
+ */
 uint32_t myGPIO_en_pins_int_k(int descriptor, uint32_t GPIO_pins, uint8_t int_en);
 
+
+/**
+ * @brief Selezione modalità di interrupt per il pin, setta il registro IRQ_MODE. 
+ * <b>Nota</b>: setta lo stesso valore per tutti i pin.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
+ * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
+ * @param int_en INT_LEVEL livelli, INT_EDGE sensibile sul fronte
+ * @retval IRQ_MODE_Register valore del registro IRQ_MODE dopo l'operazione di scrittura
+ */
 uint32_t myGPIO_set_irq_mode_k(int descriptor, uint32_t GPIO_pins, uint8_t int_mode);
 
+/**
+ * @brief Seleziona il fronte su cui è sensibile il pin per la generazione dell' interrupt,
+ *  setta il registro IRQ_MODE. 
+ * <b>Nota</b>: setta lo stesso valore per tutti i pin.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
+ * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
+ * @param int_egde INT_RE Fronte di salita, INT_FE fronte di discesa
+ * @retval IRQ_EDGE_Register valore del registro IRQ_EDGE dopo l'operazione di scrittura
+ */
 uint32_t myGPIO_set_edge_k(int descriptor, uint32_t GPIO_pins, uint8_t int_egde);
 
+/**
+ * @brief Scrittura del valore sui i pin GPIO_pins. 
+ * Scrive sul registro WRITE della periferica.
+ * <b>Nota</b>: setta lo stesso valore per tutti i pin.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pins maschera dei pin che si vogliono configurare, può essere costruita 
+ * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
+ * @param level HIGH valore logico alto, LOW valore logico basso
+ * @retval WRITE_Register valore del registro WRITE dopo l'operazione di scrittura
+ */
 uint32_t myGPIO_write_k(int descriptor, uint32_t GPIO_pins, uint8_t level);
 
+/**
+ * @brief Scrittura della maschera dei valori sui pin. 
+ * Scrive sul registro WRITE della periferica.
+ * @param descriptor descrittore del file aperto
+ * @param levels maschera dei valori che si volgiono scrivere sui pin,
+ *  HIGH valore logico alto, LOW valore logico basso
+ */
 void myGPIO_write_mask_k(int descriptor, uint32_t levels);
 
+/**
+ * @brief Lettura del valore di un pin . 
+ * Legge il registro READ della periferica.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pin Pin di cui si vuole leggere il valore
+ * @retval READ_Register_pin_value valore letto, HIGH valore logico alto, LOW valore logico basso
+ */
 uint8_t myGPIO_read_pin_k(int descriptor, uint32_t GPIO_pin);
 
+/**
+ * @brief Lettura del registro READ. 
+ * @param descriptor descrittore del file aperto
+ * @retval READ_Register valore del registro READ
+ */
 uint32_t myGPIO_read_k(int descriptor);
 
+
+/**
+ * @brief Acknowledgement di un'interruzione
+ * Legge il registro READ della periferica.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pins maschera dei pin di cui si vuol pulire lo stato d'interruzione, può essere costruita 
+ * mettendo in <b>or</b> ('|') le macro GPIO_PIN_X
+ * @retval IRQ_Register valore del registro IRQ dopo l'operazione
+ */
 uint32_t myGPIO_clear_irq_k(int descriptor, uint32_t GPIO_pins);
 
+
+/**
+ * @brief Lettura del registro IRQ. 
+ * @param descriptor descrittore del file aperto
+ * @retval IRQ_Register valore del registro IRQ
+ */
 uint32_t myGPIO_read_irq_k(int descriptor);
 
+
+/**
+ * @brief Lettura dello stato d'interruzione per il singolo pin.
+ * @param descriptor descrittore del file aperto
+ * @param GPIO_pin Pin di cui si vuole leggere lo stato d'interruzione
+ * @retval IRQ_Register valore del registro IRQ in corrispondenza dle bit idindicato da GPIO_pin, '1' richiesta
+ * di interrupt
+ */
 uint32_t myGPIO_read_pin_irq_status_k(int descriptor, uint32_t GPIO_pin);
 
+/**
+ * @brief Lettura bloccante del registro READ
+ * @param descriptor descrittore del file aperto
+ * @retval READ_Register valore del registro READE
+ */
 uint32_t myGPIO_read_bloc_k(int descriptor);
-/** @} */
-#endif
-
-/** @} */
 
 
+//@}
 #endif
 
 
+
+
+#endif
+
+/** @} */
 

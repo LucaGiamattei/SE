@@ -1,31 +1,10 @@
-/**
-* @file mygpio.c
-* @brief Questa è l'implementazione della liberia <b>mygpio.h</b> definisce un board 
-* che definisce un board support package per la gestione semplificata
-* di una periferica AXI Lite che implementa un GPIO.
-* @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
-*			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
-*			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
-* @date 13/06/2020
-*
-* @details
-*   Questa è l'implementazione della liberia <b>mygpio.h</b> definisce un board 
-*   che definisce un board support package per la gestione semplificata
-*   di una periferica AXI Lite che implementa un GPIO. API che permettono di utilizzare 
-*   una periferica AXI Lite che implementa un
-*   GPIO descritto nel file <b>myGPIO_Int_sel_AXI.vhd</b> presente all'interno
-*   del repository.
-*
-*
-* @addtogroup myGPIO
-* @{
-*/
+
 
 /***************************** Include Files *********************************/
 #include "mygpio.h"
 
 /***************************** Function Implementation *******************************/
-
+#if defined MYGPIO_NO_DRIVER || defined MYGPIO_BARE_METAL ||defined MYGPIO_UIO
 myGPIO* myGPIO_init(uint32_t * peripheral_address){
     return (myGPIO*) peripheral_address;
 }
@@ -81,7 +60,7 @@ uint32_t myGPIO_read_irq(myGPIO * mygpio){
 uint32_t myGPIO_read_pin_irq_status(myGPIO * mygpio, uint32_t GPIO_pin){
     return read_bit_in_single_pos(&mygpio->IRQ, GPIO_pin);
 }
-
+#endif
 
 #ifdef MYGPIO_KERNEL
 
@@ -152,7 +131,3 @@ uint32_t myGPIO_read_bloc_k(int descriptor){
     return read_reg_bloc(descriptor, READ_OFFSET); 
 }
 #endif
-
-
-
-/** @} */

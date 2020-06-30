@@ -1,7 +1,6 @@
 #include "utils.h"
 
 
-
 uint32_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit){
     if(bit == 0){
         *(address) &= ~pos;
@@ -14,6 +13,7 @@ uint32_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit){
 
     return *(address);
 }
+
 
 uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos){
     if(pos && !(pos & (pos-1))){
@@ -148,16 +148,16 @@ int32_t reenable_interrupt(int uio_descriptor, int32_t *reenable){
 }
 
 void* configure_uio(char* filename, int* file_descriptor){
-    void* vrt_gpio = NULL;
+    void* vrt_address = NULL;
 	if (*file_descriptor < 1) {
 		return NULL;
 	}
     uint32_t page_size = sysconf(_SC_PAGESIZE);		
-	vrt_gpio = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, *file_descriptor, 0);
-	if (vrt_gpio == MAP_FAILED) {
+	vrt_address = mmap(NULL, page_size, PROT_READ | PROT_WRITE, MAP_SHARED, *file_descriptor, 0);
+	if (vrt_address == MAP_FAILED) {
 		return NULL;
 	}  
-    return vrt_gpio;
+    return vrt_address;
 }
 
 
@@ -175,9 +175,10 @@ void* configure_no_driver(int file_descriptor, void** vrt_page_addr, uint32_t ph
 		printf("Mapping indirizzo fisico - indirizzo virtuale FALLITO!\n");
 		return NULL;
 	}
-	void* vrt_gpio_addr = *vrt_page_addr + offset;	
-    return vrt_gpio_addr;
+	void* vrt_addr = *vrt_page_addr + offset;	
+    return vrt_addr;
 }
 #endif
+ /* @} */
 
 
