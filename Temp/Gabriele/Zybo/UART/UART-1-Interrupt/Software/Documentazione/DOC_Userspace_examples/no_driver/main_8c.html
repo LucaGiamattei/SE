@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo UART no-driver: Riferimenti per il file main.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo UART no-driver
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Riferimenti per il file main.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Questo è un esempio di utilizzo della libreria <a class="el" href="myuart_8h.html">myuart.h</a> sul S.O GNU/Linux in esecuzione sulla board Zybo . Per utilizzare la libreria vi è bisogno dell'indirizzo a cui è mappata la periferica. Tramite un meccanismo di mapping sarà possibile ottenere un indirizzo virtuale, appartenente allo spazio di indrizzamento del processo, per comunicare con la periferica.  
+<a href="#details">Continua...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="myuart_8h_source.html">myuart.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+<code>#include &quot;stdint.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="memitem:a475c16d393e4ba86f5c7efee16996bc3"><td class="memItemLeft" align="right" valign="top"><a id="a475c16d393e4ba86f5c7efee16996bc3"></a>
+<a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uart1</b></td></tr>
+<tr class="separator:a475c16d393e4ba86f5c7efee16996bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ea9f23ce714530bbb5d9cb9112a7f7b"><td class="memItemLeft" align="right" valign="top"><a id="a2ea9f23ce714530bbb5d9cb9112a7f7b"></a>
+<a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>uart2</b></td></tr>
+<tr class="separator:a2ea9f23ce714530bbb5d9cb9112a7f7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05909651fa170a63e98e3f8e13451b7b"><td class="memItemLeft" align="right" valign="top"><a id="a05909651fa170a63e98e3f8e13451b7b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a05909651fa170a63e98e3f8e13451b7b">howto</a> (void)</td></tr>
+<tr class="memdesc:a05909651fa170a63e98e3f8e13451b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stampa un messaggio che fornisce indicazioni sull'utilizzo del programma. <br /></td></tr>
+<tr class="separator:a05909651fa170a63e98e3f8e13451b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af24976d06189e462e110a83120b00895"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#af24976d06189e462e110a83120b00895">parse_args</a> (int argc, char **argv, uint32_t *val)</td></tr>
+<tr class="memdesc:af24976d06189e462e110a83120b00895"><td class="mdescLeft">&#160;</td><td class="mdescRight">Effettua il parsing degli argomenti.  <a href="#af24976d06189e462e110a83120b00895">Continua...</a><br /></td></tr>
+<tr class="separator:af24976d06189e462e110a83120b00895"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main di un semplice programma di test dell'interfaccia seriale uart.  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">Continua...</a><br /></td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>Questo è un esempio di utilizzo della libreria <a class="el" href="myuart_8h.html">myuart.h</a> sul S.O GNU/Linux in esecuzione sulla board Zybo . Per utilizzare la libreria vi è bisogno dell'indirizzo a cui è mappata la periferica. Tramite un meccanismo di mapping sarà possibile ottenere un indirizzo virtuale, appartenente allo spazio di indrizzamento del processo, per comunicare con la periferica. </p>
+<dl class="section author"><dt>Autori</dt><dd><b> Giorgio Farina</b> <a href="#" onclick="location.href='mai'+'lto:'+'gio'+'rg'+'io.'+'fa'+'ri9'+'6@'+'gma'+'il'+'.co'+'m'; return false;">giorg<span style="display: none;">.nosp@m.</span>io.f<span style="display: none;">.nosp@m.</span>ari96<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a> <br />
+ <b> Luca Giamattei</b> <a href="#" onclick="location.href='mai'+'lto:'+'lgi'+'am'+'att'+'ei'+'@gm'+'ai'+'l.c'+'om'; return false;">lgiam<span style="display: none;">.nosp@m.</span>atte<span style="display: none;">.nosp@m.</span>i@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> <br />
+ <b> Gabriele Previtera</b> <a href="#" onclick="location.href='mai'+'lto:'+'gab'+'ri'+'ele'+'pr'+'evi'+'te'+'ra@'+'gm'+'ail'+'.c'+'om'; return false;">gabri<span style="display: none;">.nosp@m.</span>elep<span style="display: none;">.nosp@m.</span>revit<span style="display: none;">.nosp@m.</span>era@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a> <br />
+ </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>15/06/2020</dd></dl>
+<p>E' possibile l'utilizzo delle funzioni della libreria <a class="el" href="myuart_8h.html" title="Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI ...">myuart.h</a> grazie a un mapping che viene fatto della pagina fisica, a cui è mappata la periferica UART custom, a una virtuale nello spazio di indirizzamento del processo. Tale esempio non può fare uso delle interruzione non essendovi alcun modulo kernel ad occuparsi della periferica; per tale motivo questo modo di operare è definito driver no driver. </p>
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main di un semplice programma di test dell'interfaccia seriale uart. </p>
+<p>Il primo Uart invia il carattere ricevuto in ingresso dal terminale e il secondo uart stampa sul terminale il carattere ricevuto (ricezione con polling) sull'interfaccia seriale di ricezione. <br />
+Riceve come parametro di ingresso l'opzione -w e il valore in hex da inviare al secondo uart. Uso: uart_noDriver -w hex </p>
+
+</div>
+</div>
+<a id="af24976d06189e462e110a83120b00895"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af24976d06189e462e110a83120b00895">&#9670;&nbsp;</a></span>parse_args()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int parse_args </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>val</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Effettua il parsing degli argomenti. </p>
+<p>Il parsing viene effettuato usando la funzione getopt(). </p><div class="fragment"><div class="line"><span class="preprocessor">#include &lt;unistd.h&gt;</span></div><div class="line"><span class="keywordtype">int</span> getopt(<span class="keywordtype">int</span> argc, <span class="keywordtype">char</span> * <span class="keyword">const</span> argv[], <span class="keyword">const</span> <span class="keywordtype">char</span> *optstring);</div></div><!-- fragment --><p> Per maggiori informazioni: <a href="https://linux.die.net/man/3/getopt">https://linux.die.net/man/3/getopt</a> .</p>
+<h4>Parametri riconosciuti</h4>
+<p>I parametri riconosciuti sono:</p><ul>
+<li>'w' : operazione di scrittura, seguito dal valore che si intende scrivere, in esadecimale; </li>
+</ul>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

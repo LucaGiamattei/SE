@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo UART driver UIO: Riferimenti per il file /home/giorgio/Documents/embeddedProject/progetti/SE/SE/Temp/Gabriele/Zybo/UART/UART-1-Interrupt/Software/lib/myuart.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo UART driver UIO
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Riferimenti per il file myuart.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Questa è l'implementazione della liberia <b><a class="el" href="myuart_8h.html" title="Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI ...">myuart.h</a></b> che definisce un board support package per la gestione semplificata di una periferica AXI Lite che implementa un UART.  
+<a href="#details">Continua...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="myuart_8h_source.html">myuart.h</a>&quot;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">API per interfacciamento UIO, no-driver e bare metal</div></td></tr>
+<tr class="memitem:gacad13172f26741783190a5073681dbf8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gacad13172f26741783190a5073681dbf8">myUART_init</a> (uint32_t *peripheral_address)</td></tr>
+<tr class="memdesc:gacad13172f26741783190a5073681dbf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di inizializzazione,Effettua un casting dell'indirizzo in modo tale da poter utilizzare la struct al meglio.  <a href="group__my_u_a_r_t.html#gacad13172f26741783190a5073681dbf8">Continua...</a><br /></td></tr>
+<tr class="separator:gacad13172f26741783190a5073681dbf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga99de719aab83f214a0a14d2684b75d39"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga99de719aab83f214a0a14d2684b75d39">myUART_en_int_rx</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint8_t int_en)</td></tr>
+<tr class="memdesc:ga99de719aab83f214a0a14d2684b75d39"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abilita/Disabilita le interruzioni per la ricezione.  <a href="group__my_u_a_r_t.html#ga99de719aab83f214a0a14d2684b75d39">Continua...</a><br /></td></tr>
+<tr class="separator:ga99de719aab83f214a0a14d2684b75d39"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad5d8dc5c5f142b0bb73f2d0ced38126f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gad5d8dc5c5f142b0bb73f2d0ced38126f">myUART_en_int_tx</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint8_t int_en)</td></tr>
+<tr class="memdesc:gad5d8dc5c5f142b0bb73f2d0ced38126f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abilita/Disabilita le interruzioni per la tramissione.  <a href="group__my_u_a_r_t.html#gad5d8dc5c5f142b0bb73f2d0ced38126f">Continua...</a><br /></td></tr>
+<tr class="separator:gad5d8dc5c5f142b0bb73f2d0ced38126f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga6c7f6e1f31011b2cbbcb75a5ce0f7c11">myUART_transmit_int</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint8_t transmit_data)</td></tr>
+<tr class="memdesc:ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di trasmissione di un byte in modalità interrupt Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione.  <a href="group__my_u_a_r_t.html#ga6c7f6e1f31011b2cbbcb75a5ce0f7c11">Continua...</a><br /></td></tr>
+<tr class="separator:ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafbd4ccee474e19d356e7879208894bf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gafbd4ccee474e19d356e7879208894bf5">myUART_transmit</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint8_t transmit_data)</td></tr>
+<tr class="memdesc:gafbd4ccee474e19d356e7879208894bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di trasmissione di un byte in modalità polling Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione, aspetterà attivamente fino al completamento della trasmissione.  <a href="group__my_u_a_r_t.html#gafbd4ccee474e19d356e7879208894bf5">Continua...</a><br /></td></tr>
+<tr class="separator:gafbd4ccee474e19d356e7879208894bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga67fd2757ca2a33924d31bbcc8c4839dd"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga67fd2757ca2a33924d31bbcc8c4839dd">myUART_read</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint32_t *status_reg)</td></tr>
+<tr class="memdesc:ga67fd2757ca2a33924d31bbcc8c4839dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di ricezione di un byte in modalità polling Questa funzione mette in attesa attiva fintanto che non si riceve un byte.  <a href="group__my_u_a_r_t.html#ga67fd2757ca2a33924d31bbcc8c4839dd">Continua...</a><br /></td></tr>
+<tr class="separator:ga67fd2757ca2a33924d31bbcc8c4839dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac2677e74abbac50311063972036c632b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gac2677e74abbac50311063972036c632b">myUART_read_DBOUT</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:gac2677e74abbac50311063972036c632b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di lettura del bus DBOUT.  <a href="group__my_u_a_r_t.html#gac2677e74abbac50311063972036c632b">Continua...</a><br /></td></tr>
+<tr class="separator:gac2677e74abbac50311063972036c632b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfa26e3e4528603d97200508e1374396"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gacfa26e3e4528603d97200508e1374396">myUART_read_status_bit</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint32_t pos)</td></tr>
+<tr class="memdesc:gacfa26e3e4528603d97200508e1374396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di lettura di un bit del registro di stato Questa funzione legge dal registro di stato il bit indicato.  <a href="group__my_u_a_r_t.html#gacfa26e3e4528603d97200508e1374396">Continua...</a><br /></td></tr>
+<tr class="separator:gacfa26e3e4528603d97200508e1374396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga685f905f4d05b54d1ca81934535f1e79"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga685f905f4d05b54d1ca81934535f1e79">myUART_read_status</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:ga685f905f4d05b54d1ca81934535f1e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di lettura del registro di stato Questa funzione legge l'intero registro di stato.  <a href="group__my_u_a_r_t.html#ga685f905f4d05b54d1ca81934535f1e79">Continua...</a><br /></td></tr>
+<tr class="separator:ga685f905f4d05b54d1ca81934535f1e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga63bfc3a5055f64b3ececbd359ac61266"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga63bfc3a5055f64b3ececbd359ac61266">myUART_Iack_r</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:ga63bfc3a5055f64b3ececbd359ac61266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledgement dell'interruzione in lettura Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read.  <a href="group__my_u_a_r_t.html#ga63bfc3a5055f64b3ececbd359ac61266">Continua...</a><br /></td></tr>
+<tr class="separator:ga63bfc3a5055f64b3ececbd359ac61266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga05471977de7a31de4244e9b4c3831234"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga05471977de7a31de4244e9b4c3831234">myUART_Iack_w</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:ga05471977de7a31de4244e9b4c3831234"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledgement dell'interruzione in scrittura Alzando il bit IACK_T del registro di controllo, abbassa la linea di interruzione di scrittura per indicare che l'interruzione di scrittura è stata gestita.  <a href="group__my_u_a_r_t.html#ga05471977de7a31de4244e9b4c3831234">Continua...</a><br /></td></tr>
+<tr class="separator:ga05471977de7a31de4244e9b4c3831234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>Questa è l'implementazione della liberia <b><a class="el" href="myuart_8h.html" title="Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI ...">myuart.h</a></b> che definisce un board support package per la gestione semplificata di una periferica AXI Lite che implementa un UART. </p>
+<dl class="section author"><dt>Autori</dt><dd><b> Giorgio Farina</b> <a href="#" onclick="location.href='mai'+'lto:'+'gio'+'rg'+'io.'+'fa'+'ri9'+'6@'+'gma'+'il'+'.co'+'m'; return false;">giorg<span style="display: none;">.nosp@m.</span>io.f<span style="display: none;">.nosp@m.</span>ari96<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a> <br />
+ <b> Luca Giamattei</b> <a href="#" onclick="location.href='mai'+'lto:'+'lgi'+'am'+'att'+'ei'+'@gm'+'ai'+'l.c'+'om'; return false;">lgiam<span style="display: none;">.nosp@m.</span>atte<span style="display: none;">.nosp@m.</span>i@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> <br />
+ <b> Gabriele Previtera</b> <a href="#" onclick="location.href='mai'+'lto:'+'gab'+'ri'+'ele'+'pr'+'evi'+'te'+'ra@'+'gm'+'ail'+'.c'+'om'; return false;">gabri<span style="display: none;">.nosp@m.</span>elep<span style="display: none;">.nosp@m.</span>revit<span style="display: none;">.nosp@m.</span>era@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a> <br />
+ </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>13/06/2020</dd></dl>
+<p>Questa è l'implementazione della liberia <b><a class="el" href="myuart_8h.html" title="Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI ...">myuart.h</a></b> che definisce un board support package per la gestione semplificata di una periferica AXI Lite che implementa una UART. API che permettono di utilizzare una periferica AXI Lite che implementa un UART descritto nel file <b>myUart_AXI.vhd</b> presente all'interno del repository. </p>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

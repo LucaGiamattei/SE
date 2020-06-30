@@ -1,32 +1,10 @@
-/**
-* @file myuart.c
-* @brief Questa è l'implementazione della liberia <b>myuart.h</b> 
-* che definisce un board support package per la gestione semplificata
-* di una periferica AXI Lite che implementa un UART.
-* @authors <b> Giorgio Farina</b> <giorgio.fari96@gmail.com> <br>
-*			 <b> Luca Giamattei</b>  <lgiamattei@gmail.com> <br>
-*			 <b> Gabriele Previtera</b>  <gabrieleprevitera@gmail.com> <br>
-* @date 13/06/2020
-*
-* @details
-*   Questa è l'implementazione della liberia <b>myuart.h</b> che definisce un board 
-*   support package per la gestione semplificata di una periferica AXI Lite
-*   che implementa una UART. API che permettono di utilizzare 
-*   una periferica AXI Lite che implementa un
-*   UART descritto nel file <b>myUart_AXI.vhd</b> presente all'interno
-*   del repository.
-*
-*
-* @addtogroup myUART
-* @{
-*/
 
 /***************************** Include Files *********************************/
 #include "myuart.h"
 
 
 /***************************** Function Implementation *******************************/
-
+#if defined MYUART_NO_DRIVER || defined MYUART_BARE_METAL ||defined MYUART_UIO
 myUART* myUART_init(uint32_t *peripheral_address){
     return (myUART*) peripheral_address;
 }
@@ -86,6 +64,7 @@ void myUART_Iack_w(myUART * myuart){
     write_bit_in_pos(&myuart->CONTROL_REG, CTR_IACK, HIGH);
     //IACK è abbassato automaticamente in hw
 }
+#endif
 
 #ifdef MYUART_KERNEL
 
@@ -146,4 +125,4 @@ void  read_reg_bloc_UART_k(int descriptor, uint32_t reg, uint32_t* read_value){
 
 #endif
 
-/** @} */
+

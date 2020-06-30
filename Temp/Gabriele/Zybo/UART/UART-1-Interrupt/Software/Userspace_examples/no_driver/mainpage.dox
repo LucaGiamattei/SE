@@ -1,18 +1,14 @@
 /*! \mainpage UART no-driver
  *
  * \section intro_sec Introduzione
- * 
- * @brief UART no-driver è un esempio di implementazione di un driver no driver per la periferica custom UART sintetizzata sulla
- * PL della board ZYBO. 
+ * UART no-driver è un esempio di implementazione di un driver no driver per la periferica custom UART sintetizzata sulla PL della board ZYBO. \n Tale esercizio ha lo scopo di guidare la periferica custom UART dal sistema operativo Linux in esecuzione sulla board tramite un meccanismo che permette di trapassare il sistema operativo e di comunicare direttamente con i registri della periferica. Questo approccio, seppure molto semplice e veloce, ha delle limitazioni.
  *
  * \section File
  *  - @ref main.c
  *
  * \section Requirements
  * - @ref myuart.h
- * - @ref myuart.c
  * - @ref utils.h
- * - @ref utils.c
  * - @ref config.h
  * \section Use
  *

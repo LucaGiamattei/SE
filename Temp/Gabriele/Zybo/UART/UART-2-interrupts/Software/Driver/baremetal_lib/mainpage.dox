@@ -1,9 +1,9 @@
-/*! \mainpage UART with interrupt
+/*! \mainpage UART bare-metal con interrupt
  *
  * \section intro_sec Introduzione
  * 
  * @brief Questa liberia definisce un board support package per la gestione semplificata
- * di una periferica AXI Lite che implementa una UART.
+ * di una periferica AXI Lite che implementa una UART. \n Non essendovi il sistema operativo bisognerà occuparsi anche della configurazione del GIC per usufruire del meccanismo delle interruizoni.
  *
  * \section File
  * - @ref myuart.h

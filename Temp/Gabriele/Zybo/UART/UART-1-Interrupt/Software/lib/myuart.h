@@ -72,9 +72,14 @@
 #include <stdint.h>
 #include "utils.h"
 /***************************** Type Definition *******************************/
+#if defined MYUART_NO_DRIVER || defined MYUART_BARE_METAL ||defined MYUART_UIO
+/**
+ * @name API per interfacciamento UIO, no-driver e bare metal 
+ * 
+//@{
+ */
 
 /**
- * @name myUART STRUCT
  * @struct myUART
  * @brief struct che permette una semplice gestione della periferica
  * @var myUART::DBIN
@@ -97,7 +102,6 @@
  * - FE	    => Frame Error, indica che è stato ricevuto un bit in più
  * - OE	    => Overwrite Error, indica che è stato ricevuto in ulteriore byte prima che il
  *  precedente fosse consumato, e di conseguenza, quest'ultimo, è perso.
- * @{
  */
 typedef struct{
     uint32_t DBIN; 
@@ -105,53 +109,45 @@ typedef struct{
     uint32_t CONTROL_REG;
     uint32_t STATUS_REG;
 } myUART;
-/** @} */
+
 /***************************** Function Definition *******************************/
 
-/**
- * @name myUART API
- * @brief API per poter configurare e utilizzare la periferica UART
- * @{
- */
 
  /** @brief Funzione di inizializzazione,Effettua un casting dell'indirizzo in modo tale da 
  * poter utilizzare la struct al meglio
  * @param peripheral_address indirizzo base della periferica AXI Lite
  * @retval puntatore ad una struct myUART il cui indirzzo base è quello di peripheral_address
- * @{
+
  */
 myUART* myUART_init(uint32_t *peripheral_address);
-/** @} */
+
 
 /**
  * @brief Abilita/Disabilita le interruzioni per la ricezione
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param int_en INT_EN abilitato, INT_DIS GIES disabilitato 
  * @retval valore del registro di controllo dopo l'operazione di scrittura
- * @{
  */
 uint32_t myUART_en_int_rx(myUART * myuart, uint8_t int_en);
-/** @} */
+
 
 /**
  * @brief Abilita/Disabilita le interruzioni per la tramissione
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole configurare
  * @param int_en INT_EN abilitato, INT_DIS GIES disabilitato 
  * @retval valore del registro di controllo dopo l'operazione di scrittura
- * @{
  */
 uint32_t myUART_en_int_tx(myUART * myuart, uint8_t int_en);
-/** @} */
+
 
 /**
  * @brief Funzione di trasmissione di un byte in modalità interrupt
  * Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione.
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole utilizzare
  * @param transmit_data byte di dati da trasmettere
- * @{
  */
 void myUART_transmit_int(myUART * myuart, uint8_t transmit_data);
-/** @} */
+
 
 /**
  * @brief Funzione di trasmissione di un byte in modalità polling
@@ -159,30 +155,27 @@ void myUART_transmit_int(myUART * myuart, uint8_t transmit_data);
  * aspetterà attivamente fino al completamento della trasmissione.
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole utilizzare
  * @param transmit_data byte di dati da trasmettere
- * @{
  */
 void myUART_transmit(myUART * myuart, uint8_t transmit_data);
-/** @} */
+
 
 /**
  * @brief Funzione di ricezione di un byte in modalità polling
  * Questa funzione mette in attesa attiva fintanto che non si riceve un byte.
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole utilizzare
  * @retval byte letto 
- * @{
  */
 uint8_t myUART_read(myUART * myuart, uint32_t* status_reg);
-/** @} */
+
 
 /**
  * @brief Funzione di lettura del bus DBOUT
  *
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole utilizzare
  * @retval byte contenuto in DBOUT
- * @{
  */
 uint8_t myUART_read_DBOUT(myUART * myuart);
-/** @} */
+
 
 /**
  * @brief Funzione di lettura di un bit del registro di stato
@@ -190,46 +183,47 @@ uint8_t myUART_read_DBOUT(myUART * myuart);
  * @param myuart puntatore alla sctruct che identifica la periferica 
  * @param pos maschera che indica il bit da leggere
  * @retval byte letto 
- * @{
  */
 uint8_t myUART_read_status_bit(myUART * myuart, uint32_t pos);
-/** @} */
+
 
 /**
  * @brief Funzione di lettura del registro di stato
  * Questa funzione legge l'intero registro di stato
  * @param myuart puntatore alla sctruct che identifica la periferica  
  * @retval registro di stato
- * @{
  */
 uint32_t myUART_read_status(myUART * myuart);
-/** @} */
+
 
 /**
  * @brief Acknowledgement dell'interruzione in lettura
  * Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read
  * @param myuart puntatore alla sctruct che identifica la periferica
- * @{
  */
 void myUART_Iack_r(myUART * myuart);
-/** @} */
+
 
 /**
  * @brief Acknowledgement dell'interruzione in scrittura
  * Alzando il bit IACK_T del registro di controllo, abbassa la linea di interruzione di scrittura
  * per indicare che l'interruzione di scrittura è stata gestita.
  * @param myuart puntatore alla sctruct che identifica la periferica
- * @{
  */
 void myUART_Iack_w(myUART * myuart);
-/** @} */
-
-/** @} */
 
 
+//@}
+
+#endif
 
 
 #ifdef MYUART_KERNEL
+/**
+ * @name API per interfacciamento tramito modulo kernel
+ * Funzioni utilizzate per interfacciarsi con la periferica tramite un modulo kernel. 
+//@{
+ */
 
 
 /**
@@ -237,31 +231,26 @@ void myUART_Iack_w(myUART * myuart);
  * @param descriptor descrittore del file aperto
  * @param int_en int_en INT_EN abilitato, INT_DIS disabilitato
  * @retval valore del registro di controllo dopo l'operazione di scrittura
- * @{
  */
 uint32_t myUART_en_int_rx_k(int descriptor, uint8_t int_en);
-/** @} */
 
-/*
 /**
  * @brief Abilita/Disabilita le interruzioni per la tramissione
  * @param descriptor descrittore del file aperto
  * @param int_en  INT_EN abilitato, INT_DIS  disabilitato 
  * @retval valore del registro di controllo dopo l'operazione di scrittura
- * @{
  */
 uint32_t myUART_en_int_tx_k(int descriptor, uint8_t int_en);
-/** @} */
+
 
 
 /**
  * @brief Funzione di trasmissione di un byte in modalità interrupt
  * @param descriptor descrittore del file aperto
  * @param transmit_data byte di dati da trasmettere
- * @{
  */
 void myUART_transmit_int_k(int descriptor, uint8_t transmit_data);
-/** @} */
+
 
 /**
  * @brief Funzione di trasmissione di un byte in modalità polling
@@ -269,11 +258,10 @@ void myUART_transmit_int_k(int descriptor, uint8_t transmit_data);
  * Si assicura prima che il buffer di trasmissione sia libero.
  * @param descriptor descrittore del file aperto
  * @param transmit_data byte di dati da trasmettere
- * @{
  */
 //ATT: Si dovrebbe gestire il TIMEOUT con un timer
 void myUART_transmit_k(int descriptor, uint8_t transmit_data);
-/** @} */
+
 
 /**
  * @brief Funzione di ricezione di un byte in modalità polling
@@ -281,11 +269,10 @@ void myUART_transmit_k(int descriptor, uint8_t transmit_data);
  * @param descriptor descrittore del file aperto
  * @param status_reg (parametro di ingresso uscita) registro di stato della periferica
  * @retval byte contenuto in DBOUT
- * @{
  */
 //ATT: Si dovrebbe gestire il TIMEOUT con un timer
 uint8_t myUART_read_k(int descriptor,uint32_t* status_reg);
-/** @} */
+
 
 /**
  * @brief funzione di ricezione bloccante. Si sblocca nel momento in cui
@@ -295,10 +282,9 @@ uint8_t myUART_read_k(int descriptor,uint32_t* status_reg);
  * E' un parametro di ingresso uscita. In uscita sarà un vettore di due elementi.
  * In posziione 0 si avrà il dato letto dal registro DBOUT e in posizione 1
  * il registro di stato.
- * @{
  */
 void myUART_read_DBOUT_bloc_k(int descriptor,uint32_t* read_value);
-/** @} */
+
 
 /**
  * @brief Funzione di lettura di un bit del registro di stato
@@ -306,44 +292,41 @@ void myUART_read_DBOUT_bloc_k(int descriptor,uint32_t* read_value);
  * @param descriptor descrittore del file aperto
  * @param pos maschera che indica il bit da leggere
  * @retval bit letto
- * @{
  */
 uint8_t myUART_read_status_bit_k(int descriptor, uint32_t pos);
-/** @} */
+
 
 /**
  * @brief Funzione di lettura del registro di stato
  * Questa funzione legge l'intero registro di stato
  * @param descriptor descrittore del file aperto
  * @retval registro di stato
- * @{
  */
 uint32_t myUART_read_status_k(int descriptor);
-/** @} */
+
 
 /**
  * @brief Acknowledgement dell'interruzione in lettura
  * Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read
  * @param descriptor descrittore del file aperto
- * @{
  */
 void myUART_Iack_r_k(int descriptor);
-/** @} */
+
 
 /**
  * @brief Acknowledgement dell'interruzione in scrittura
  * Alzando il bit IACK_T del registro di controllo, abbassa la linea di interruzione di scrittura
  * per indicare che l'interruzione di scrittura è stata gestita.
  * @param descriptor descrittore del file aperto
- * @{
  */
 void myUART_Iack_w_k(int descriptor);
-/** @} */
+
 
 void  read_reg_bloc_UART_k(int descriptor, uint32_t reg, uint32_t* read_value);
 
-
+//@}
 #endif
 
 
 #endif
+/** @} */

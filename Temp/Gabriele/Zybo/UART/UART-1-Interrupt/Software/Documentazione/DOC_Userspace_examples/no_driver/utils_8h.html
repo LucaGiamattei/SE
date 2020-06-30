@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo UART no-driver: Riferimenti per il file /home/giorgio/Documents/embeddedProject/progetti/SE/SE/Temp/Gabriele/Zybo/UART/UART-1-Interrupt/Software/lib/utils.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo UART no-driver
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Riferimenti per il file utils.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>La liberia utils definisce delle funzioni comuni alla gestione semplificata di una periferica AXI Lite generica <br />
+.  
+<a href="#details">Continua...</a></p>
+<div class="textblock"><code>#include &quot;stdlib.h&quot;</code><br />
+<code>#include &quot;stdint.h&quot;</code><br />
+<code>#include &quot;stdio.h&quot;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+</div>
+<p><a href="utils_8h_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader"></div></td></tr>
+<tr class="memitem:ade01a13f0d4f855077f5fca181c4f419"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#ade01a13f0d4f855077f5fca181c4f419">write_bit_in_pos</a> (uint32_t *address, uint32_t pos, uint32_t bit)</td></tr>
+<tr class="memdesc:ade01a13f0d4f855077f5fca181c4f419"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permette di scrivere un bit in una specifica posizione in un determinato registro.  <a href="#ade01a13f0d4f855077f5fca181c4f419">Continua...</a><br /></td></tr>
+<tr class="separator:ade01a13f0d4f855077f5fca181c4f419"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc97b3de4d5b2627e09ec62403f07d2b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#abc97b3de4d5b2627e09ec62403f07d2b">read_bit_in_single_pos</a> (uint32_t *address, uint8_t pos)</td></tr>
+<tr class="memdesc:abc97b3de4d5b2627e09ec62403f07d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permette di leggere un bit in una specifica posizione in un determinato registro.  <a href="#abc97b3de4d5b2627e09ec62403f07d2b">Continua...</a><br /></td></tr>
+<tr class="separator:abc97b3de4d5b2627e09ec62403f07d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">API per interfacciamento no driver</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Funzioni utilizzate per interfacciarsi con la periferica bypassando il sistema operativo. </p>
+</div></td></tr>
+<tr class="memitem:a9b8dd2f6646f92f575fad56ad47b94f7"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a9b8dd2f6646f92f575fad56ad47b94f7">configure_no_driver</a> (int file_descriptor, void **vrt_page_addr, uint32_t phy_address)</td></tr>
+<tr class="memdesc:a9b8dd2f6646f92f575fad56ad47b94f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esegue mmap sul file /dev/mem aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED.  <a href="#a9b8dd2f6646f92f575fad56ad47b94f7">Continua...</a><br /></td></tr>
+<tr class="separator:a9b8dd2f6646f92f575fad56ad47b94f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>La liberia utils definisce delle funzioni comuni alla gestione semplificata di una periferica AXI Lite generica <br />
+. </p>
+<p>Le funzioni da prendere in considerazione dipendono dal contesto di esecuzione. <br />
+Bare metal considera un contesto in cui non è presente il sistema operativo e si è a diretto contatto con l'hardware. <br />
+Le altre tipologie di API presenti nella libreria considerano la presenza di un sistema operativo. </p><dl class="section author"><dt>Autori</dt><dd><b> Giorgio Farina</b> <a href="#" onclick="location.href='mai'+'lto:'+'gio'+'rg'+'io.'+'fa'+'ri9'+'6@'+'gma'+'il'+'.co'+'m'; return false;">giorg<span style="display: none;">.nosp@m.</span>io.f<span style="display: none;">.nosp@m.</span>ari96<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a> <br />
+ <b> Luca Giamattei</b> <a href="#" onclick="location.href='mai'+'lto:'+'lgi'+'am'+'att'+'ei'+'@gm'+'ai'+'l.c'+'om'; return false;">lgiam<span style="display: none;">.nosp@m.</span>atte<span style="display: none;">.nosp@m.</span>i@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> <br />
+ <b> Gabriele Previtera</b> <a href="#" onclick="location.href='mai'+'lto:'+'gab'+'ri'+'ele'+'pr'+'evi'+'te'+'ra@'+'gm'+'ail'+'.c'+'om'; return false;">gabri<span style="display: none;">.nosp@m.</span>elep<span style="display: none;">.nosp@m.</span>revit<span style="display: none;">.nosp@m.</span>era@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a> <br />
+ </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>15/06/2020 </dd></dl>
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a9b8dd2f6646f92f575fad56ad47b94f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b8dd2f6646f92f575fad56ad47b94f7">&#9670;&nbsp;</a></span>configure_no_driver()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void* configure_no_driver </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>file_descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">void **&#160;</td>
+          <td class="paramname"><em>vrt_page_addr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>phy_address</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esegue mmap sul file /dev/mem aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_descriptor</td><td>descrittore del file /dev/mem aperto </td></tr>
+    <tr><td class="paramname">vrt_page_addr</td><td>puntatore all'indirizzo virtuale della pagina a cui appartiene l'indirizzo virtuale della periferica memory mapped (parametro di ingresso uscita) </td></tr>
+    <tr><td class="paramname">phy_address</td><td>indirizzo fisico base della periferica memory mapped </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">vrt_addr</td><td>NULL nel caso in cui "mmap" ritorni MAP_FAILED, altrimenti l'indirizzo virtuale base della periferica </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abc97b3de4d5b2627e09ec62403f07d2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc97b3de4d5b2627e09ec62403f07d2b">&#9670;&nbsp;</a></span>read_bit_in_single_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t read_bit_in_single_pos </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permette di leggere un bit in una specifica posizione in un determinato registro. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>indirizzo del registro </td></tr>
+    <tr><td class="paramname">pos</td><td>posizione del bit </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">register</td><td>il valore del registro </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ade01a13f0d4f855077f5fca181c4f419"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade01a13f0d4f855077f5fca181c4f419">&#9670;&nbsp;</a></span>write_bit_in_pos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t write_bit_in_pos </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>address</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>bit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permette di scrivere un bit in una specifica posizione in un determinato registro. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>indirizzo del registro </td></tr>
+    <tr><td class="paramname">pos</td><td>posizione del bit </td></tr>
+    <tr><td class="paramname">bit</td><td>1 asserisce il livello alto, 0 asserisce il livello basso </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">register</td><td>il valore del registro aggiornato </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

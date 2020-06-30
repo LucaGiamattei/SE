@@ -1,0 +1,562 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo UART bare-metal: MyUART</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo UART bare-metal
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Composti</a>  </div>
+  <div class="headertitle">
+<div class="title">MyUART</div>  </div>
+</div><!--header-->
+<div class="contents">
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Composti</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmy_u_a_r_t.html">myUART</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct che permette una semplice gestione della periferica  <a href="structmy_u_a_r_t.html#details">Continua...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Definizioni delle macro per identificare i bit</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrp6e27314c83dfc864b0674892152ef914"></a>Macro utili a identificare i bit dei registri di controllo e di stato </p>
+</td></tr>
+<tr class="memitem:ga88e635389e92b648cdb4e31a53348497"><td class="memItemLeft" align="right" valign="top"><a id="ga88e635389e92b648cdb4e31a53348497"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CTR_RD</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 0</td></tr>
+<tr class="separator:ga88e635389e92b648cdb4e31a53348497"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gab11f3f62e247ab4ebee4246780e49978"><td class="memItemLeft" align="right" valign="top"><a id="gab11f3f62e247ab4ebee4246780e49978"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CTR_WR</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 1</td></tr>
+<tr class="separator:gab11f3f62e247ab4ebee4246780e49978"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga26f2cb9b7cafbbf19f0efe01373cb33f"><td class="memItemLeft" align="right" valign="top"><a id="ga26f2cb9b7cafbbf19f0efe01373cb33f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CTR_IE</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 2</td></tr>
+<tr class="separator:ga26f2cb9b7cafbbf19f0efe01373cb33f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga17ccb8b7a7cd3d2c12b2fa0b4340475f"><td class="memItemLeft" align="right" valign="top"><a id="ga17ccb8b7a7cd3d2c12b2fa0b4340475f"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CTR_IACK</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 3</td></tr>
+<tr class="separator:ga17ccb8b7a7cd3d2c12b2fa0b4340475f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabbf119b4e1a6d2db980a53361be4f0e9"><td class="memItemLeft" align="right" valign="top"><a id="gabbf119b4e1a6d2db980a53361be4f0e9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_RDA</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 0</td></tr>
+<tr class="separator:gabbf119b4e1a6d2db980a53361be4f0e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gad09f739438cfda33ad31ca4fc2ec57bd"><td class="memItemLeft" align="right" valign="top"><a id="gad09f739438cfda33ad31ca4fc2ec57bd"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_TBE</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 1</td></tr>
+<tr class="separator:gad09f739438cfda33ad31ca4fc2ec57bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga72b550ad53e9b45ebe5b27c23543bced"><td class="memItemLeft" align="right" valign="top"><a id="ga72b550ad53e9b45ebe5b27c23543bced"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_PE</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 2</td></tr>
+<tr class="separator:ga72b550ad53e9b45ebe5b27c23543bced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9bd497759c8273f5eb138d945253e3e8"><td class="memItemLeft" align="right" valign="top"><a id="ga9bd497759c8273f5eb138d945253e3e8"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_FE</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 3</td></tr>
+<tr class="separator:ga9bd497759c8273f5eb138d945253e3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga43c911c7820ac49010a00723b13cfe79"><td class="memItemLeft" align="right" valign="top"><a id="ga43c911c7820ac49010a00723b13cfe79"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ST_OE</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 4</td></tr>
+<tr class="separator:ga43c911c7820ac49010a00723b13cfe79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Definizioni delle macro per il livello logico del valore dei letto o scritto sui pin</h2></td></tr>
+<tr class="memitem:gab811d8c6ff3a505312d3276590444289"><td class="memItemLeft" align="right" valign="top"><a id="gab811d8c6ff3a505312d3276590444289"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LOW</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:gab811d8c6ff3a505312d3276590444289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5bb885982ff66a2e0a0a45a8ee9c35e2"><td class="memItemLeft" align="right" valign="top"><a id="ga5bb885982ff66a2e0a0a45a8ee9c35e2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HIGH</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga5bb885982ff66a2e0a0a45a8ee9c35e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Definizioni delle macro per l'abilitazione dell'interrupt</h2></td></tr>
+<tr class="memitem:ga8dc8a6ba32861f0a3cbd89fa1ec0d216"><td class="memItemLeft" align="right" valign="top"><a id="ga8dc8a6ba32861f0a3cbd89fa1ec0d216"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_EN</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ga8dc8a6ba32861f0a3cbd89fa1ec0d216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga397142c688abab6ac8a47d8e7312810b"><td class="memItemLeft" align="right" valign="top"><a id="ga397142c688abab6ac8a47d8e7312810b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_DIS</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ga397142c688abab6ac8a47d8e7312810b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+Definizioni delle macro per identificare l'offset dei registri della periferica</h2></td></tr>
+<tr class="memitem:gaf121a36dbb01ac04c569c711b92758c0"><td class="memItemLeft" align="right" valign="top"><a id="gaf121a36dbb01ac04c569c711b92758c0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DBIN_OFFSET</b>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:gaf121a36dbb01ac04c569c711b92758c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaae2f21f46c8ee0b40d8d2b25444fa348"><td class="memItemLeft" align="right" valign="top"><a id="gaae2f21f46c8ee0b40d8d2b25444fa348"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>DBOUT_OFFSET</b>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:gaae2f21f46c8ee0b40d8d2b25444fa348"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0756e02215f544d6b31525ad673dad73"><td class="memItemLeft" align="right" valign="top"><a id="ga0756e02215f544d6b31525ad673dad73"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>CONTROL_REG_OFFSET</b>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:ga0756e02215f544d6b31525ad673dad73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga69ebf8ef753297744e9550c1e60c6619"><td class="memItemLeft" align="right" valign="top"><a id="ga69ebf8ef753297744e9550c1e60c6619"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>STATUS_REG_OFFSET</b>&#160;&#160;&#160;0x0C</td></tr>
+<tr class="separator:ga69ebf8ef753297744e9550c1e60c6619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+myUART STRUCT</h2></td></tr>
+<tr class="memitem:ga376445b3b094e6b30521de9724b434c6"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga376445b3b094e6b30521de9724b434c6">myUART::DBIN</a></td></tr>
+<tr class="separator:ga376445b3b094e6b30521de9724b434c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac247418c8ed0fdaea471f2b4e7a919a8"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gac247418c8ed0fdaea471f2b4e7a919a8">myUART::DBOUT</a></td></tr>
+<tr class="separator:gac247418c8ed0fdaea471f2b4e7a919a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="member-group"></a>
+myUART API</h2></td></tr>
+<tr><td class="ititle" colspan="2"><p><a class="anchor" id="amgrp032672f640099d68af5a23afba216233"></a>API per poter configurare e utilizzare la periferica UART </p>
+</td></tr>
+<tr class="memitem:gade45ef29769c6610a78ce7fa363f70ec"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gade45ef29769c6610a78ce7fa363f70ec">myUART_init</a> (uint32_t *peripheral_address)</td></tr>
+<tr class="memdesc:gade45ef29769c6610a78ce7fa363f70ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di inizializzazione,Effettua un casting dell'indirizzo in modo tale da poter utilizzare la struct al meglio.  <a href="#gade45ef29769c6610a78ce7fa363f70ec">Continua...</a><br /></td></tr>
+<tr class="separator:gade45ef29769c6610a78ce7fa363f70ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf5b112928f7a0205dd3b043a6a1c5b46"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gaf5b112928f7a0205dd3b043a6a1c5b46">myUART_en_int</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint8_t int_en)</td></tr>
+<tr class="memdesc:gaf5b112928f7a0205dd3b043a6a1c5b46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abilita/Disabilita le interruzioni.  <a href="#gaf5b112928f7a0205dd3b043a6a1c5b46">Continua...</a><br /></td></tr>
+<tr class="separator:gaf5b112928f7a0205dd3b043a6a1c5b46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga6c7f6e1f31011b2cbbcb75a5ce0f7c11">myUART_transmit_int</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint8_t transmit_data)</td></tr>
+<tr class="memdesc:ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di trasmissione di un byte in modalità interrupt Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione.  <a href="#ga6c7f6e1f31011b2cbbcb75a5ce0f7c11">Continua...</a><br /></td></tr>
+<tr class="separator:ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gafbd4ccee474e19d356e7879208894bf5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gafbd4ccee474e19d356e7879208894bf5">myUART_transmit</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint8_t transmit_data)</td></tr>
+<tr class="memdesc:gafbd4ccee474e19d356e7879208894bf5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di trasmissione di un byte in modalità polling Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione, aspetterà attivamente fino al completamento della trasmissione.  <a href="#gafbd4ccee474e19d356e7879208894bf5">Continua...</a><br /></td></tr>
+<tr class="separator:gafbd4ccee474e19d356e7879208894bf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0cfa609b95060161533188416c510d8c"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga0cfa609b95060161533188416c510d8c">myUART_read</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:ga0cfa609b95060161533188416c510d8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di ricezione di un byte in modalità polling Questa funzione mette in attesa attiva fintanto che non si riceve un byte.  <a href="#ga0cfa609b95060161533188416c510d8c">Continua...</a><br /></td></tr>
+<tr class="separator:ga0cfa609b95060161533188416c510d8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac2677e74abbac50311063972036c632b"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gac2677e74abbac50311063972036c632b">myUART_read_DBOUT</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:gac2677e74abbac50311063972036c632b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di lettura del bus DBOUT.  <a href="#gac2677e74abbac50311063972036c632b">Continua...</a><br /></td></tr>
+<tr class="separator:gac2677e74abbac50311063972036c632b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacfa26e3e4528603d97200508e1374396"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#gacfa26e3e4528603d97200508e1374396">myUART_read_status_bit</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart, uint32_t pos)</td></tr>
+<tr class="memdesc:gacfa26e3e4528603d97200508e1374396"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di lettura di un bit del registro di stato Questa funzione legge dal registro di stato il bit indicato.  <a href="#gacfa26e3e4528603d97200508e1374396">Continua...</a><br /></td></tr>
+<tr class="separator:gacfa26e3e4528603d97200508e1374396"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga685f905f4d05b54d1ca81934535f1e79"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga685f905f4d05b54d1ca81934535f1e79">myUART_read_status</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:ga685f905f4d05b54d1ca81934535f1e79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di lettura del registro di stato Questa funzione legge l'intero registro di stato.  <a href="#ga685f905f4d05b54d1ca81934535f1e79">Continua...</a><br /></td></tr>
+<tr class="separator:ga685f905f4d05b54d1ca81934535f1e79"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga63bfc3a5055f64b3ececbd359ac61266"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga63bfc3a5055f64b3ececbd359ac61266">myUART_Iack_r</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:ga63bfc3a5055f64b3ececbd359ac61266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledgement dell'interruzione in lettura Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read.  <a href="#ga63bfc3a5055f64b3ececbd359ac61266">Continua...</a><br /></td></tr>
+<tr class="separator:ga63bfc3a5055f64b3ececbd359ac61266"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga05471977de7a31de4244e9b4c3831234"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__my_u_a_r_t.html#ga05471977de7a31de4244e9b4c3831234">myUART_Iack_w</a> (<a class="el" href="structmy_u_a_r_t.html">myUART</a> *myuart)</td></tr>
+<tr class="memdesc:ga05471977de7a31de4244e9b4c3831234"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledgement dell'interruzione in scrittura Alzando il bit IACK_T del registro di controllo, abbassa la linea di interruzione di scrittura per indicare che l'interruzione di scrittura è stata gestita.  <a href="#ga05471977de7a31de4244e9b4c3831234">Continua...</a><br /></td></tr>
+<tr class="separator:ga05471977de7a31de4244e9b4c3831234"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="gaf5b112928f7a0205dd3b043a6a1c5b46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf5b112928f7a0205dd3b043a6a1c5b46">&#9670;&nbsp;</a></span>myUART_en_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myUART_en_int </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>int_en</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Abilita/Disabilita le interruzioni. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">int_en</td><td>INT_EN abilitato, INT_DIS GIES disabilitato </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">valore</td><td>del registro di controllo dopo l'operazione di scrittura </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga63bfc3a5055f64b3ececbd359ac61266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga63bfc3a5055f64b3ececbd359ac61266">&#9670;&nbsp;</a></span>myUART_Iack_r()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void myUART_Iack_r </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Acknowledgement dell'interruzione in lettura Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga05471977de7a31de4244e9b4c3831234"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga05471977de7a31de4244e9b4c3831234">&#9670;&nbsp;</a></span>myUART_Iack_w()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void myUART_Iack_w </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Acknowledgement dell'interruzione in scrittura Alzando il bit IACK_T del registro di controllo, abbassa la linea di interruzione di scrittura per indicare che l'interruzione di scrittura è stata gestita. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gade45ef29769c6610a78ce7fa363f70ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gade45ef29769c6610a78ce7fa363f70ec">&#9670;&nbsp;</a></span>myUART_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmy_u_a_r_t.html">myUART</a>* myUART_init </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>peripheral_address</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di inizializzazione,Effettua un casting dell'indirizzo in modo tale da poter utilizzare la struct al meglio. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">peripheral_address</td><td>indirizzo base della periferica AXI Lite </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">puntatore</td><td>ad una struct <a class="el" href="structmy_u_a_r_t.html" title="struct che permette una semplice gestione della periferica ">myUART</a> il cui indirzzo base è quello di peripheral_address </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga0cfa609b95060161533188416c510d8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0cfa609b95060161533188416c510d8c">&#9670;&nbsp;</a></span>myUART_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t myUART_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di ricezione di un byte in modalità polling Questa funzione mette in attesa attiva fintanto che non si riceve un byte. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica che si vuole utilizzare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">byte</td><td>letto </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gac2677e74abbac50311063972036c632b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac2677e74abbac50311063972036c632b">&#9670;&nbsp;</a></span>myUART_read_DBOUT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t myUART_read_DBOUT </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di lettura del bus DBOUT. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica che si vuole utilizzare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">byte</td><td>contenuto in DBOUT </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga685f905f4d05b54d1ca81934535f1e79"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga685f905f4d05b54d1ca81934535f1e79">&#9670;&nbsp;</a></span>myUART_read_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myUART_read_status </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di lettura del registro di stato Questa funzione legge l'intero registro di stato. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">registro</td><td>di stato </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gacfa26e3e4528603d97200508e1374396"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacfa26e3e4528603d97200508e1374396">&#9670;&nbsp;</a></span>myUART_read_status_bit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t myUART_read_status_bit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>pos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di lettura di un bit del registro di stato Questa funzione legge dal registro di stato il bit indicato. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica </td></tr>
+    <tr><td class="paramname">pos</td><td>maschera che indica il bit da leggere </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">byte</td><td>letto </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="gafbd4ccee474e19d356e7879208894bf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafbd4ccee474e19d356e7879208894bf5">&#9670;&nbsp;</a></span>myUART_transmit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void myUART_transmit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>transmit_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di trasmissione di un byte in modalità polling Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione, aspetterà attivamente fino al completamento della trasmissione. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica che si vuole utilizzare </td></tr>
+    <tr><td class="paramname">transmit_data</td><td>byte di dati da trasmettere </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6c7f6e1f31011b2cbbcb75a5ce0f7c11">&#9670;&nbsp;</a></span>myUART_transmit_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void myUART_transmit_int </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_u_a_r_t.html">myUART</a> *&#160;</td>
+          <td class="paramname"><em>myuart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>transmit_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di trasmissione di un byte in modalità interrupt Scrive il byte sul bus di ingresso e alzando il bit WR inizierà la trasmissione. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">myuart</td><td>puntatore alla sctruct che identifica la periferica che si vuole utilizzare </td></tr>
+    <tr><td class="paramname">transmit_data</td><td>byte di dati da trasmettere </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<h2 class="groupheader">Documentazione delle variabili</h2>
+<a id="ga376445b3b094e6b30521de9724b434c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga376445b3b094e6b30521de9724b434c6">&#9670;&nbsp;</a></span>DBIN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">myUART::DBIN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Registro dati contenente il byte che verrà inviato sulla periferica </p>
+
+</div>
+</div>
+<a id="gac247418c8ed0fdaea471f2b4e7a919a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac247418c8ed0fdaea471f2b4e7a919a8">&#9670;&nbsp;</a></span>DBOUT</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">myUART::DBOUT</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Registro dati contenente il byte che è stato ricevuto sulla periferica </p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

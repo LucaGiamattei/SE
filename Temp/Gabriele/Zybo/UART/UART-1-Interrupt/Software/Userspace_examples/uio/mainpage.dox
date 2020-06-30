@@ -1,10 +1,8 @@
 /*! \mainpage UART con driver UIO
  *
  * \section intro_sec Introduzione
- * 
- * 
- * @brief UART uio è un esempio di utilizzo, a livello user space, del driver uio per interfacciarsi con la periferica custom UART sintetizzata sulla
- * PL della board ZYBO. 
+ *  UART uio è un esempio di utilizzo, a livello user space, del driver uio per interfacciarsi con la periferica custom UART sintetizzata sulla
+ * PL della board ZYBO. \n Tale esercizio ha lo scopo di interfacciarsi a livello user space con la periferica UART tramite il modulo kernel UIO.
  * 
  *
  * \section File
@@ -12,9 +10,7 @@
  *
  * \section Requirements
  * - @ref myuart.h
- * - @ref myuart.c
  * - @ref utils.h
- * - @ref utils.c
  * - @ref config.h
  * \section Use
  *

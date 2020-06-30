@@ -1,17 +1,14 @@
 /*! \mainpage Uart modulo kernel
  *
  * \section intro_sec Introduzione
- * 
- * @brief In questo esempio l'interfacciamento con la periferica avviene tramite il modulo kernel uart. E' stata realizzata un'espansione della libreria myuart.h per consentire l'utilizzo del modulo.
+ * In questo esempio l'interfacciamento con la periferica avviene tramite il modulo kernel uart. E' stata realizzata un'espansione della libreria myuart.h per consentire l'utilizzo del modulo. \n Tale esercizio ha lo scopo di guidare la periferica custom UART dal sistema operativo Linux in esecuzione sulla board tramite il modulo kernel uart con l'impiego della libreria "myuart.h"
  *
  * \section File
  *  - @ref main.c
  *
  * \section Requirements
  * - @ref myuart.h
- * - @ref myuart.c
  * - @ref utils.h
- * - @ref utils.c
  * - @ref config.h
  * \section Use
  *
@@ -35,8 +32,8 @@
  * 
  * \subsection step4 Step 4: Trasferimento dell'eseguibile sulla board ed esecuzione
  * Assicurarsi che il device tree sia quello corretto e che dia le giuste informazioni al kernel linux affinchè sia possibile
- * utilizzare il modulo kernel uart. \n
- * Copiare il file <b>uart_uio_with_int</b> sulla microsd contenente il root FS. 
+ * utilizzare il modulo kernel uart.Inoltre bisogna prima mandare in esecuzione il modulo kernel. \n
+ * Copiare il file <b>kernel_test</b> sulla microsd contenente il root FS. 
  * La cartella in cui si copia è indifferente, basta solo tenerla presente. \n
  * Avviare la zybo. Connettersi utilizzando la seriale (per i parametri vedere 
  * il manuale). \n

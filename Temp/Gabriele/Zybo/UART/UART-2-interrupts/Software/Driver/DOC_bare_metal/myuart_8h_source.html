@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo UART bare-metal:  File sorgente myuart.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo UART bare-metal
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">myuart.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="myuart_8h.html">Vai alla documentazione di questo file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#ifndef MYUART_H</span></div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#define MYUART_H</span></div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">/************************** Constant Definitions *****************************/</span></div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="preprocessor">#define CTR_RD      (uint32_t) 1 &lt;&lt; 0</span></div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="preprocessor">#define CTR_WR      (uint32_t) 1 &lt;&lt; 1</span></div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor">#define CTR_IE      (uint32_t) 1 &lt;&lt; 2</span></div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#define CTR_IACK    (uint32_t) 1 &lt;&lt; 3</span></div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#define ST_RDA      (uint32_t) 1 &lt;&lt; 0</span></div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#define ST_TBE      (uint32_t) 1 &lt;&lt; 1</span></div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor">#define ST_PE       (uint32_t) 1 &lt;&lt; 2</span></div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#define ST_FE       (uint32_t) 1 &lt;&lt; 3</span></div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor">#define ST_OE       (uint32_t) 1 &lt;&lt; 4</span></div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#define LOW         0</span></div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;<span class="preprocessor">#define HIGH        1</span></div><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="preprocessor">#define INT_EN      1</span></div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#define INT_DIS     0</span></div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#define DBIN_OFFSET             0x00</span></div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#define DBOUT_OFFSET            0x04</span></div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#define CONTROL_REG_OFFSET      0x08</span></div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#define STATUS_REG_OFFSET       0x0C</span></div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="comment">/***************************** Include Files *********************************/</span></div><div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div><div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">#include &quot;stdio.h&quot;</span></div><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div><div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">/***************************** Type Definition *******************************/</span></div><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;</div><div class="line"><a name="l00100"></a><span class="lineno"><a class="line" href="structmy_u_a_r_t.html">  100</a></span>&#160;<span class="keyword">typedef</span> <span class="keyword">struct</span>{</div><div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="group__my_u_a_r_t.html#ga376445b3b094e6b30521de9724b434c6">  101</a></span>&#160;    uint32_t <a class="code" href="group__my_u_a_r_t.html#ga376445b3b094e6b30521de9724b434c6">DBIN</a>; </div><div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="group__my_u_a_r_t.html#gac247418c8ed0fdaea471f2b4e7a919a8">  102</a></span>&#160;    uint32_t <a class="code" href="group__my_u_a_r_t.html#gac247418c8ed0fdaea471f2b4e7a919a8">DBOUT</a>;</div><div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    uint32_t CONTROL_REG;</div><div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    uint32_t STATUS_REG;</div><div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;} <a class="code" href="structmy_u_a_r_t.html">myUART</a>;</div><div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">/***************************** Function Definition *******************************/</span></div><div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;</div><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<a class="code" href="structmy_u_a_r_t.html">myUART</a>* <a class="code" href="group__my_u_a_r_t.html#gade45ef29769c6610a78ce7fa363f70ec">myUART_init</a>(uint32_t *peripheral_address);</div><div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;uint32_t <a class="code" href="group__my_u_a_r_t.html#gaf5b112928f7a0205dd3b043a6a1c5b46">myUART_en_int</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart, uint8_t int_en);</div><div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__my_u_a_r_t.html#ga6c7f6e1f31011b2cbbcb75a5ce0f7c11">myUART_transmit_int</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart, uint8_t transmit_data);</div><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__my_u_a_r_t.html#gafbd4ccee474e19d356e7879208894bf5">myUART_transmit</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart, uint8_t transmit_data);</div><div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;uint8_t <a class="code" href="group__my_u_a_r_t.html#ga0cfa609b95060161533188416c510d8c">myUART_read</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart);</div><div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;uint8_t <a class="code" href="group__my_u_a_r_t.html#gac2677e74abbac50311063972036c632b">myUART_read_DBOUT</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart);</div><div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;uint8_t <a class="code" href="group__my_u_a_r_t.html#gacfa26e3e4528603d97200508e1374396">myUART_read_status_bit</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart, uint32_t pos);</div><div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;uint32_t <a class="code" href="group__my_u_a_r_t.html#ga685f905f4d05b54d1ca81934535f1e79">myUART_read_status</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart);</div><div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__my_u_a_r_t.html#ga63bfc3a5055f64b3ececbd359ac61266">myUART_Iack_r</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart);</div><div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;<span class="keywordtype">void</span> <a class="code" href="group__my_u_a_r_t.html#ga05471977de7a31de4244e9b4c3831234">myUART_Iack_w</a>(<a class="code" href="structmy_u_a_r_t.html">myUART</a> * myuart);</div><div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;<span class="preprocessor">#endif</span></div><div class="ttc" id="group__my_u_a_r_t_html_gafbd4ccee474e19d356e7879208894bf5"><div class="ttname"><a href="group__my_u_a_r_t.html#gafbd4ccee474e19d356e7879208894bf5">myUART_transmit</a></div><div class="ttdeci">void myUART_transmit(myUART *myuart, uint8_t transmit_data)</div><div class="ttdoc">Funzione di trasmissione di un byte in modalità polling Scrive il byte sul bus di ingresso e alzando ...</div><div class="ttdef"><b>Definition:</b> myuart.c:45</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_gade45ef29769c6610a78ce7fa363f70ec"><div class="ttname"><a href="group__my_u_a_r_t.html#gade45ef29769c6610a78ce7fa363f70ec">myUART_init</a></div><div class="ttdeci">myUART * myUART_init(uint32_t *peripheral_address)</div><div class="ttdoc">Funzione di inizializzazione,Effettua un casting dell&amp;#39;indirizzo in modo tale da poter utilizzare la s...</div><div class="ttdef"><b>Definition:</b> myuart.c:30</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_gac247418c8ed0fdaea471f2b4e7a919a8"><div class="ttname"><a href="group__my_u_a_r_t.html#gac247418c8ed0fdaea471f2b4e7a919a8">myUART::DBOUT</a></div><div class="ttdeci">uint32_t DBOUT</div><div class="ttdef"><b>Definition:</b> myuart.h:102</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_ga685f905f4d05b54d1ca81934535f1e79"><div class="ttname"><a href="group__my_u_a_r_t.html#ga685f905f4d05b54d1ca81934535f1e79">myUART_read_status</a></div><div class="ttdeci">uint32_t myUART_read_status(myUART *myuart)</div><div class="ttdoc">Funzione di lettura del registro di stato Questa funzione legge l&amp;#39;intero registro di stato...</div><div class="ttdef"><b>Definition:</b> myuart.c:66</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_ga63bfc3a5055f64b3ececbd359ac61266"><div class="ttname"><a href="group__my_u_a_r_t.html#ga63bfc3a5055f64b3ececbd359ac61266">myUART_Iack_r</a></div><div class="ttdeci">void myUART_Iack_r(myUART *myuart)</div><div class="ttdoc">Acknowledgement dell&amp;#39;interruzione in lettura Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read. </div><div class="ttdef"><b>Definition:</b> myuart.c:70</div></div>
+<div class="ttc" id="structmy_u_a_r_t_html"><div class="ttname"><a href="structmy_u_a_r_t.html">myUART</a></div><div class="ttdoc">struct che permette una semplice gestione della periferica </div><div class="ttdef"><b>Definition:</b> myuart.h:100</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_gaf5b112928f7a0205dd3b043a6a1c5b46"><div class="ttname"><a href="group__my_u_a_r_t.html#gaf5b112928f7a0205dd3b043a6a1c5b46">myUART_en_int</a></div><div class="ttdeci">uint32_t myUART_en_int(myUART *myuart, uint8_t int_en)</div><div class="ttdoc">Abilita/Disabilita le interruzioni. </div><div class="ttdef"><b>Definition:</b> myuart.c:34</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_gacfa26e3e4528603d97200508e1374396"><div class="ttname"><a href="group__my_u_a_r_t.html#gacfa26e3e4528603d97200508e1374396">myUART_read_status_bit</a></div><div class="ttdeci">uint8_t myUART_read_status_bit(myUART *myuart, uint32_t pos)</div><div class="ttdoc">Funzione di lettura di un bit del registro di stato Questa funzione legge dal registro di stato il bi...</div><div class="ttdef"><b>Definition:</b> myuart.c:62</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_ga0cfa609b95060161533188416c510d8c"><div class="ttname"><a href="group__my_u_a_r_t.html#ga0cfa609b95060161533188416c510d8c">myUART_read</a></div><div class="ttdeci">uint8_t myUART_read(myUART *myuart)</div><div class="ttdoc">Funzione di ricezione di un byte in modalità polling Questa funzione mette in attesa attiva fintanto ...</div><div class="ttdef"><b>Definition:</b> myuart.c:53</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_ga05471977de7a31de4244e9b4c3831234"><div class="ttname"><a href="group__my_u_a_r_t.html#ga05471977de7a31de4244e9b4c3831234">myUART_Iack_w</a></div><div class="ttdeci">void myUART_Iack_w(myUART *myuart)</div><div class="ttdoc">Acknowledgement dell&amp;#39;interruzione in scrittura Alzando il bit IACK_T del registro di controllo...</div><div class="ttdef"><b>Definition:</b> myuart.c:75</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_gac2677e74abbac50311063972036c632b"><div class="ttname"><a href="group__my_u_a_r_t.html#gac2677e74abbac50311063972036c632b">myUART_read_DBOUT</a></div><div class="ttdeci">uint8_t myUART_read_DBOUT(myUART *myuart)</div><div class="ttdoc">Funzione di lettura del bus DBOUT. </div><div class="ttdef"><b>Definition:</b> myuart.c:58</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_ga376445b3b094e6b30521de9724b434c6"><div class="ttname"><a href="group__my_u_a_r_t.html#ga376445b3b094e6b30521de9724b434c6">myUART::DBIN</a></div><div class="ttdeci">uint32_t DBIN</div><div class="ttdef"><b>Definition:</b> myuart.h:101</div></div>
+<div class="ttc" id="group__my_u_a_r_t_html_ga6c7f6e1f31011b2cbbcb75a5ce0f7c11"><div class="ttname"><a href="group__my_u_a_r_t.html#ga6c7f6e1f31011b2cbbcb75a5ce0f7c11">myUART_transmit_int</a></div><div class="ttdeci">void myUART_transmit_int(myUART *myuart, uint8_t transmit_data)</div><div class="ttdoc">Funzione di trasmissione di un byte in modalità interrupt Scrive il byte sul bus di ingresso e alzand...</div><div class="ttdef"><b>Definition:</b> myuart.c:38</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>
