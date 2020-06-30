@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo GPIO bare metal: GPIO bare-matal con Interrupt</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo GPIO bare metal
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">GPIO bare-matal con Interrupt </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><p>Tale esempio ha lo scopo di pilotare in modo bare metal la periferica GPIO custom sintetizzata sulla parte PL della board. <br />
+ Non essendovi il sistema operativo bisognerà occuparsi anche della configurazione del GIC per usufruire del meccanismo delle interruizoni.</p>
+<h1><a class="anchor" id="intro_sec"></a>
+Introduzione</h1>
+<h1><a class="anchor" id="File"></a>
+File</h1>
+<ul>
+<li><a class="el" href="main_8c.html">main.c</a></li>
+</ul>
+<h1><a class="anchor" id="Requirements"></a>
+Requirements</h1>
+<ul>
+<li><a class="el" href="mygpio_8h.html">mygpio.h</a></li>
+<li><a class="el" href="utils_8h.html">utils.h</a> </li>
+</ul>
+<h1><a class="anchor" id="Use"></a>
+Use</h1>
+<h2><a class="anchor" id="step1"></a>
+Step 1: Vivado</h2>
+<ul>
+<li>Creare un xsa partendo dal manuale presente nella documentazione doxygen generata a partire dalla cartella Hardware </li>
+</ul>
+<h2><a class="anchor" id="step2"></a>
+Step 2: Test</h2>
+<ul>
+<li>Creare un nuovo <b>Platform Project</b></li>
+<li>Modificare il <b>Makefile</b> presente in <b>ps7_cortexa9_0/standalone_domain/bsp/ </b> cambiando <b>-O2</b> in <b>-O0</b> dove è presente, per rimuovere le ottimizzazioni di compilazione</li>
+<li>Creare un nuovo <b>Application Project</b> scegliendo come platform quella creata precedentemente</li>
+<li>Copiare le dipendenze presenti in ../Driver/baremetal_lib </li>
+</ul>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

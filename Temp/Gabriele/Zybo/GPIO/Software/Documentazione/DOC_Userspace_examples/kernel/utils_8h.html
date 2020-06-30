@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo di GPIO kernel module: Riferimenti per il file /home/giorgio/Documents/embeddedProject/progetti/SE/SE/Temp/Gabriele/Zybo/GPIO/Software/lib/utils.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo di GPIO kernel module
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Riferimenti per il file utils.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>La liberia utils definisce delle funzioni comuni alla gestione semplificata di una periferica AXI Lite generica <br />
+.  
+<a href="#details">Continua...</a></p>
+<div class="textblock"><code>#include &quot;stdlib.h&quot;</code><br />
+<code>#include &quot;stdint.h&quot;</code><br />
+<code>#include &quot;stdio.h&quot;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/stat.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+</div>
+<p><a href="utils_8h_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">API per interfacciamento tramito modulo kernel</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p>Funzioni utilizzate per interfacciarsi con la periferica tramite un modulo kernel. </p>
+</div></td></tr>
+<tr class="memitem:a54da903ecd3a9b22d20f988797be33a8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a54da903ecd3a9b22d20f988797be33a8">open_device</a> (int *file_descriptor, char *device_file)</td></tr>
+<tr class="memdesc:a54da903ecd3a9b22d20f988797be33a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Richiama la system call open.  <a href="#a54da903ecd3a9b22d20f988797be33a8">Continua...</a><br /></td></tr>
+<tr class="separator:a54da903ecd3a9b22d20f988797be33a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51f55e75d642ad6be1caccd8d5393591"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a51f55e75d642ad6be1caccd8d5393591">write_bit_in_pos_k</a> (int descriptor, int32_t reg, uint32_t pos, uint32_t bit)</td></tr>
+<tr class="memdesc:a51f55e75d642ad6be1caccd8d5393591"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permette di scrivere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto.  <a href="#a51f55e75d642ad6be1caccd8d5393591">Continua...</a><br /></td></tr>
+<tr class="separator:a51f55e75d642ad6be1caccd8d5393591"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa52d57485f04902d3271186dcff5d86"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#aaa52d57485f04902d3271186dcff5d86">read_bit_in_single_pos_k</a> (int descriptor, int32_t reg, uint8_t pos)</td></tr>
+<tr class="memdesc:aaa52d57485f04902d3271186dcff5d86"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permette di leggere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto.  <a href="#aaa52d57485f04902d3271186dcff5d86">Continua...</a><br /></td></tr>
+<tr class="separator:aaa52d57485f04902d3271186dcff5d86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2af713f0db4635fb11afcb94fc2956e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a2af713f0db4635fb11afcb94fc2956e0">write_reg</a> (int descriptor, int32_t reg, int32_t write_value)</td></tr>
+<tr class="memdesc:a2af713f0db4635fb11afcb94fc2956e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permette di scrivere un intero registro di 32 bit prendendo in ingresso il descrittore del file aperto.  <a href="#a2af713f0db4635fb11afcb94fc2956e0">Continua...</a><br /></td></tr>
+<tr class="separator:a2af713f0db4635fb11afcb94fc2956e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07644f2f0eb8d31bcba4fc98e85494fb"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a07644f2f0eb8d31bcba4fc98e85494fb">read_reg</a> (int descriptor, int32_t reg)</td></tr>
+<tr class="memdesc:a07644f2f0eb8d31bcba4fc98e85494fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permette di leggere un intero registro di 32 bit prendendo in ingresso il descrittore del file aperto.  <a href="#a07644f2f0eb8d31bcba4fc98e85494fb">Continua...</a><br /></td></tr>
+<tr class="separator:a07644f2f0eb8d31bcba4fc98e85494fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cd2dde00a92015667b7690751ae894c"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="utils_8h.html#a9cd2dde00a92015667b7690751ae894c">read_reg_bloc</a> (int descriptor, int32_t reg)</td></tr>
+<tr class="memdesc:a9cd2dde00a92015667b7690751ae894c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permette di leggere un intero registro di 32 bit utilizzando una read bloccante prendendo in ingresso il descrittore del file aperto.  <a href="#a9cd2dde00a92015667b7690751ae894c">Continua...</a><br /></td></tr>
+<tr class="separator:a9cd2dde00a92015667b7690751ae894c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>La liberia utils definisce delle funzioni comuni alla gestione semplificata di una periferica AXI Lite generica <br />
+. </p>
+<p>Le funzioni da prendere in considerazione dipendono dal contesto di esecuzione. <br />
+Bare metal considera un contesto in cui non è presente il sistema operativo e si è a diretto contatto con l'hardware. <br />
+Le altre tipologie di API presenti nella libreria considerano la presenza di un sistema operativo. </p><dl class="section author"><dt>Autori</dt><dd><b> Giorgio Farina</b> <a href="#" onclick="location.href='mai'+'lto:'+'gio'+'rg'+'io.'+'fa'+'ri9'+'6@'+'gma'+'il'+'.co'+'m'; return false;">giorg<span style="display: none;">.nosp@m.</span>io.f<span style="display: none;">.nosp@m.</span>ari96<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a> <br />
+ <b> Luca Giamattei</b> <a href="#" onclick="location.href='mai'+'lto:'+'lgi'+'am'+'att'+'ei'+'@gm'+'ai'+'l.c'+'om'; return false;">lgiam<span style="display: none;">.nosp@m.</span>atte<span style="display: none;">.nosp@m.</span>i@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> <br />
+ <b> Gabriele Previtera</b> <a href="#" onclick="location.href='mai'+'lto:'+'gab'+'ri'+'ele'+'pr'+'evi'+'te'+'ra@'+'gm'+'ail'+'.c'+'om'; return false;">gabri<span style="display: none;">.nosp@m.</span>elep<span style="display: none;">.nosp@m.</span>revit<span style="display: none;">.nosp@m.</span>era@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a> <br />
+ </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>15/06/2020 </dd></dl>
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a54da903ecd3a9b22d20f988797be33a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54da903ecd3a9b22d20f988797be33a8">&#9670;&nbsp;</a></span>open_device()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int open_device </td>
+          <td>(</td>
+          <td class="paramtype">int *&#160;</td>
+          <td class="paramname"><em>file_descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>device_file</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Richiama la system call open. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file_descriptor</td><td>descrittore del file aperto dalla funzione (parametro di ingresso uscita) </td></tr>
+    <tr><td class="paramname">device_file</td><td>nome del file da aprire </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">result</td><td>0 se l'operazione di apertura è andata a buon fine e il descrittore è valido, -1 altrimenti </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aaa52d57485f04902d3271186dcff5d86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa52d57485f04902d3271186dcff5d86">&#9670;&nbsp;</a></span>read_bit_in_single_pos_k()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t read_bit_in_single_pos_k </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>reg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pos</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permette di leggere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">descriptor</td><td>descrittore del file aperto dalla funzione (parametro di ingresso uscita) </td></tr>
+    <tr><td class="paramname">reg</td><td>offset del registro </td></tr>
+    <tr><td class="paramname">pos</td><td>posizione del bit </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">register</td><td>il valore del registro aggiornato </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a07644f2f0eb8d31bcba4fc98e85494fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07644f2f0eb8d31bcba4fc98e85494fb">&#9670;&nbsp;</a></span>read_reg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t read_reg </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>reg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permette di leggere un intero registro di 32 bit prendendo in ingresso il descrittore del file aperto. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">descriptor</td><td>descrittore del file aperto dalla funzione (parametro di ingresso uscita) </td></tr>
+    <tr><td class="paramname">reg</td><td>offset del registro </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">register</td><td>il valore letto dal registro </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9cd2dde00a92015667b7690751ae894c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cd2dde00a92015667b7690751ae894c">&#9670;&nbsp;</a></span>read_reg_bloc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t read_reg_bloc </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>reg</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permette di leggere un intero registro di 32 bit utilizzando una read bloccante prendendo in ingresso il descrittore del file aperto. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">descriptor</td><td>descrittore del file aperto dalla funzione (parametro di ingresso uscita) </td></tr>
+    <tr><td class="paramname">reg</td><td>offset del registro </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">register</td><td>il valore letto dal registro </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a51f55e75d642ad6be1caccd8d5393591"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51f55e75d642ad6be1caccd8d5393591">&#9670;&nbsp;</a></span>write_bit_in_pos_k()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t write_bit_in_pos_k </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>reg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>pos</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>bit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permette di scrivere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">descriptor</td><td>descrittore del file aperto dalla funzione (parametro di ingresso uscita) </td></tr>
+    <tr><td class="paramname">reg</td><td>offset del registro </td></tr>
+    <tr><td class="paramname">pos</td><td>posizione del bit </td></tr>
+    <tr><td class="paramname">bit</td><td>1 asserisce il livello alto, 0 asserisce il livello basso </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">register</td><td>il valore del registro aggiornato </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a2af713f0db4635fb11afcb94fc2956e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2af713f0db4635fb11afcb94fc2956e0">&#9670;&nbsp;</a></span>write_reg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void write_reg </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>descriptor</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>reg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int32_t&#160;</td>
+          <td class="paramname"><em>write_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Permette di scrivere un intero registro di 32 bit prendendo in ingresso il descrittore del file aperto. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">descriptor</td><td>descrittore del file aperto dalla funzione (parametro di ingresso uscita) </td></tr>
+    <tr><td class="paramname">reg</td><td>offset del registro </td></tr>
+    <tr><td class="paramname">write_value</td><td>valore da asserire al registro </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

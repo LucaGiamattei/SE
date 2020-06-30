@@ -1,0 +1,842 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo GPIO bare metal: Riferimenti per il file /home/giorgio/Documents/embeddedProject/progetti/SE/SE/Temp/Gabriele/Zybo/GPIO/Software/lib/mygpio.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo GPIO bare metal
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_97aefd0d527b934f1d99a682da8fe6a9.html">lib</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Composti</a>  </div>
+  <div class="headertitle">
+<div class="title">Riferimenti per il file mygpio.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI Lite che implementa un GPIO.  
+<a href="#details">Continua...</a></p>
+<div class="textblock"><code>#include &quot;stdlib.h&quot;</code><br />
+<code>#include &quot;stdio.h&quot;</code><br />
+<code>#include &quot;stdint.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+</div>
+<p><a href="mygpio_8h_source.html">Vai al codice sorgente di questo file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Composti</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct che permette una semplice gestione della periferica  <a href="structmy_g_p_i_o.html#details">Continua...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Definizioni</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per identificare i pin</div></td></tr>
+<tr><td colspan="2"><div class="groupText"><p><b>Nota</b> per permettere utilizzare i restanti 24 pin è possibile crearsi delle machere oppure continuare la definizione delle seguenti macro </p>
+</div></td></tr>
+<tr class="memitem:a176efbf43a259b7bb0a85a47401505be"><td class="memItemLeft" align="right" valign="top"><a id="a176efbf43a259b7bb0a85a47401505be"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_0</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 0</td></tr>
+<tr class="separator:a176efbf43a259b7bb0a85a47401505be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c35af4e75c3cb57bb650feaa7a136b5"><td class="memItemLeft" align="right" valign="top"><a id="a6c35af4e75c3cb57bb650feaa7a136b5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_1</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 1</td></tr>
+<tr class="separator:a6c35af4e75c3cb57bb650feaa7a136b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eee38b797a7268f04357dfa2759efd2"><td class="memItemLeft" align="right" valign="top"><a id="a6eee38b797a7268f04357dfa2759efd2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_2</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 2</td></tr>
+<tr class="separator:a6eee38b797a7268f04357dfa2759efd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcaf899c018a0dde572b5af783565c62"><td class="memItemLeft" align="right" valign="top"><a id="adcaf899c018a0dde572b5af783565c62"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_3</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 3</td></tr>
+<tr class="separator:adcaf899c018a0dde572b5af783565c62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3871e35868deecd260e586ad70d4b83"><td class="memItemLeft" align="right" valign="top"><a id="ab3871e35868deecd260e586ad70d4b83"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_4</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 4</td></tr>
+<tr class="separator:ab3871e35868deecd260e586ad70d4b83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a01cc9ed93f6fd12fd3403362779aaa18"><td class="memItemLeft" align="right" valign="top"><a id="a01cc9ed93f6fd12fd3403362779aaa18"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_5</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 5</td></tr>
+<tr class="separator:a01cc9ed93f6fd12fd3403362779aaa18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9089f18f20ec88ee38ce6f27389e6d7e"><td class="memItemLeft" align="right" valign="top"><a id="a9089f18f20ec88ee38ce6f27389e6d7e"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_6</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 6</td></tr>
+<tr class="separator:a9089f18f20ec88ee38ce6f27389e6d7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a482cb86c2f036e630661a41e8986bcfe"><td class="memItemLeft" align="right" valign="top"><a id="a482cb86c2f036e630661a41e8986bcfe"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GPIO_PIN_7</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 7</td></tr>
+<tr class="separator:a482cb86c2f036e630661a41e8986bcfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per identificare la modalità di funzionamento dei pin</div></td></tr>
+<tr class="memitem:a064cc7153fdb5596b2079d865dd9e055"><td class="memItemLeft" align="right" valign="top"><a id="a064cc7153fdb5596b2079d865dd9e055"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>READ_MODE</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a064cc7153fdb5596b2079d865dd9e055"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2fe33f497c74e0b5a72f36f121b2ef0"><td class="memItemLeft" align="right" valign="top"><a id="aa2fe33f497c74e0b5a72f36f121b2ef0"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>WRITE_MODE</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:aa2fe33f497c74e0b5a72f36f121b2ef0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per il livello logico del valore dei letto o scritto sui pin</div></td></tr>
+<tr class="memitem:ab811d8c6ff3a505312d3276590444289"><td class="memItemLeft" align="right" valign="top"><a id="ab811d8c6ff3a505312d3276590444289"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>LOW</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:ab811d8c6ff3a505312d3276590444289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bb885982ff66a2e0a0a45a8ee9c35e2"><td class="memItemLeft" align="right" valign="top"><a id="a5bb885982ff66a2e0a0a45a8ee9c35e2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>HIGH</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a5bb885982ff66a2e0a0a45a8ee9c35e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per identificare i bit del GIES</div></td></tr>
+<tr class="memitem:a1495824c79556cf611ba8d7c1572eab2"><td class="memItemLeft" align="right" valign="top"><a id="a1495824c79556cf611ba8d7c1572eab2"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GIES_IE</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 0   /** Interrupt Enable */</td></tr>
+<tr class="separator:a1495824c79556cf611ba8d7c1572eab2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ff54139a365184a49ff8c375a88e383"><td class="memItemLeft" align="right" valign="top"><a id="a9ff54139a365184a49ff8c375a88e383"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GIES_IS</b>&#160;&#160;&#160;(uint32_t) 1 &lt;&lt; 1   /** Interrupt Status */</td></tr>
+<tr class="separator:a9ff54139a365184a49ff8c375a88e383"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per l'abilitazione dell'interrupt di un pin</div></td></tr>
+<tr class="memitem:a8dc8a6ba32861f0a3cbd89fa1ec0d216"><td class="memItemLeft" align="right" valign="top"><a id="a8dc8a6ba32861f0a3cbd89fa1ec0d216"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_EN</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a8dc8a6ba32861f0a3cbd89fa1ec0d216"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a397142c688abab6ac8a47d8e7312810b"><td class="memItemLeft" align="right" valign="top"><a id="a397142c688abab6ac8a47d8e7312810b"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_DIS</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a397142c688abab6ac8a47d8e7312810b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per scegliere la modalità di funzionamento dell'interrupt di un pin</div></td></tr>
+<tr class="memitem:aed01298d37e73ed9737c8a6b70e67caa"><td class="memItemLeft" align="right" valign="top"><a id="aed01298d37e73ed9737c8a6b70e67caa"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_LEVEL</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:aed01298d37e73ed9737c8a6b70e67caa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bdc5de032683d281f61c25323a33865"><td class="memItemLeft" align="right" valign="top"><a id="a6bdc5de032683d281f61c25323a33865"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_EDGE</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a6bdc5de032683d281f61c25323a33865"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per scegliere il fronte su cui è sensibile il pin per generare l'interrupt</div></td></tr>
+<tr class="memitem:af76d5962be43fea5f4acabe52884d3b1"><td class="memItemLeft" align="right" valign="top"><a id="af76d5962be43fea5f4acabe52884d3b1"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_RE</b>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:af76d5962be43fea5f4acabe52884d3b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a735aaaaa31ff638941423bc6207995b7"><td class="memItemLeft" align="right" valign="top"><a id="a735aaaaa31ff638941423bc6207995b7"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>INT_FE</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a735aaaaa31ff638941423bc6207995b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr><td colspan="2"><div class="groupHeader">Definizioni delle macro per identificare l'offset dei registri della periferica</div></td></tr>
+<tr class="memitem:a7a63b24ca5489eb3206598e3d90fe19c"><td class="memItemLeft" align="right" valign="top"><a id="a7a63b24ca5489eb3206598e3d90fe19c"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>MODE_OFFSET</b>&#160;&#160;&#160;0x00</td></tr>
+<tr class="separator:a7a63b24ca5489eb3206598e3d90fe19c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a77d96306ed0e813f93c4c3f98b970b86"><td class="memItemLeft" align="right" valign="top"><a id="a77d96306ed0e813f93c4c3f98b970b86"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>WRITE_OFFSET</b>&#160;&#160;&#160;0x04</td></tr>
+<tr class="separator:a77d96306ed0e813f93c4c3f98b970b86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad32c3a5b42163e171daccde5b5d5de02"><td class="memItemLeft" align="right" valign="top"><a id="ad32c3a5b42163e171daccde5b5d5de02"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>READ_OFFSET</b>&#160;&#160;&#160;0x08</td></tr>
+<tr class="separator:ad32c3a5b42163e171daccde5b5d5de02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab36de1441744373484591b53f99f1b62"><td class="memItemLeft" align="right" valign="top"><a id="ab36de1441744373484591b53f99f1b62"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>GIES_OFFSET</b>&#160;&#160;&#160;0x0C</td></tr>
+<tr class="separator:ab36de1441744373484591b53f99f1b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a73394d1913a5fbe3a0260555d9893738"><td class="memItemLeft" align="right" valign="top"><a id="a73394d1913a5fbe3a0260555d9893738"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>PIE_OFFSET</b>&#160;&#160;&#160;0x10</td></tr>
+<tr class="separator:a73394d1913a5fbe3a0260555d9893738"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e1c531e7643480a66bbf255cdad3b02"><td class="memItemLeft" align="right" valign="top"><a id="a8e1c531e7643480a66bbf255cdad3b02"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IRQ_OFFSET</b>&#160;&#160;&#160;0x14</td></tr>
+<tr class="separator:a8e1c531e7643480a66bbf255cdad3b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c1531854466a6355c85b32a035af311"><td class="memItemLeft" align="right" valign="top"><a id="a5c1531854466a6355c85b32a035af311"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IACK_OFFSET</b>&#160;&#160;&#160;0x18</td></tr>
+<tr class="separator:a5c1531854466a6355c85b32a035af311"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32d15226cca8ff02a0a2b0b00db9e87d"><td class="memItemLeft" align="right" valign="top"><a id="a32d15226cca8ff02a0a2b0b00db9e87d"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IRQ_MODE_OFFSET</b>&#160;&#160;&#160;0x1C</td></tr>
+<tr class="separator:a32d15226cca8ff02a0a2b0b00db9e87d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8da0acd69c98c1d4c6353a48cff9196"><td class="memItemLeft" align="right" valign="top"><a id="af8da0acd69c98c1d4c6353a48cff9196"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>IRQ_EDGE_OFFSET</b>&#160;&#160;&#160;0x1F</td></tr>
+<tr class="separator:af8da0acd69c98c1d4c6353a48cff9196"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funzioni</h2></td></tr>
+<tr><td colspan="2"><div class="groupHeader">API per interfacciamento UIO, no-driver e bare metal</div></td></tr>
+<tr class="memitem:a87ce2bc4cddcc4644ff33dbe79d076db"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a87ce2bc4cddcc4644ff33dbe79d076db">myGPIO_init</a> (uint32_t *peripheral_address)</td></tr>
+<tr class="memdesc:a87ce2bc4cddcc4644ff33dbe79d076db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funzione di inizializzazione,Effettua un casting dell'indirizzo in modo tale da poter utilizzare la struct al meglio.  <a href="#a87ce2bc4cddcc4644ff33dbe79d076db">Continua...</a><br /></td></tr>
+<tr class="separator:a87ce2bc4cddcc4644ff33dbe79d076db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06b54c06a75779a66cd3f30ea4902c9d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a06b54c06a75779a66cd3f30ea4902c9d">myGPIO_set_mode</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pins, uint8_t mode)</td></tr>
+<tr class="memdesc:a06b54c06a75779a66cd3f30ea4902c9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta lo stesso valore, mode, per i pin identificati dalla maschera GPIO_pins <b>Nota</b>: setta lo stesso valore per tutti i pin.  <a href="#a06b54c06a75779a66cd3f30ea4902c9d">Continua...</a><br /></td></tr>
+<tr class="separator:a06b54c06a75779a66cd3f30ea4902c9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac11d4959ba180f4552f8257357bbaaba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#ac11d4959ba180f4552f8257357bbaaba">myGPIO_set_mode_mask</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t mode_mask)</td></tr>
+<tr class="memdesc:ac11d4959ba180f4552f8257357bbaaba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Imposta il registro MODE della periferica con la maschera data in input.  <a href="#ac11d4959ba180f4552f8257357bbaaba">Continua...</a><br /></td></tr>
+<tr class="separator:ac11d4959ba180f4552f8257357bbaaba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33dfd0e90f136c5e88776af918d8771e"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a33dfd0e90f136c5e88776af918d8771e">myGPIO_en_int</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint8_t int_en)</td></tr>
+<tr class="memdesc:a33dfd0e90f136c5e88776af918d8771e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abilita/Disabilita il GIES.  <a href="#a33dfd0e90f136c5e88776af918d8771e">Continua...</a><br /></td></tr>
+<tr class="separator:a33dfd0e90f136c5e88776af918d8771e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af102f91d550e0207e0663a5d8d283d18"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#af102f91d550e0207e0663a5d8d283d18">myGPIO_en_pins_int</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pins, uint8_t int_en)</td></tr>
+<tr class="memdesc:af102f91d550e0207e0663a5d8d283d18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abilitazione interrupt per il pin, setta il registro PIE. <b>Nota</b>: setta lo stesso valore per tutti i pin.  <a href="#af102f91d550e0207e0663a5d8d283d18">Continua...</a><br /></td></tr>
+<tr class="separator:af102f91d550e0207e0663a5d8d283d18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7677741d239bcea3cf5e0ff601fad5f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#ab7677741d239bcea3cf5e0ff601fad5f">myGPIO_set_irq_mode</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pins, uint8_t int_mode)</td></tr>
+<tr class="memdesc:ab7677741d239bcea3cf5e0ff601fad5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Selezione modalità di interrupt per il pin, setta il registro IRQ_MODE. <b>Nota</b>: setta lo stesso valore per tutti i pin.  <a href="#ab7677741d239bcea3cf5e0ff601fad5f">Continua...</a><br /></td></tr>
+<tr class="separator:ab7677741d239bcea3cf5e0ff601fad5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b408669aa4f06538ca08755bb16e2c7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a9b408669aa4f06538ca08755bb16e2c7">myGPIO_set_edge</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pins, uint8_t int_egde)</td></tr>
+<tr class="memdesc:a9b408669aa4f06538ca08755bb16e2c7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Seleziona il fronte su cui è sensibile il pin per la generazione dell' interrupt, setta il registro IRQ_MODE. <b>Nota</b>: setta lo stesso valore per tutti i pin.  <a href="#a9b408669aa4f06538ca08755bb16e2c7">Continua...</a><br /></td></tr>
+<tr class="separator:a9b408669aa4f06538ca08755bb16e2c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6808e3192c806e9e981759ebd8e8f36"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#ae6808e3192c806e9e981759ebd8e8f36">myGPIO_write</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pins, uint8_t level)</td></tr>
+<tr class="memdesc:ae6808e3192c806e9e981759ebd8e8f36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrittura del valore sui i pin GPIO_pins. Scrive sul registro WRITE della periferica. <b>Nota</b>: setta lo stesso valore per tutti i pin.  <a href="#ae6808e3192c806e9e981759ebd8e8f36">Continua...</a><br /></td></tr>
+<tr class="separator:ae6808e3192c806e9e981759ebd8e8f36"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c786c2bb8a5585c8cb9d07cb10eb635"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a1c786c2bb8a5585c8cb9d07cb10eb635">myGPIO_write_mask</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t levels)</td></tr>
+<tr class="memdesc:a1c786c2bb8a5585c8cb9d07cb10eb635"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scrittura della maschera dei valori sui pin. Scrive sul registro WRITE della periferica.  <a href="#a1c786c2bb8a5585c8cb9d07cb10eb635">Continua...</a><br /></td></tr>
+<tr class="separator:a1c786c2bb8a5585c8cb9d07cb10eb635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bc848a15a7373f0636564b935874e06"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a4bc848a15a7373f0636564b935874e06">myGPIO_read_pin</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pin)</td></tr>
+<tr class="memdesc:a4bc848a15a7373f0636564b935874e06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lettura del valore di un pin . Legge il registro READ della periferica.  <a href="#a4bc848a15a7373f0636564b935874e06">Continua...</a><br /></td></tr>
+<tr class="separator:a4bc848a15a7373f0636564b935874e06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a398d7cac5560264801ef3df6606f2997"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a398d7cac5560264801ef3df6606f2997">myGPIO_read</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio)</td></tr>
+<tr class="memdesc:a398d7cac5560264801ef3df6606f2997"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lettura del registro READ.  <a href="#a398d7cac5560264801ef3df6606f2997">Continua...</a><br /></td></tr>
+<tr class="separator:a398d7cac5560264801ef3df6606f2997"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89a4858bacf5e10c7f5c389ab8724137"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a89a4858bacf5e10c7f5c389ab8724137">myGPIO_clear_irq</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pins)</td></tr>
+<tr class="memdesc:a89a4858bacf5e10c7f5c389ab8724137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Acknowledgement di un'interruzione Legge il registro READ della periferica.  <a href="#a89a4858bacf5e10c7f5c389ab8724137">Continua...</a><br /></td></tr>
+<tr class="separator:a89a4858bacf5e10c7f5c389ab8724137"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a346371e3bd49cda8b169149c1070d0f0"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a346371e3bd49cda8b169149c1070d0f0">myGPIO_read_irq</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio)</td></tr>
+<tr class="memdesc:a346371e3bd49cda8b169149c1070d0f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lettura del registro IRQ.  <a href="#a346371e3bd49cda8b169149c1070d0f0">Continua...</a><br /></td></tr>
+<tr class="separator:a346371e3bd49cda8b169149c1070d0f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3886cfaca994a45a081b2a6cb5abd44f"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="mygpio_8h.html#a3886cfaca994a45a081b2a6cb5abd44f">myGPIO_read_pin_irq_status</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio, uint32_t GPIO_pin)</td></tr>
+<tr class="memdesc:a3886cfaca994a45a081b2a6cb5abd44f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lettura dello stato d'interruzione per il singolo pin.  <a href="#a3886cfaca994a45a081b2a6cb5abd44f">Continua...</a><br /></td></tr>
+<tr class="separator:a3886cfaca994a45a081b2a6cb5abd44f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI Lite che implementa un GPIO. </p>
+<dl class="section author"><dt>Autori</dt><dd><b> Giorgio Farina</b> <a href="#" onclick="location.href='mai'+'lto:'+'gio'+'rg'+'io.'+'fa'+'ri9'+'6@'+'gma'+'il'+'.co'+'m'; return false;">giorg<span style="display: none;">.nosp@m.</span>io.f<span style="display: none;">.nosp@m.</span>ari96<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a> <br />
+ <b> Luca Giamattei</b> <a href="#" onclick="location.href='mai'+'lto:'+'lgi'+'am'+'att'+'ei'+'@gm'+'ai'+'l.c'+'om'; return false;">lgiam<span style="display: none;">.nosp@m.</span>atte<span style="display: none;">.nosp@m.</span>i@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> <br />
+ <b> Gabriele Previtera</b> <a href="#" onclick="location.href='mai'+'lto:'+'gab'+'ri'+'ele'+'pr'+'evi'+'te'+'ra@'+'gm'+'ail'+'.c'+'om'; return false;">gabri<span style="display: none;">.nosp@m.</span>elep<span style="display: none;">.nosp@m.</span>revit<span style="display: none;">.nosp@m.</span>era@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a> <br />
+ </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>12/06/2020</dd></dl>
+<p>API che permettono di utilizzare una periferica AXI Lite che implementa un GPIO descritto nel file <b>myGPIO_Int_sel_AXI.vhd</b> presente all'interno del repository. </p>
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a89a4858bacf5e10c7f5c389ab8724137"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89a4858bacf5e10c7f5c389ab8724137">&#9670;&nbsp;</a></span>myGPIO_clear_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_clear_irq </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pins</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Acknowledgement di un'interruzione Legge il registro READ della periferica. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pins</td><td>maschera dei pin di cui si vuol pulire lo stato d'interruzione, può essere costruita mettendo in <b>or</b> ('|') le macro GPIO_PIN_X </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">IRQ_Register</td><td>valore del registro IRQ dopo l'operazione </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a33dfd0e90f136c5e88776af918d8771e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33dfd0e90f136c5e88776af918d8771e">&#9670;&nbsp;</a></span>myGPIO_en_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_en_int </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>int_en</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Abilita/Disabilita il GIES. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">int_en</td><td>INT_EN abilitato, INT_DIS GIES disabilitato </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">GIES_Register</td><td>valore del registro GIES dopo l'operazione di scrittura </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af102f91d550e0207e0663a5d8d283d18"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af102f91d550e0207e0663a5d8d283d18">&#9670;&nbsp;</a></span>myGPIO_en_pins_int()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_en_pins_int </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>int_en</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Abilitazione interrupt per il pin, setta il registro PIE. <b>Nota</b>: setta lo stesso valore per tutti i pin. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pins</td><td>maschera dei pin che si vogliono configurare, può essere costruita mettendo in <b>or</b> ('|') le macro GPIO_PIN_X </td></tr>
+    <tr><td class="paramname">int_en</td><td>INT_EN interrupt abilitato, INT_DIS interrupt disabilitato </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">PIE_register</td><td>valore del registro PIE dopo l'operazione di scrittura </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a87ce2bc4cddcc4644ff33dbe79d076db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87ce2bc4cddcc4644ff33dbe79d076db">&#9670;&nbsp;</a></span>myGPIO_init()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a>* myGPIO_init </td>
+          <td>(</td>
+          <td class="paramtype">uint32_t *&#160;</td>
+          <td class="paramname"><em>peripheral_address</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funzione di inizializzazione,Effettua un casting dell'indirizzo in modo tale da poter utilizzare la struct al meglio. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">peripheral_address</td><td>indirizzo base della periferica AXI Lite </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname"><a class="el" href="structmy_g_p_i_o.html" title="struct che permette una semplice gestione della periferica ">myGPIO</a></td><td>puntatore ad una struct <a class="el" href="structmy_g_p_i_o.html" title="struct che permette una semplice gestione della periferica ">myGPIO</a> il cui indirzzo base è quello di peripheral_address </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a398d7cac5560264801ef3df6606f2997"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a398d7cac5560264801ef3df6606f2997">&#9670;&nbsp;</a></span>myGPIO_read()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_read </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lettura del registro READ. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">READ_Register</td><td>valore del registro READ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a346371e3bd49cda8b169149c1070d0f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a346371e3bd49cda8b169149c1070d0f0">&#9670;&nbsp;</a></span>myGPIO_read_irq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_read_irq </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lettura del registro IRQ. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">IRQ_Register</td><td>valore del registro IRQ </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a4bc848a15a7373f0636564b935874e06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bc848a15a7373f0636564b935874e06">&#9670;&nbsp;</a></span>myGPIO_read_pin()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t myGPIO_read_pin </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lettura del valore di un pin . Legge il registro READ della periferica. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pin</td><td>Pin di cui si vuole leggere il valore </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">READ_Register_pin_value</td><td>valore letto, HIGH valore logico alto, LOW valore logico basso </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3886cfaca994a45a081b2a6cb5abd44f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3886cfaca994a45a081b2a6cb5abd44f">&#9670;&nbsp;</a></span>myGPIO_read_pin_irq_status()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_read_pin_irq_status </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pin</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Lettura dello stato d'interruzione per il singolo pin. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pin</td><td>Pin di cui si vuole leggere lo stato d'interruzione </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">IRQ_Register</td><td>valore del registro IRQ in corrispondenza dle bit idindicato da GPIO_pin, '1' richiesta di interrupt </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9b408669aa4f06538ca08755bb16e2c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b408669aa4f06538ca08755bb16e2c7">&#9670;&nbsp;</a></span>myGPIO_set_edge()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_set_edge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>int_egde</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Seleziona il fronte su cui è sensibile il pin per la generazione dell' interrupt, setta il registro IRQ_MODE. <b>Nota</b>: setta lo stesso valore per tutti i pin. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pins</td><td>maschera dei pin che si vogliono configurare, può essere costruita mettendo in <b>or</b> ('|') le macro GPIO_PIN_X </td></tr>
+    <tr><td class="paramname">int_egde</td><td>INT_RE Fronte di salita, INT_FE fronte di discesa </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">IRQ_EDGE_Register</td><td>valore del registro IRQ_EDGE dopo l'operazione di scrittura </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ab7677741d239bcea3cf5e0ff601fad5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7677741d239bcea3cf5e0ff601fad5f">&#9670;&nbsp;</a></span>myGPIO_set_irq_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_set_irq_mode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>int_mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Selezione modalità di interrupt per il pin, setta il registro IRQ_MODE. <b>Nota</b>: setta lo stesso valore per tutti i pin. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pins</td><td>maschera dei pin che si vogliono configurare, può essere costruita mettendo in <b>or</b> ('|') le macro GPIO_PIN_X </td></tr>
+    <tr><td class="paramname">int_en</td><td>INT_LEVEL livelli, INT_EDGE sensibile sul fronte </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">IRQ_MODE_Register</td><td>valore del registro IRQ_MODE dopo l'operazione di scrittura </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a06b54c06a75779a66cd3f30ea4902c9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06b54c06a75779a66cd3f30ea4902c9d">&#9670;&nbsp;</a></span>myGPIO_set_mode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_set_mode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Imposta lo stesso valore, mode, per i pin identificati dalla maschera GPIO_pins <b>Nota</b>: setta lo stesso valore per tutti i pin. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pins</td><td>maschera dei pin che si vogliono configurare, può essere costruita mettendo in <b>or</b> ('|') le macro GPIO_PIN_X </td></tr>
+    <tr><td class="paramname">mode</td><td>modalità di funzionamento dei pin </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">MODE_Register</td><td>valore del registro MODE dopo l'operazione di scrittura </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac11d4959ba180f4552f8257357bbaaba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac11d4959ba180f4552f8257357bbaaba">&#9670;&nbsp;</a></span>myGPIO_set_mode_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void myGPIO_set_mode_mask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>mode_mask</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Imposta il registro MODE della periferica con la maschera data in input. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">mode_mask</td><td>maschera dei bit che si vogliono scrivere sulla periferica </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae6808e3192c806e9e981759ebd8e8f36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6808e3192c806e9e981759ebd8e8f36">&#9670;&nbsp;</a></span>myGPIO_write()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t myGPIO_write </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>GPIO_pins</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>level</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scrittura del valore sui i pin GPIO_pins. Scrive sul registro WRITE della periferica. <b>Nota</b>: setta lo stesso valore per tutti i pin. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">GPIO_pins</td><td>maschera dei pin che si vogliono configurare, può essere costruita mettendo in <b>or</b> ('|') le macro GPIO_PIN_X </td></tr>
+    <tr><td class="paramname">level</td><td>HIGH valore logico alto, LOW valore logico basso </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">WRITE_Register</td><td>valore del registro WRITE dopo l'operazione di scrittura </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1c786c2bb8a5585c8cb9d07cb10eb635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c786c2bb8a5585c8cb9d07cb10eb635">&#9670;&nbsp;</a></span>myGPIO_write_mask()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void myGPIO_write_mask </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint32_t&#160;</td>
+          <td class="paramname"><em>levels</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Scrittura della maschera dei valori sui pin. Scrive sul registro WRITE della periferica. </p>
+<dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>puntatore alla sctruct che identifica la periferica che si vuole configurare </td></tr>
+    <tr><td class="paramname">levels</td><td>maschera dei valori che si volgiono scrivere sui pin, HIGH valore logico alto, LOW valore logico basso </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>

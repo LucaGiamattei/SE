@@ -1,0 +1,214 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Applicativo GPIO driver UIO: Riferimenti per il file main_int.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Applicativo GPIO driver UIO
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generato da Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Cerca');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Cerca');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">Riferimenti per il file main_int.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Questo è un esempio di utilizzo del driver uio per il GPIO custom.  
+<a href="#details">Continua...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="mygpio_8h_source.html">mygpio.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="utils_8h_source.html">utils.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="config_8h_source.html">config.h</a>&quot;</code><br />
+<code>#include &lt;inttypes.h&gt;</code><br />
+<code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/mman.h&gt;</code><br />
+<code>#include &lt;fcntl.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="memitem:a213fff38172c1160951db685ed52a368"><td class="memItemLeft" align="right" valign="top"><a id="a213fff38172c1160951db685ed52a368"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>read_value</b> = 0</td></tr>
+<tr class="separator:a213fff38172c1160951db685ed52a368"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5958e432513fc5cb5fd30ab3f8bd7b3"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main__int_8c.html#aa5958e432513fc5cb5fd30ab3f8bd7b3">create_shared_memory</a> (size_t size)</td></tr>
+<tr class="memdesc:aa5958e432513fc5cb5fd30ab3f8bd7b3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crea una memoria condivisa di size byte.  <a href="#aa5958e432513fc5cb5fd30ab3f8bd7b3">Continua...</a><br /></td></tr>
+<tr class="separator:aa5958e432513fc5cb5fd30ab3f8bd7b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68ed161dbf372bfa1f99d31de9bbf101"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main__int_8c.html#a68ed161dbf372bfa1f99d31de9bbf101">configure_btn_swt</a> (<a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *mygpio)</td></tr>
+<tr class="memdesc:a68ed161dbf372bfa1f99d31de9bbf101"><td class="mdescLeft">&#160;</td><td class="mdescRight">configura i bottoni e gli switch utilizzando la libreria <a class="el" href="mygpio_8h.html" title="Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI ...">mygpio.h</a>  <a href="#a68ed161dbf372bfa1f99d31de9bbf101">Continua...</a><br /></td></tr>
+<tr class="separator:a68ed161dbf372bfa1f99d31de9bbf101"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main__int_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main di un semplice programma che guida la periferica GPIO a livello utente grazie al driver UIO a livello kernel.  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">Continua...</a><br /></td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a05909651fa170a63e98e3f8e13451b7b"><td class="memItemLeft" align="right" valign="top"><a id="a05909651fa170a63e98e3f8e13451b7b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main__int_8c.html#a05909651fa170a63e98e3f8e13451b7b">howto</a> (void)</td></tr>
+<tr class="memdesc:a05909651fa170a63e98e3f8e13451b7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stampa un messaggio che fornisce indicazioni sull'utilizzo del programma. <br /></td></tr>
+<tr class="separator:a05909651fa170a63e98e3f8e13451b7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descrizione dettagliata</h2>
+<div class="textblock"><p>Questo è un esempio di utilizzo del driver uio per il GPIO custom. </p>
+<dl class="section author"><dt>Autori</dt><dd><b> Giorgio Farina</b> <a href="#" onclick="location.href='mai'+'lto:'+'gio'+'rg'+'io.'+'fa'+'ri9'+'6@'+'gma'+'il'+'.co'+'m'; return false;">giorg<span style="display: none;">.nosp@m.</span>io.f<span style="display: none;">.nosp@m.</span>ari96<span style="display: none;">.nosp@m.</span>@gma<span style="display: none;">.nosp@m.</span>il.co<span style="display: none;">.nosp@m.</span>m</a> <br />
+ <b> Luca Giamattei</b> <a href="#" onclick="location.href='mai'+'lto:'+'lgi'+'am'+'att'+'ei'+'@gm'+'ai'+'l.c'+'om'; return false;">lgiam<span style="display: none;">.nosp@m.</span>atte<span style="display: none;">.nosp@m.</span>i@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a> <br />
+ <b> Gabriele Previtera</b> <a href="#" onclick="location.href='mai'+'lto:'+'gab'+'ri'+'ele'+'pr'+'evi'+'te'+'ra@'+'gm'+'ail'+'.c'+'om'; return false;">gabri<span style="display: none;">.nosp@m.</span>elep<span style="display: none;">.nosp@m.</span>revit<span style="display: none;">.nosp@m.</span>era@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a> <br />
+ </dd></dl>
+<dl class="section date"><dt>Data</dt><dd>15/06/2020</dd></dl>
+<p>E' possibile l'utilizzo delle funzioni della libreria <a class="el" href="mygpio_8h.html" title="Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI ...">mygpio.h</a> sul S.O. GNU/Linux grazie a un mapping che viene fatto della pagina fisica, a cui è mappata la periferica GPIO custom, a una virtuale nello spazio di indirizzamento del processo. <br />
+Al contrario del no-driver, questa volta vi è un modulo kernel. Tale modulo, UIO, è stato generato automaticamente dal sistema operativo grazie alle informazioni ricavate dal device tree. <br />
+Per interagire con tale modulo bisogna interfacciarsi con il particolare file /dev/uio che si occupa della periferica. Tale esempio, contrariamente a quello no driver, può fare uso delle interruzione essendovi un modulo, uio, a livello kernel, ad occuparsi della periferica. <br />
+Una volta aperto il file /dev/uio opportuno, è possibile mappare l'indriizzo fisico della periferica allo spazio virtuale del processo. Questa volta, contrariamente al caso no-driver, non è nemmeno neccessario dare informazioni alla funzione mmap riguardo l'indirizzo fisico della periferica, tale informazione è già contenuta nel file aperto /dev/uio. <br />
+Il modulo kernel UIO implementa un meccanismo semplice per permettere a livello user_space di svolgere delle azioni una volta ricevuta un'interruzione. Con la system call read è possibile bloccare il processo fino all'arrivo dell'interruzione. L'ISR (implementata dal modulo UIO) sicuramente si occuperà di svegliare i processi in attesa su tale evento. <br />
+Le interruzioni saranno disabilitate dopo la read. Per riabilitarle sarà necessario invocare la system call write. <br />
+</p>
+</div><h2 class="groupheader">Documentazione delle funzioni</h2>
+<a id="a68ed161dbf372bfa1f99d31de9bbf101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68ed161dbf372bfa1f99d31de9bbf101">&#9670;&nbsp;</a></span>configure_btn_swt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void configure_btn_swt </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structmy_g_p_i_o.html">myGPIO</a> *&#160;</td>
+          <td class="paramname"><em>mygpio</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>configura i bottoni e gli switch utilizzando la libreria <a class="el" href="mygpio_8h.html" title="Questa liberia definisce un board support package per la gestione semplificata di una periferica AXI ...">mygpio.h</a> </p>
+<p>I bottoni e gli switch sono configurati per interrompere il processore sull'evento di rising edge. </p><dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">mygpio</td><td>instanza del gpio da configurare </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa5958e432513fc5cb5fd30ab3f8bd7b3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5958e432513fc5cb5fd30ab3f8bd7b3">&#9670;&nbsp;</a></span>create_shared_memory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * create_shared_memory </td>
+          <td>(</td>
+          <td class="paramtype">size_t&#160;</td>
+          <td class="paramname"><em>size</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crea una memoria condivisa di size byte. </p>
+<p>Alla memoria condivisa potranno accedere in lettura e scrittura solo il processo e i suoi figli processi. </p><dl class="params"><dt>Parametri</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">size</td><td>dimensione in byte della memoria condivisa </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="retval"><dt>Valori di ritorno</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">ritorna</td><td>il puntatore a tale area di memoria condivisa </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Main di un semplice programma che guida la periferica GPIO a livello utente grazie al driver UIO a livello kernel. </p>
+<p>In questo esempio e' utilizzata la periferica generata dai file VHDL presenti in Hardware/GPIO/VHDL. <br />
+ Nota per utilizzare correttamente la periferica è necessario generare il dtb seguento quanto riportato nella documentazione a corredo di questi esempi. <br />
+ Nel caso specifico si utilizzano 3 dispositivi GPIO, per switch, bottoni e led. <br />
+ Vengono definiti 3 processi che condividono uno spazio di memoria, al quale switch e bottoni accedono in scrittura e i led in lettura. <br />
+ Gli switch accendono i led, viceversa i bottoni li spengono. </p>
+<p>Processo che aspetta l'interruzione da parte dei bottoni per poter spegnere i led</p>
+<p>Processo che aspetta l'interrupt da parte degli switch per accendere i led</p>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generato da &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
+</body>
+</html>
