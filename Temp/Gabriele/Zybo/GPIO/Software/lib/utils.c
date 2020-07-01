@@ -147,7 +147,7 @@ int32_t reenable_interrupt(int uio_descriptor, int32_t *reenable){
     return 1; 
 }
 
-void* configure_uio(char* filename, int* file_descriptor){
+void* configure_uio(int* file_descriptor){
     void* vrt_address = NULL;
 	if (*file_descriptor < 1) {
 		return NULL;

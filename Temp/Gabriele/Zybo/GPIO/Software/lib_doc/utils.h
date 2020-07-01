@@ -203,12 +203,11 @@ int32_t reenable_interrupt(int uio_descriptor, int32_t* reenable);
 
 /**
  * @brief Esegue mmap sul file uio aperto con la seguente configurazione: PROT_READ | PROT_WRITE e MAP_SHARED
- * @param filename nome del file, per la stampa di errore sul file descriptor
  * @param file_descriptor descrittore del file uio aperto
  * @retval vrt_addr NULL nel caso in cui il descrittore non sia valido o nel caso in cui 
  * "mmap" ritorni MAP_FAILED, altrimenti l'indirizzo virtuale a cui è stata mappata la periferica 
  */
-void* configure_uio(char* filename, int* file_descriptor);
+void* configure_uio(int* file_descriptor);
 
 
 
