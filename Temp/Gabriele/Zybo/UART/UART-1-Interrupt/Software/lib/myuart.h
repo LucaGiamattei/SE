@@ -128,7 +128,7 @@ myUART* myUART_init(uint32_t *peripheral_address);
  * @param int_en INT_EN abilitato, INT_DIS GIES disabilitato 
  * @retval valore del registro di controllo dopo l'operazione di scrittura
  */
-uint32_t myUART_en_int_rx(myUART * myuart, uint8_t int_en);
+int8_t myUART_en_int_rx(myUART * myuart, uint8_t int_en, uint32_t* writed_value);
 
 
 /**
@@ -137,7 +137,7 @@ uint32_t myUART_en_int_rx(myUART * myuart, uint8_t int_en);
  * @param int_en INT_EN abilitato, INT_DIS GIES disabilitato 
  * @retval valore del registro di controllo dopo l'operazione di scrittura
  */
-uint32_t myUART_en_int_tx(myUART * myuart, uint8_t int_en);
+int8_t myUART_en_int_tx(myUART * myuart, uint8_t int_en, uint32_t* writed_value);
 
 
 /**
@@ -146,7 +146,7 @@ uint32_t myUART_en_int_tx(myUART * myuart, uint8_t int_en);
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole utilizzare
  * @param transmit_data byte di dati da trasmettere
  */
-void myUART_transmit_int(myUART * myuart, uint8_t transmit_data);
+int8_t myUART_transmit_int(myUART * myuart, uint8_t transmit_data, uint32_t* writed_value);
 
 
 /**
@@ -156,7 +156,7 @@ void myUART_transmit_int(myUART * myuart, uint8_t transmit_data);
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole utilizzare
  * @param transmit_data byte di dati da trasmettere
  */
-void myUART_transmit(myUART * myuart, uint8_t transmit_data);
+int8_t myUART_transmit(myUART * myuart, uint8_t transmit_data);
 
 
 /**
@@ -165,7 +165,7 @@ void myUART_transmit(myUART * myuart, uint8_t transmit_data);
  * @param myuart puntatore alla sctruct che identifica la periferica che si vuole utilizzare
  * @retval byte letto 
  */
-uint8_t myUART_read(myUART * myuart, uint32_t* status_reg);
+uint8_t myUART_read(myUART * myuart,uint32_t* status_reg);
 
 
 /**
@@ -184,8 +184,7 @@ uint8_t myUART_read_DBOUT(myUART * myuart);
  * @param pos maschera che indica il bit da leggere
  * @retval byte letto 
  */
-uint8_t myUART_read_status_bit(myUART * myuart, uint32_t pos);
-
+uint8_t myUART_read_status_bit(myUART * myuart, uint32_t pos, uint8_t* buff);
 
 /**
  * @brief Funzione di lettura del registro di stato
@@ -201,7 +200,7 @@ uint32_t myUART_read_status(myUART * myuart);
  * Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read
  * @param myuart puntatore alla sctruct che identifica la periferica
  */
-void myUART_Iack_r(myUART * myuart);
+uint8_t myUART_Iack_r(myUART * myuart);
 
 
 /**
@@ -210,7 +209,7 @@ void myUART_Iack_r(myUART * myuart);
  * per indicare che l'interruzione di scrittura è stata gestita.
  * @param myuart puntatore alla sctruct che identifica la periferica
  */
-void myUART_Iack_w(myUART * myuart);
+uint8_t myUART_Iack_w(myUART * myuart);
 
 
 //@}
@@ -230,17 +229,17 @@ void myUART_Iack_w(myUART * myuart);
  @brief Abilita/Disabilita le interruzioni per la ricezione di un dato
  * @param descriptor descrittore del file aperto
  * @param int_en int_en INT_EN abilitato, INT_DIS disabilitato
- * @retval valore del registro di controllo dopo l'operazione di scrittura
+ * @retval codice di stato: 0 nessun errore, -1 errore
  */
-uint32_t myUART_en_int_rx_k(int descriptor, uint8_t int_en);
+int8_t myUART_en_int_rx_k(int descriptor, uint8_t int_en);
 
 /**
  * @brief Abilita/Disabilita le interruzioni per la tramissione
  * @param descriptor descrittore del file aperto
  * @param int_en  INT_EN abilitato, INT_DIS  disabilitato 
- * @retval valore del registro di controllo dopo l'operazione di scrittura
+ * @retval codice di stato: 0 nessun errore, -1 errore
  */
-uint32_t myUART_en_int_tx_k(int descriptor, uint8_t int_en);
+ int8_t myUART_en_int_tx_k(int descriptor, uint8_t int_en);
 
 
 
@@ -258,9 +257,10 @@ void myUART_transmit_int_k(int descriptor, uint8_t transmit_data);
  * Si assicura prima che il buffer di trasmissione sia libero.
  * @param descriptor descrittore del file aperto
  * @param transmit_data byte di dati da trasmettere
+ * @retval codice di stato: 0 nessun errore, -1 errore
  */
 //ATT: Si dovrebbe gestire il TIMEOUT con un timer
-void myUART_transmit_k(int descriptor, uint8_t transmit_data);
+ uint8_t myUART_transmit_k(int descriptor, uint8_t transmit_data);
 
 
 /**
@@ -269,6 +269,7 @@ void myUART_transmit_k(int descriptor, uint8_t transmit_data);
  * @param descriptor descrittore del file aperto
  * @param status_reg (parametro di ingresso uscita) registro di stato della periferica
  * @retval byte contenuto in DBOUT
+ * 
  */
 //ATT: Si dovrebbe gestire il TIMEOUT con un timer
 uint8_t myUART_read_k(int descriptor,uint32_t* status_reg);
@@ -291,10 +292,10 @@ void myUART_read_DBOUT_bloc_k(int descriptor,uint32_t* read_value);
  * Questa funzione legge dal registro di stato il bit indicato
  * @param descriptor descrittore del file aperto
  * @param pos maschera che indica il bit da leggere
- * @retval bit letto
+ * @param buff bit letto
+ *  @retval codice di stato: 0 nessun errore, -1 errore
  */
-uint8_t myUART_read_status_bit_k(int descriptor, uint32_t pos);
-
+int8_t myUART_read_status_bit_k(int descriptor, uint32_t pos, uint8_t *buff);
 
 /**
  * @brief Funzione di lettura del registro di stato
@@ -310,7 +311,7 @@ uint32_t myUART_read_status_k(int descriptor);
  * Alzando il bit RD del registro di controllo, resetta la periferica per una nuova read
  * @param descriptor descrittore del file aperto
  */
-void myUART_Iack_r_k(int descriptor);
+ int8_t myUART_Iack_r_k(int descriptor);
 
 
 /**
@@ -319,7 +320,7 @@ void myUART_Iack_r_k(int descriptor);
  * per indicare che l'interruzione di scrittura è stata gestita.
  * @param descriptor descrittore del file aperto
  */
-void myUART_Iack_w_k(int descriptor);
+ int8_t myUART_Iack_w_k(int descriptor);
 
 
 void  read_reg_bloc_UART_k(int descriptor, uint32_t reg, uint32_t* read_value);

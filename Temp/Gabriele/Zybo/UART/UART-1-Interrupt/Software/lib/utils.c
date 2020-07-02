@@ -1,25 +1,27 @@
 #include "utils.h"
 
 
-uint32_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit){
+int8_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit, uint32_t* writed_value){
     if(bit == 0){
         *(address) &= ~pos;
     }else if(bit == 1){
         *(address) |= pos;
     }else{
         //invalid bit
-        return 0;
+        return -1;
     }
-
-    return *(address);
+    if(writed_value)
+        *writed_value = *(address);
+    return 0;
 }
 
 
-uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos){
+int8_t read_bit_in_single_pos(uint32_t* address, uint8_t pos, uint8_t* buff){
     if(pos && !(pos & (pos-1))){
-        return (*(address) & pos) && 1;
+        *buff = (*(address) & pos) && 1;
+        return 0;
     }
-    return 0;
+    return -1;
 }
 
 
@@ -65,7 +67,7 @@ uint32_t gic_register_interrupt_handler(XScuGic *gic_inst, interrupt_handler* in
 
 #if defined MYGPIO_KERNEL || defined MYUART_KERNEL
 
-int open_device(int* file_descriptor, char* device_file){
+int8_t open_device(int* file_descriptor, char* device_file){
     printf("Open device_file: %s \n", device_file);
     *file_descriptor = open(device_file, O_RDWR);
 	if (*file_descriptor < 1) {
@@ -76,41 +78,59 @@ int open_device(int* file_descriptor, char* device_file){
 }
 
 
-uint32_t write_bit_in_pos_k(int descriptor, int32_t reg, uint32_t pos, uint32_t bit){
+int8_t write_bit_in_pos_k(int descriptor, int32_t reg, uint32_t pos, uint32_t bit, uint32_t* writed_value){
     lseek(descriptor, reg, SEEK_SET);
+
+    //Imposto la modalità non bloccante
     int flags = fcntl(descriptor, F_GETFL, 0);
     fcntl(descriptor, F_SETFL, flags | O_NONBLOCK);
+
     int32_t write_value = 0;
     read(descriptor, &write_value, sizeof(__uint32_t));
+    //Reimposto la modalità bloccante
     fcntl(descriptor, F_SETFL, flags & ~O_NONBLOCK);
+
     if(bit == 0){
         write_value &= ~pos;
     }else if(bit == 1){
         write_value |= pos;
     }else{
-        return 0;
+        return -1;
     }
+
     write(descriptor, &write_value , sizeof(__uint32_t));
-    return write_value;
-}
-uint8_t  read_bit_in_single_pos_k(int descriptor, int32_t reg, uint8_t pos){
-    lseek(descriptor, reg, SEEK_SET);
-    int flags = fcntl(descriptor, F_GETFL, 0);
-    fcntl(descriptor, F_SETFL, flags | O_NONBLOCK);
-    int32_t read_value = 0;
-    read(descriptor, &read_value, sizeof(__uint32_t));
-    fcntl(descriptor, F_SETFL, flags & ~O_NONBLOCK);
-    if(pos && !(pos & (pos-1))){
-        return (read_value & pos) && 1;
-    }
+    if(writed_value)
+        *writed_value = write_value;
+
     return 0;
 }
 
-void write_reg(int descriptor, int32_t reg, int32_t write_value){
+int8_t read_bit_in_single_pos_k(int descriptor, int32_t reg, uint8_t pos, uint8_t* buff){
     lseek(descriptor, reg, SEEK_SET);
-    write(descriptor, &write_value , sizeof(__uint32_t));
+
+    //Imposto la modalità non bloccante
+    int flags = fcntl(descriptor, F_GETFL, 0);
+    fcntl(descriptor, F_SETFL, flags | O_NONBLOCK);
+
+    int32_t read_value = 0;
+    read(descriptor, &read_value, sizeof(__uint32_t));
+    //Reimposto la modalità bloccante
+    fcntl(descriptor, F_SETFL, flags & ~O_NONBLOCK);
+
+    if(pos && !(pos & (pos-1))){
+        *buff = (read_value & pos) && 1;
+        return 0;
+    }
+    
+    return -1;
 }
-uint32_t  read_reg(int descriptor, int32_t reg){
+
+size_t write_reg(int descriptor, int32_t reg, int32_t write_value){
+    lseek(descriptor, reg, SEEK_SET);
+    return write(descriptor, &write_value , sizeof(__uint32_t));
+}
+
+size_t read_reg(int descriptor, int32_t reg){
     lseek(descriptor, reg, SEEK_SET);
     int flags = fcntl(descriptor, F_GETFL, 0);
     fcntl(descriptor, F_SETFL, flags | O_NONBLOCK);
@@ -119,7 +139,8 @@ uint32_t  read_reg(int descriptor, int32_t reg){
     fcntl(descriptor, F_SETFL, flags & ~O_NONBLOCK);
     return read_value;
 }
-uint32_t  read_reg_bloc(int descriptor, int32_t reg){
+
+size_t  read_reg_bloc(int descriptor, int32_t reg){
     lseek(descriptor, reg, SEEK_SET);
     int32_t read_value = 0;
     read(descriptor, &read_value, sizeof(__uint32_t));
@@ -128,23 +149,23 @@ uint32_t  read_reg_bloc(int descriptor, int32_t reg){
 #endif
 
 #if defined MYGPIO_UIO || defined MYUART_UIO
+
 int32_t wait_interrupt(int uio_descriptor, int32_t *interrupt_count){
-    printf("Aspetto interrupt");
      if (read(uio_descriptor, interrupt_count, sizeof(uint32_t)) != sizeof(uint32_t)) {
         printf("Read error!\n");
         return -1;
     }
 
-    return 1;            
+    return 0;            
 }
 
 int32_t reenable_interrupt(int uio_descriptor, int32_t *reenable){   
     if (write(uio_descriptor, (void*)reenable, sizeof(uint32_t)) != sizeof(uint32_t)) {
         printf(" Write error!\n");
-        return -2;
+        return -1;
     }
 
-    return 1; 
+    return 0; 
 }
 
 void* configure_uio(char* filename, int* file_descriptor){

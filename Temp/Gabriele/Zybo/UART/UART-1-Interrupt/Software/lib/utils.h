@@ -24,22 +24,26 @@
 
 #if defined MYGPIO_NO_DRIVER|| defined MYUART_NO_DRIVER || defined MYGPIO_BARE_METAL || defined MYUART_BARE_METAL||defined MYGPIO_UIO || defined MYUART_UIO
 
-/** @brief Permette di scrivere un bit in una specifica posizione in un determinato registro
+/** 
+ * @brief Permette di scrivere un bit in una specifica posizione in un determinato registro
  * @param address indirizzo del registro
  * @param pos posizione del bit
  * @param bit 1 asserisce il livello alto, 0 asserisce il livello basso
- * @retval register il valore del registro aggiornato
+ * @param writed_value valore del registro scritto
+ * @retval codice di stato: 0 nessun errore, -1 errore
  * 
  */
-uint32_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit);
+int8_t write_bit_in_pos(uint32_t* address, uint32_t pos, uint32_t bit, uint32_t* writed_value);
 
-/** @brief Permette di leggere un bit in una specifica posizione in un determinato registro
+/** 
+ * @brief Permette di leggere un bit in una specifica posizione in un determinato registro
  * @param address indirizzo del registro
  * @param pos posizione del bit
- * @retval register il valore del registro 
+ * @param buff valore del bit letto
+ * @retval codice di stato: 0 nessun errore, -1 errore
  * 
  */
-uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos);
+int8_t read_bit_in_single_pos(uint32_t* address, uint8_t pos, uint8_t* buff);
 
 #endif 
 
@@ -55,63 +59,66 @@ uint8_t  read_bit_in_single_pos(uint32_t* address, uint8_t pos);
 #include <sys/stat.h>
 #include <fcntl.h>
 
- /** @brief Richiama la system call open
+ /** 
+ * @brief Richiama la system call open
  * @param file_descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
  * @param device_file nome del file da aprire
  * @retval result 0 se l'operazione di apertura è andata a buon fine e il descrittore è valido, -1 altrimenti
  * 
  */
-int open_device(int* file_descriptor, char* device_file);
+int8_t open_device(int* file_descriptor, char* device_file);
 
 
-/** @brief Permette di scrivere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto 
+/**
+ * @brief Permette di scrivere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto 
  * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
  * @param reg offset del registro 
  * @param pos posizione del bit
  * @param bit 1 asserisce il livello alto, 0 asserisce il livello basso
- * @retval register il valore del registro aggiornato
+ * @param writed_value writed_value
+ * @retval codice di stato: 0 nessun errore, -1 errore
  * 
  */
-uint32_t write_bit_in_pos_k(int descriptor, int32_t reg, uint32_t pos, uint32_t bit);
+int8_t write_bit_in_pos_k(int descriptor, int32_t reg, uint32_t pos, uint32_t bit, uint32_t* writed_value);
 
 
-/** @brief Permette di leggere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto 
+/** 
+ * @brief Permette di leggere un bit in una specifica posizione in un determinato registro prendendo in ingresso il descrittore del file aperto 
  * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
  * @param reg offset del registro 
  * @param pos posizione del bit 
+ * @param buff valore del bit letto
  * @retval register il valore del registro aggiornato
  */
-uint8_t  read_bit_in_single_pos_k(int descriptor, int32_t reg, uint8_t pos);
+int8_t  read_bit_in_single_pos_k(int descriptor, int32_t reg, uint8_t pos, uint8_t* buff);
 
 
-/** @brief Permette di scrivere un intero registro di 32 bit  prendendo in ingresso il descrittore del file aperto 
+/** 
+ * @brief Permette di scrivere un intero registro di 32 bit  prendendo in ingresso il descrittore del file aperto 
  * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
  * @param reg offset del registro 
  * @param write_value valore da asserire al registro
-
+ * @retval In caso di successo è il numero di byte scritti. in caso di errore ritorna -1  
  */
-void     write_reg(int descriptor, int32_t reg, int32_t write_value);
+size_t     write_reg(int descriptor, int32_t reg, int32_t write_value);
 
 
-/** @brief Permette di leggere un intero registro di 32 bit  prendendo in ingresso il descrittore del file aperto 
+/** 
+ * @brief Permette di leggere un intero registro di 32 bit  prendendo in ingresso il descrittore del file aperto 
  * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
  * @param reg offset del registro 
- * @retval register il valore letto dal registro 
-
+ * @retval In caso di successo è il numero di byte scritti. in caso di errore ritorna -1  
  */
-uint32_t  read_reg(int descriptor, int32_t reg);
+size_t  read_reg(int descriptor, int32_t reg);
 
 
-/** @brief Permette di leggere un intero registro di 32 bit utilizzando una read bloccante prendendo in ingresso il descrittore del file aperto 
+/** 
+ * @brief Permette di leggere un intero registro di 32 bit utilizzando una read bloccante prendendo in ingresso il descrittore del file aperto 
  * @param descriptor descrittore del file aperto dalla funzione (parametro di ingresso uscita)
  * @param reg offset del registro 
- * @retval register il valore letto dal registro 
-
+ * @retval In caso di successo è il numero di byte scritti. in caso di errore ritorna -1  
  */
-uint32_t  read_reg_bloc(int descriptor, int32_t reg);
-
-
-
+size_t  read_reg_bloc(int descriptor, int32_t reg);
 
 //@}
 #endif
@@ -211,8 +218,6 @@ int32_t reenable_interrupt(int uio_descriptor, int32_t* reenable);
  */
 void* configure_uio(char* filename, int* file_descriptor);
 
-
-
 //@}
 #endif
 
@@ -237,9 +242,7 @@ void* configure_uio(char* filename, int* file_descriptor);
 void* configure_no_driver(int file_descriptor, void** vrt_page_addr, uint32_t phy_address);
 //@}
 #endif
-
-
-
+#endif
 
 
  /* @} */
