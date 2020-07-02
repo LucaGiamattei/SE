@@ -270,6 +270,11 @@ static ssize_t myUARTK_read (struct file *file_ptr, char *buf, size_t count, lof
 		printk(KERN_INFO "%s è bloccante\n", __func__);
 		myUARTK_TestCanReadAndSleep(myUARTK_dev_ptr);
 		myUARTK_ResetCanRead(myUARTK_dev_ptr);
+	}else{
+		printk(KERN_INFO "%s non è bloccante\n", __func__);
+	}
+	
+	if (*off == myUARTK_DBOUT_OFFSET) {
 		if ((data = kmalloc(2*sizeof(uint32_t), GFP_KERNEL)) == NULL ) {
 			printk(KERN_ERR "%s: kmalloc ha restituito NULL\n", __func__);
 			return -ENOMEM;
@@ -279,22 +284,18 @@ static ssize_t myUARTK_read (struct file *file_ptr, char *buf, size_t count, lof
 		status_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+myUARTK_STATUS_REG_OFFSET;
 		data[1] = ioread32(status_addr);
 		printk("KERNEL byte %c with state %d count %d \n",data[0],data[1],count);
-		if (copy_to_user(buf, data, count));
+		if (copy_to_user(buf, data, count))
+			return -EFAULT;
 		myUARTK_PinInterruptAck(myUARTK_dev_ptr);
 		myUARTK_GlobalInterruptEnable(myUARTK_dev_ptr);
 		kfree(data);
-		return -EFAULT;
-		
-	}
-	else {
-		printk(KERN_INFO "%s non è bloccante\n", __func__);
-		read_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
+	}else{			
 		read_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
 		data_readed = ioread32(read_addr);
 		if (copy_to_user(buf, &data_readed, count))
-		return -EFAULT;
+			return -EFAULT;
+
 	}
-	
 	return count;
 }
 
@@ -316,7 +317,7 @@ static ssize_t myUARTK_write (struct file *file_ptr, const char *buf, size_t siz
 
 	//se stiamo scrivendo sul dbout, alziamo il bit wr per iviare
 	if(*off == myUARTK_DBIN_OFFSET){
-		printk("%s: Sto facendo la write per inviare", __func__);
+		printk("%s: Sto facendo la write per inviare/n", __func__);
 		write_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+myUARTK_CONTROL_REG_OFFSET;
 		old_ctr_reg = ioread32(write_addr);
 		printk("%s: Control read before write %08x\n", __func__, old_ctr_reg);
