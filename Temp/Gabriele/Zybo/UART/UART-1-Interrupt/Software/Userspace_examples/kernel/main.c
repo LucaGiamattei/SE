@@ -57,7 +57,7 @@ int main (int argc, char** argv){
                         myUART_transmit_k(uart_1_file_descriptor, byte_to_send);
                         if(byte_to_send=='a') send=0; 
                     }
-
+                    usleep(300000);
                 }
                                
             }
@@ -86,9 +86,10 @@ int main (int argc, char** argv){
                     scanf(" %c", &byte_to_send);
                     if(byte_to_send != 0){
                         printf("%s[UART2]%s send byte %c\n",COL_RED, COL_GRAY, byte_to_send);
-                         myUART_transmit_k(uart_2_file_descriptor, byte_to_send);
+                        myUART_transmit_k(uart_2_file_descriptor, byte_to_send);
                         if(byte_to_send=='a') send=0; 
                     }
+                    usleep(300000);
                 }
             }           
         }
