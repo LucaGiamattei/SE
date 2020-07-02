@@ -205,6 +205,7 @@ static int myUARTK_release(struct inode *inode, struct file *file_ptr) {
 }
 
 static loff_t myUARTK_llseek (struct file *file_ptr, loff_t off, int whence) {
+	
 	myUARTK_t *myUARTK_dev_ptr;
     loff_t newpos;
 	printk(KERN_INFO "Chiamata %s\n", __func__);
@@ -260,6 +261,7 @@ static ssize_t myUARTK_read (struct file *file_ptr, char *buf, size_t count, lof
 	uint32_t data_readed;
 	uint32_t* data;
 	void* status_addr;
+	
 	printk(KERN_INFO "Chiamata %s\n", __func__);
 	
 	myUARTK_dev_ptr = file_ptr->private_data;
@@ -267,25 +269,32 @@ static ssize_t myUARTK_read (struct file *file_ptr, char *buf, size_t count, lof
 		return -EFAULT;
 
 	if ((file_ptr->f_flags & O_NONBLOCK) == 0) {
+		
 		printk(KERN_INFO "%s è bloccante\n", __func__);
+		
 		myUARTK_TestCanReadAndSleep(myUARTK_dev_ptr);
 		myUARTK_ResetCanRead(myUARTK_dev_ptr);
 	}else{
 		printk(KERN_INFO "%s non è bloccante\n", __func__);
 	}
 	
+	//Se leggo il registro DBOUT faccio in automatico la IACK
 	if (*off == myUARTK_DBOUT_OFFSET) {
+		
 		if ((data = kmalloc(2*sizeof(uint32_t), GFP_KERNEL)) == NULL ) {
 			printk(KERN_ERR "%s: kmalloc ha restituito NULL\n", __func__);
 			return -ENOMEM;
 		}
+		
 		read_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
 		data[0] = ioread32(read_addr);
 		status_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+myUARTK_STATUS_REG_OFFSET;
 		data[1] = ioread32(status_addr);
 		printk("KERNEL byte %c with state %d count %d \n",data[0],data[1],count);
+		
 		if (copy_to_user(buf, data, count))
 			return -EFAULT;
+		
 		myUARTK_PinInterruptAck(myUARTK_dev_ptr);
 		myUARTK_GlobalInterruptEnable(myUARTK_dev_ptr);
 		kfree(data);
@@ -301,17 +310,21 @@ static ssize_t myUARTK_read (struct file *file_ptr, char *buf, size_t count, lof
 
 
 static ssize_t myUARTK_write (struct file *file_ptr, const char *buf, size_t size, loff_t *off) {
+
 	myUARTK_t *myUARTK_dev_ptr;
 	uint32_t data_to_write;
 	void* write_addr;
 	uint32_t old_ctr_reg;
+	
 	printk(KERN_INFO "Chiamata %s\n", __func__);
+	
 	myUARTK_dev_ptr = file_ptr->private_data;
 	if (*off > myUARTK_dev_ptr->rsrc_size)
 		return -EFAULT;
 
 	if (copy_from_user(&data_to_write, buf, size))
 		return -EFAULT;
+	
 	write_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
 	iowrite32(data_to_write, write_addr);
 
@@ -319,10 +332,13 @@ static ssize_t myUARTK_write (struct file *file_ptr, const char *buf, size_t siz
 	if(*off == myUARTK_DBIN_OFFSET){
 		printk("%s: Sto facendo la write per inviare/n", __func__);
 		write_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+myUARTK_CONTROL_REG_OFFSET;
+		
 		old_ctr_reg = ioread32(write_addr);
 		printk("%s: Control read before write %08x\n", __func__, old_ctr_reg);
+		
 		data_to_write = old_ctr_reg | CTR_WR;
 		iowrite32(data_to_write, write_addr);
+		
 		data_to_write = old_ctr_reg & ~CTR_WR;
 		iowrite32(data_to_write, write_addr);
 		printk("%s: Xontrol read before write %08x\n", __func__, old_ctr_reg);
