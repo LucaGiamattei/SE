@@ -634,7 +634,11 @@ static irqreturn_t myGPIOK_irq_handler(int irq, struct pt_regs * regs) {
  * Per prevenire race condition, tale operazione viene effettuata mutua esclusione.
  */
 	myGPIOK_SetCanRead(myGPIOK_dev_ptr);
-
+	#ifdef __XGPIO__
+		XGpio_Ack_Interrupt(myGPIOK_dev_ptr->vrtl_addr, myGPIOK_dev_ptr->irq_mask);
+	#else
+		myGPIOK_PinInterruptAck(myGPIOK_dev_ptr, myGPIOK_dev_ptr->irq_mask);
+	#endif
 /** <h5>Incremento del numero totale di interrupt</h5>
  * Dopo aver settato il flag, viene incrementato il valore degli interrupt totali.
  * Anche questa operazione viene effettuata in mutua esclusione.
@@ -809,11 +813,6 @@ static ssize_t myGPIOK_read (struct file *file_ptr, char *buf, size_t count, lof
  * Viene inviato l'Ack alla periferica, per segnalargli che l'interrupt è stato servito, solo dopo che la lettura
  * sia stata effettuata.
  */
-#ifdef __XGPIO__
-	XGpio_Ack_Interrupt(myGPIOK_dev_ptr->vrtl_addr, myGPIOK_dev_ptr->irq_mask);
-#else
-	myGPIOK_PinInterruptAck(myGPIOK_dev_ptr, myGPIOK_dev_ptr->irq_mask);
-#endif
 /** <h5>Abilitazione degli interrupt della periferica</h5>
  * Dopo aver inviato notifica di servizio dell'interruzione al device, vengono nuovamente abilitati gli interrupt.
  */
