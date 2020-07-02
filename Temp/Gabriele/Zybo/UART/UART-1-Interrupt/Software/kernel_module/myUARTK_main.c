@@ -328,8 +328,11 @@ static ssize_t myUARTK_write (struct file *file_ptr, const char *buf, size_t siz
 	write_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+*off;
 	iowrite32(data_to_write, write_addr);
 
-	//se stiamo scrivendo sul dbout, alziamo il bit wr per iviare
+	//se stiamo scrivendo sul dbin, alziamo il bit wr per iviare
 	if(*off == myUARTK_DBIN_OFFSET){
+		//myUARTK_TestCanWriteAndSleep(myUARTK_dev_ptr);
+		//myUARTK_ResetCanWrite(myUARTK_dev_ptr);
+
 		printk("%s: Sto facendo la write per inviare/n", __func__);
 		write_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+myUARTK_CONTROL_REG_OFFSET;
 		
@@ -342,8 +345,19 @@ static ssize_t myUARTK_write (struct file *file_ptr, const char *buf, size_t siz
 		data_to_write = old_ctr_reg & ~CTR_WR;
 		iowrite32(data_to_write, write_addr);
 		printk("%s: Xontrol read before write %08x\n", __func__, old_ctr_reg);
+		
+		uint32_t status_reg;
+		uint8_t tbe;
+		do{
+			write_addr = myUARTK_GetDeviceAddress(myUARTK_dev_ptr)+myUARTK_STATUS_REG_OFFSET;
+		
+			status_reg = ioread32(write_addr);
+			printk(KERN_INFO"Status reg end of write %08x\n",status_reg);
+			tbe = status_reg && ST_TBE;
+			printk(KERN_INFO"TBE end of write %08x\n",tbe);
+		}while(!tbe);
 
-
+		//myUARTK_SetCanWrite(myUARTK_dev_ptr);
 	}
 	return size;
 }

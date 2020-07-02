@@ -47,7 +47,7 @@
 #define myUARTK_DBOUT_OFFSET            0x04	//!< @brief Offset, rispetto all'indirizzo base, del registro "DBOUT"
 #define myUARTK_CONTROL_REG_OFFSET      0x08	//!< @brief Offset, rispetto all'indirizzo base, del registro "CONTROL"
 #define myUARTK_STATUS_REG_OFFSET       0x0C	//!< @brief Offset, rispetto all'indirizzo base, del registro "STATUS"
-
+#define ST_TBE      (uint32_t) 1 << 1
 
 #include <linux/device.h>
 #include <linux/cdev.h>
@@ -130,6 +130,8 @@ typedef struct {
 	uint32_t total_irq;			/**< 	numero totale di interrupt manifestatesi */
 	spinlock_t sl_total_irq; 	/**<	Spinlock usato per garantire l'accesso in mutua esclusione alla variabile
 								 		total_irq da parte delle funzioni del modulo */
+	wait_queue_head_t write_queue; 
+	uint32_t can_write; 			
 
 } myUARTK_t;
 
@@ -151,6 +153,12 @@ extern void myUARTK_SetCanRead(myUARTK_t* device);
 extern void myUARTK_ResetCanRead(myUARTK_t* device);
 
 extern void myUARTK_TestCanReadAndSleep(myUARTK_t* device);
+
+extern void myUARTK_SetCanWrite(myUARTK_t* device);
+
+extern void myUARTK_ResetCanWrite(myUARTK_t* device);
+
+extern void myUARTK_TestCanWriteAndSleep(myUARTK_t* device);
 
 extern unsigned myUARTK_GetPollMask(myUARTK_t *device, struct file *file_ptr, struct poll_table_struct *wait);
 

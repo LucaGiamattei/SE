@@ -129,11 +129,13 @@ int myUARTK_Init(	myUARTK_t* myUARTK_device,
 	myUARTK_device->irq_mask = irq_mask;
 
 	init_waitqueue_head(&myUARTK_device->read_queue);
+	init_waitqueue_head(&myUARTK_device->write_queue);
 	init_waitqueue_head(&myUARTK_device->poll_queue);
 
 	spin_lock_init(&myUARTK_device->slock_int);
 	spin_lock_init(&myUARTK_device->sl_total_irq);
 	myUARTK_device->can_read = 0;
+	myUARTK_device->can_write = 1;
 	myUARTK_device->total_irq = 0;
 
 
@@ -195,6 +197,25 @@ void myUARTK_TestCanReadAndSleep(myUARTK_t* device) {
 	wait_event_interruptible(device->read_queue, (device->can_read != 0));
 }
 
+void myUARTK_SetCanWrite(myUARTK_t* device) {
+	unsigned long flags;
+	spin_lock_irqsave(&device->slock_int, flags);
+	device-> can_write = 1;
+	spin_unlock_irqrestore(&device->slock_int, flags);
+}
+
+
+void myUARTK_ResetCanWrite(myUARTK_t* device) {
+	unsigned long flags;
+	spin_lock_irqsave(&device->slock_int, flags);
+	device-> can_write = 0;
+	spin_unlock_irqrestore(&device->slock_int, flags);
+}
+
+
+void myUARTK_TestCanWriteAndSleep(myUARTK_t* device) {
+	wait_event_interruptible(device->write_queue, (device->can_write != 0));
+}
 
 unsigned myUARTK_GetPollMask(myUARTK_t *device, struct file *file_ptr, struct poll_table_struct *wait) {
 	unsigned mask;
