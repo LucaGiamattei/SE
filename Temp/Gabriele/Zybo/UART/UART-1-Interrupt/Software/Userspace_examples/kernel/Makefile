@@ -1,6 +1,6 @@
 CFLAGS=-DMYUART_KERNEL
 DEPS=myuart.h config.h 
-EXE_NAME=kernel_test
+EXE_NAME=uart_kernel
 
 all: main.c lib  $(DEPS)
 	$(CC) $(CFLAGS) -o $(EXE_NAME) main.c myuart.o utils.o 

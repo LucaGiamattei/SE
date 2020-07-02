@@ -70,7 +70,7 @@ int main (int argc, char** argv){
         
     }else if(pid>0){
         
-        printf("%s[UART2]%s sono il figlio \n",COL_RED,COL_GRAY);
+        printf("%s[UART2]%s sono il padre \n",COL_RED,COL_GRAY);
         if((error = open_device(&uart_2_file_descriptor, UART_2_FILE)) != 0){
             printf("Errore mentre aprivo il device file: %s\n", UART_2_FILE);
             return -1;

@@ -91,7 +91,7 @@ int main (int argc, char** argv){
 
         uart2 = myUART_init(vrt_uart);
         
-        myUART_en_int_rx(uart2, INT_EN);
+        myUART_en_int_rx(uart2, INT_EN, NULL);
         myUART_Iack_r(uart2);
         printf("%s[UART2-RECEIVER]%s myUART pointer: %08x\n",COL_RED, COL_GRAY, uart2);
             
