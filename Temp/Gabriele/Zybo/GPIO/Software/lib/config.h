@@ -90,7 +90,6 @@
 #define COL_WHITE COL(37)
 #define COL_GRAY "\033[0m"
 //@}
-
 #endif
 
  /* @} */

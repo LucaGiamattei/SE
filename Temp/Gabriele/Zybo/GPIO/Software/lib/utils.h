@@ -237,8 +237,5 @@ void* configure_no_driver(int file_descriptor, void** vrt_page_addr, uint32_t ph
 //@}
 #endif
 
-
-
-
-
+#endif
  /* @} */
