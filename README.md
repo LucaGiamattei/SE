@@ -6,7 +6,7 @@
 - **Gabriele Previtera**  <gabrieleprevitera@gmail.com>
 
 ## Descrizione cartelle
-- STM32F4: esempi per le board della famiglia STM32F4
-- Zybo: contiene gli esempi di realizzazione e utilizzo di periferiche costum realizzate per le board della famiglia Zybo 7000. 
+- __STM32F4__: esempi per le board della famiglia STM32F4
+- __Zybo__: contiene gli esempi di realizzazione e utilizzo di periferiche costum realizzate per le board della famiglia Zybo 7000. 
 
 ## Guida
