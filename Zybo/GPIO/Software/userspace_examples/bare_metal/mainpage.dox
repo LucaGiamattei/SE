@@ -1,0 +1,28 @@
+/*! \mainpage GPIO bare-matal con Interrupt
+ *
+ * \section intro_sec Introduzione
+ * 
+ * @brief Tale esempio ha lo scopo di pilotare in modo bare metal la periferica GPIO custom sintetizzata sulla parte PL della board. \n Non essendovi il sistema operativo bisognerà occuparsi anche della configurazione del GIC per usufruire del meccanismo delle interruizoni.
+ *
+ * \section File
+ *  - @ref main.c
+ *
+ * \section Requirements
+ * - @ref mygpio.h
+ * - @ref utils.h
+ * \section Use
+ *
+ * \subsection step1 Step 1: Vivado
+ * - Creare un xsa partendo dal manuale presente nella documentazione doxygen 
+ *   generata a partire dalla cartella Hardware
+ * \subsection step2 Step 2: Test 
+ * - Creare un nuovo <b>Platform Project</b>
+ * - Modificare il <b>Makefile</b> presente in <b>ps7_cortexa9_0/standalone_domain/bsp/ </b> 
+ *  cambiando <b>-O2</b> in <b>-O0</b> dove è presente, per rimuovere le ottimizzazioni di compilazione
+ * - Creare un nuovo <b>Application Project</b> scegliendo come platform 
+ * quella creata precedentemente
+ * - Copiare le dipendenze presenti in ../Driver/baremetal_lib
+ * 
+ * 
+ *
+ */

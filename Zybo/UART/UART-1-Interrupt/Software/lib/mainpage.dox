@@ -1,0 +1,15 @@
+/*! \mainpage 
+ *  
+ * <b> Libreria utils </b> \n
+ * Questa liberia definisce delle funzioni comuni per la gestione semplificata
+ * di una periferica AXI Lite generica.
+ * @ref utils.h \n
+ * 
+ * <b> Libreria myuart </b> \n
+ * Questa liberia definisce delle funzioni specifiche per la gestione semplificata
+ * di una periferica UART AXI Lite.
+ * @ref myuart.h
+ * 
+ * 
+ *
+ */

@@ -1,0 +1,46 @@
+/*! \mainpage GPIO modulo kernel
+ *
+ * \section intro_sec Introduzione
+ * Tale esercizio ha lo scopo di guidare la periferica custom GPIO dal sistema operativo Linux in esecuzione sulla board tramite il modulo kernel gpio con l'impiego della libreria "mygpio.h. \n E' stata realizzata un'espansione della libreria mygpio.h per consentire l'utilizzo del modulo.
+ *
+ * \section File
+ *  - @ref main.c
+ *
+ * \section Requirements
+ * - @ref mygpio.h
+ * - @ref utils.h
+ * - @ref config.h
+ * \section Use
+ *
+ * \subsection step1 Step 1: Configurare il CrossCompile
+ * Modificare il file <b>init_crosscompile_build_environment.sh</b> cambiando la 
+ * variabile <b>BUILDROOT_PATH</b> con il path d'installazione di buildroot, oppure
+ * mettere il path d'installazione del proprio crosscompilatore facendo però attenzione
+ * a modificare anche la variabile CROSS_COMPILE assegnandovi il nome del crosscompilatore
+ * che si intende utilizzare. \n
+ * \subsection step2 Step 2: Esportare le variabili d'ambiente
+ * Aprire il terminale, posizionarsi nella directory corretto e digitare il seguente comando:
+ * @code
+ *  source init_crosscompile_build_environment
+ * @endcode
+ * \subsection step3 Step 3: Cross Compilazione
+ * Usando lo stesso terminale in cui si è digitato il comando <b>source</b>, posizionarsi 
+ * nella cartella dei sorgenti e digitare il seguente comando:
+ * @code
+ *  make 
+ * @endcode
+ * 
+ * \subsection step4 Step 4: Trasferimento dell'eseguibile sulla board ed esecuzione
+ * Assicurarsi che il device tree sia quello corretto e che dia le giuste informazioni al kernel linux affinchè sia possibile
+ * utilizzare il modulo kernel gpio. Inoltre bisogna prima mandare in esecuzione il modulo kernel. \n
+ * Copiare il file <b>kernel_test</b> sulla microsd contenente il root FS. 
+ * La cartella in cui si copia è indifferente, basta solo tenerla presente. \n
+ * Avviare la zybo. Connettersi utilizzando la seriale (per i parametri vedere 
+ * il manuale). \n
+ * Posizionarsi nella cartella contenete l'eseguibile copiato precedentemente e 
+ * dare il comando:
+ * @code
+ * kernel_test value
+ * @endcode 
+ *
+ */
