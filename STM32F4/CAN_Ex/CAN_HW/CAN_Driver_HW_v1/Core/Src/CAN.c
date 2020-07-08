@@ -34,18 +34,28 @@ void setup (uint32_t enable_interrupts)  {
   // abilita il clock per Alternate Function
   RCC->APB2ENR |= RCC_AHB1LPENR_GPIOBLPEN;
 
+  // Scrivo 10 nei registri moder dei pin in modo da configurarli in Alternate mode 
   GPIOB->MODER |= (0x1<<17);
   GPIOB->MODER &= ~(0x1<<16);
   GPIOB->MODER |= (0x1<<19);
   GPIOB->MODER &= ~(0x1<<18);
+
+  // Imposto AF9 nel'alternate function register
   GPIOB->AFR[1]  &= ~(0xF);
   GPIOB->AFR[1]  |= (0x9);
   GPIOB->AFR[1]  &= ~(0xF<<4);
   GPIOB->AFR[1]  |= (0x9<<4);
+
+  // Configuro le linee PB9 e PB8 come open drain
   GPIOB->OTYPER &= ~(0x1<<8);
   GPIOB->OTYPER &= ~(0x1<<9);
+
+  // Configuro le linee PB9 e PB8 come no pull-up e no pull-down
   GPIOB->PUPDR &= ~(0xF<<16);
+  
+  // Imposto la velocità di I/O come bassa
   GPIOB->OSPEEDR |= (0xF<<16);
+  
   /* Entra nell inizialization mode (abilitando il bit INRQ nel reg. di controllo)
    * e si assicura che sia disabilita la ritransmissione
    */
@@ -55,7 +65,6 @@ void setup (uint32_t enable_interrupts)  {
    *La FIFO0 è utilizzata per la ricezione dei messaggi e la mailbox0 per la trasmissione dei messaggi.*/
   /*!<FIFO Message Pending Interrupt Enable */
   /*!<Transmit Mailbox Empty Interrupt Enable */
-
   CAN1->IER |= enable_interrupts;
 
 
